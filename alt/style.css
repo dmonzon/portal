@@ -1,0 +1,445 @@
+
+table { 
+	width: 80%;
+	border-collapse: collapse; 
+	margin-top:10px;
+	margin-left: auto;
+	margin-right: auto;
+	color: black;
+	}
+
+table.thead { 
+	/* background: #ffffff;  */
+	/* color: black; 
+	font-weight:normal; 
+	font-size: 15px; */
+	color: #000;
+	background:#FFF7F9;
+	padding: 10px; 
+	border: 1px solid red; 
+	text-align: left; 
+	font-size: 15px;
+	}
+
+th { 
+	/* background: #ffffff;  */
+	/* color: black; 
+	font-weight:normal; 
+	font-size: 15px; */
+	color: #000;
+	background:#FFF7F9;
+	padding: 10px; 
+	border: 1px solid red; 
+	text-align: left; 
+	font-size: 15px;
+	}
+
+td { 
+	color: #000;
+	background: #ffffff;
+	padding: 10px; 
+	border: 1px solid red; 
+	text-align: left; 
+	font-size: 15px;
+}
+textarea {
+	/* border: 1px solid #ccc; */
+	/* font-family: inherit;
+	font-size: inherit;
+	/* padding: 1px 6px; */
+  
+	/* display: block; */ 
+	width: 90%;
+	overflow: hidden; 
+	resize: both;
+	min-width: 250px;
+	min-height: 20px;
+	line-height: 20px; 
+}
+a:link {
+	color: red;
+	}
+	
+	/* visited link */
+	a:visited {
+	color: red;
+	}
+	
+	/* mouse over link */
+	a:hover {
+	color:darkred;
+	}
+	
+	/* selected link */
+	a:active {
+	color: chocolate;
+}
+
+
+button {
+	background: white;
+	border: 0.125em solid red;
+	cursor: pointer;
+	/* font: 250 0.4rem/1.25 ; */
+	font-family:sans-serif;
+	font-weight: bold;
+	font-size: xx-small;
+	letter-spacing: 0.170em;
+	margin: 0.5rem;
+	padding: 0.5em 0.75em;
+	position: relative;
+	text-transform: uppercase;
+}
+button:before, button:after {
+	content: "";
+	position: absolute;
+	transition: all 0.125s ease-in-out;
+}
+button.border {
+	background: none;
+	border-color: transparent;
+}
+button.border:before, button.border:after {
+	transition: all 0.175s ease-in-out;
+}
+button.border:before {
+	background: black;
+	border: 0px dashed black;
+	left: -0.125em;
+	top: -0.125em;
+	right: -0.125em;
+	bottom: -0.125em;
+	z-index: -1;
+}
+button.border:hover:before, button.border:focus:before {
+	background: white;
+	border-width: 0.125em;
+}
+button.border:after {
+	background: white;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	top: 0;
+	z-index: -1;
+}
+button.sombra:after {
+	border: 0.125em dashed black;
+	bottom: -0.125em;
+	left: -0.125em;
+	right: -0.125em;
+	top: -0.125em;
+	z-index: -1;
+}
+button.sombra:hover:after, button.sombra:focus:after {
+	bottom: -0.375em;
+	left: 0.125em;
+	right: -0.375em;
+	top: 0.125em;
+}
+button.dentro:after {
+	border: 0.125em dashed red;
+	bottom: -0.125em;
+	left: -0.125em;
+	right: -0.125em;
+	top: -0.125em;
+}
+button.dentro:hover:after, button.dentro:focus:after {
+	bottom: 0.125em;
+	left: 0.125em;
+	right: 0.125em;
+	top: 0.125em;
+}
+
+  
+
+@media 
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+	table { 
+	  	width: 100%; 
+	}
+
+	/* Force table to not be like tables anymore */
+	table, thead, tbody, th, td, tr { 
+		display: block; 
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility) */
+	thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+
+	tr { border: 1px solid #ccc; }
+	
+	td { 
+		/* Behave  like a "row" */
+		color: #000;
+		border: none;
+		border-bottom: 1px solid rgb(255, 0, 0); 
+		position: relative;
+		padding-left: 50%; 
+	}
+
+	td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+		/* Label the data */
+		content: attr(input);
+
+		color: #000;
+		font-weight: bold;
+	}
+}	
+@media print
+	{
+	.noprint {
+		display:none;
+	}
+	#btnPrint {
+		display: none;
+	  }
+	}
+
+
+details summary::-webkit-details-marker { display: none; }
+summary::before {
+  font-family: "Hiragino Mincho ProN", "Open Sans", sans-serif;
+  content: "▶";
+  /* position: absolute; */
+  top: 1rem;
+  left: 0.8rem;
+  transform: rotate(0);
+  transform-origin: center;
+  transition: 0.2s transform ease;
+}
+details[open] > summary:before {
+  transform: rotate(90deg);
+  transition: 0.35s transform ease;
+}
+
+/* # The Sliding Summary # */
+details { overflow: hidden; }
+details summary {
+  position: relative;
+  z-index: 10;
+}
+@keyframes details-show {
+  from {
+    /* margin-bottom: -80%; */
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+}
+details > *:not(summary) {
+  animation: details-show 500ms ease-in-out;
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s ease-in-out;
+  color: transparent;
+  overflow: hidden;
+}
+details[open] > *:not(summary) { color: inherit; }
+
+/* # Style 2 # */
+details.style2 summary::before {
+  content: "×";
+  color: #FFF;
+  font-size: 2rem;
+  line-height: 1rem;
+  transform: rotate(-35deg);
+  top: 1.2rem;
+  left: 0.5rem;
+}
+details[open].style2 > summary:before {
+  transform: rotate(90deg);
+  color: #F00 !important;
+  transition: color ease 2s, transform ease 1s;
+}
+
+/* # Style 3 # */
+details.style3 summary::before {
+  content: "›";
+  font-size: 2.5rem;
+  line-height: 1rem;
+  top: 1.3rem;
+  left: 0rem;
+  margin: -0.5rem -0.5rem 0 0.5rem;
+  transform-origin: bottom center;
+  transition: margin linear 0.05s;
+}
+details.style3:hover > summary:before {
+  color: #FFF;
+}
+details[open].style3 > summary:before {
+  left: 0rem;
+  color: #CCC;
+  transform: rotate(90deg);
+  margin-left: 0.4rem;
+  transition: color ease 2s, transform ease 1s, margin ease 1s;
+}
+@supports (-webkit-touch-callout: none) {
+  details.style3 summary::before { top: 1.6rem; }
+  details[open].style3 > summary:before { top: 1.3rem; transition: all 0.8s; }
+}
+
+/* # Style 4 # */
+details.style4 summary {
+  padding-right: 2.2rem;
+  padding-left: 1rem;
+}
+details.style4 summary::before {
+  content: "×";
+  color: #FFF;
+  font-size: 2rem;
+  line-height: 1rem;
+  transform: rotate(-35deg);
+  top: 1.2rem;
+  left: unset;
+  right: 0.6rem;
+}
+details[open].style4 > summary:before {
+  transform: rotate(90deg);
+  color: #F00 !important;
+  transition: color ease 2s, transform ease 1s;
+}
+
+/* # Style 5 # */
+details.style5 summary {
+  padding-right: 2.2rem;
+  padding-left: 1rem;
+}
+details.style5 summary::before {
+  content: "🙈";
+  font-size: 1.5rem;
+  top: 0.5rem;
+  left: unset;
+  right: 0.5rem;
+  transform: rotate(0);
+}
+details.style5:hover > summary::before {
+  content: "🙊";
+}
+details[open].style5 > summary::before {
+  content: "🐵";
+  transform: rotate(0deg);
+}
+details[open].style5 > summary:hover::before {
+  content: "🙉";
+}
+details .monkey-see { display: inline; }
+details .monkey-hide { display: none; }
+details[open] .monkey-see { display: none; }
+details[open] .monkey-hide { display: inline; }
+
+/* # Style 6 # */
+details.style6 summary {
+  padding-right: 2.2rem;
+  padding-left: 1rem;
+}
+details.style6 summary::before {
+  content: "❔";
+  font-size: 1.5rem;
+  top: 0.5rem;
+  left: unset;
+  right: 0.5rem;
+  transform: rotate(0);
+}
+details.style6:hover > summary:before {
+  content: "👁️‍🗨️";
+}
+details[open].style6 > summary:before {
+  content: "❌";
+  transform: rotate(0deg);
+}
+
+/* # Style 7 # */
+details.style7 summary {
+  padding-left: 3rem;
+}
+details[open].style7 summary,
+details.style7:hover summary {
+  background: #000;
+  color: #CCC;
+}
+details[open].style7 summary strong,
+details.style7:hover summary strong {
+  color: #FDCE4C;
+}
+details.style7:hover summary strong { color: #ffdf87; }
+details.style7 summary::before {
+  content: "🌑";
+  font-size: 1.5rem;
+  top: 0.5rem;
+  left: 0.5rem;
+  transform: rotate(0);
+}
+details.style7:hover > summary::before {
+  content: "🌕";
+}
+details[open].style7 > summary::before {
+  content: "🌕";
+  transform: rotate(0deg);
+}
+details[open].style7 > summary:hover::before {
+  content: "🌕";
+}
+details .moon-new { display: inline; }
+details .moon-full { display: none; }
+details[open] .moon-new { display: none; }
+details[open] .moon-full { display: inline; }
+details.style7 .content { background: #DDD; }
+
+/* # Just Some Pretty Styles # */
+body { font-family: "Open Sans", sans-serif; padding-bottom: 400px; }
+img { max-width: 100%; }
+p { margin: 0; padding-bottom: 10px; }
+p:last-child { padding: 0; }
+details {
+  /* max-width	: 900px; */
+  width: 80%;
+  box-sizing: border-box;
+  margin-top: 5px;
+  background: white;
+  margin-left: auto;
+  margin-right: auto;
+}
+summary {
+	border: 1px solid red;
+  outline: none;
+  padding: 1rem;
+  display: block;
+  background: #fff;
+  color: #000;
+  padding-left: 2.2rem;
+  position: relative;
+  cursor: pointer;
+  
+}
+details[open] summary,
+summary:hover {
+  color: #000;
+  background: #FFF7F9;
+}
+summary:hover strong,
+details[open] summary strong,
+summary:hover::before,
+details[open] summary::before {
+  color: red;
+  /* color: #FFA128; */
+}
+}
+.content {
+  padding: 10px;
+  border: 1px solid red;
+  border-top: none;
+}

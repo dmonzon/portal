@@ -1,0 +1,162 @@
+
+table { 
+	width: 95%;
+	border-collapse: collapse; 
+	margin-top:-1px;
+	margin-left: auto;
+	margin-right: auto;
+	color: black;
+	}
+
+table.thead { 
+  height: auto;
+	color: #000;
+	background:#FFF7F9;
+	padding: 1px; 
+	border: 1px solid red; 
+	text-align: left; 
+	font-size: 12px;
+	}
+
+th { 
+  height: auto;
+	color: #000;
+	background:#FFF7F9;
+	padding: 0px ; 
+	border: 1px solid red; 
+	text-align: left; 
+	font-size: 12px;
+	}
+
+td { 
+  height: auto;
+	color: #000;
+	background: #ffffff;
+	padding: 1px 1px; 
+	border: 1px solid red; 
+	text-align: center; 
+	font-size: 12px;
+}
+a:link {
+	color: red;
+	}
+	
+	/* visited link */
+	a:visited {
+	color: red;
+	}
+	
+	/* mouse over link */
+	a:hover {
+	color:darkred;
+	}
+	
+	/* selected link */
+	a:active {
+	color: chocolate;
+}
+
+
+
+.tabset > input[type="radio"] {
+  position: absolute;
+  left: -200vw;
+}
+
+.tabset .tab-panel {
+  display: none;
+}
+
+.tabset > input:first-child:checked ~ .tab-panels > .tab-panel:first-child,
+.tabset > input:nth-child(3):checked ~ .tab-panels > .tab-panel:nth-child(2),
+.tabset > input:nth-child(5):checked ~ .tab-panels > .tab-panel:nth-child(3),
+.tabset > input:nth-child(7):checked ~ .tab-panels > .tab-panel:nth-child(4),
+.tabset > input:nth-child(9):checked ~ .tab-panels > .tab-panel:nth-child(5),
+.tabset > input:nth-child(11):checked ~ .tab-panels > .tab-panel:nth-child(6) {
+  display: block;
+}
+
+/*
+ Styling
+*/
+body {
+  font: 16px/1.5em "Overpass", "Open Sans", Helvetica, sans-serif;
+  color: #333;
+  font-weight: 300;
+}
+
+.tabset > label {
+  position: relative;
+  display: inline-block;
+  padding: 1px 15px 25px;
+  border: 0px solid transparent;
+  border-bottom: 0;
+  cursor: pointer;
+  font-weight: 600;padding: 0px 0;
+}
+
+.tabset > label::after {
+  content: "";
+  position: absolute;
+  left: 1px;
+  bottom: 20px;
+  width: 25px;
+  height: 4px;padding: 0px 0;
+  background: #8d8d8d;
+}
+
+.tabset > label:hover,
+.tabset > input:focus + label {
+  color: rgb(255, 0, 0);
+}
+
+.tabset > label:hover::after,
+.tabset > input:focus + label::after,
+.tabset > input:checked + label::after {
+  background: rgb(255, 0, 0);
+}
+
+.tabset > input:checked + label {
+  border-color: #ccc;
+  border-bottom: 0px solid #fff;
+  margin-bottom: -1px;
+}
+
+.tab-panel {
+	position: fixed;
+	/* center the div */
+	right: 0;
+	left: 0;
+	margin-right: auto;
+	margin-left: auto;
+	padding: 0px 0;
+	border-top: 0px solid #ccc;
+}
+
+/*
+ Demo purposes only
+*/
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+.tabset {
+	width: 900px;
+	max-width: 65em;
+  }
+
+body {
+  padding: 0px;
+}
+
+@media print
+	{
+	.noprint {
+		display: none !important;
+	}
+	#btnPrint, #lblMain{
+		display: none;
+	  }
+}
