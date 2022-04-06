@@ -286,6 +286,18 @@ function getEmpTotalDet($alta){
     echo $html;
 }
 
+function runSpEcqm(){
+    $db = new ServidorBD();
+    $conn = $db->Conectar('a');
+    $sql = "EXEC ECQM - File Transfer - Manual";
+    $stmt = sqlsrv_prepare($conn, $sql, array());
+    if (!sqlsrv_execute($stmt)) {
+        return false;
+    }else{
+        return true;
+    }
+}
+
 // obtener reporte de altas
 function getAltasRpt($date = null,$id = 0){
     $db = new ServidorBD();
