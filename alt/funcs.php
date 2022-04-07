@@ -6,6 +6,7 @@ function toConsole($data) {
 
   echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
 }
+// function to crate the menu
 function buildMenu($menu,$conn)
 {
   $html = '';

@@ -1,6 +1,22 @@
 <?php
 date_default_timezone_set("America/Puerto_Rico");
 header('Content-Type: text/html; charset=utf-8');
+
+//function to run ECQM Job
+function runSpEcqm(){
+    $db = new ServidorBD();
+    $conn = $db->Conectar('a');
+    // $sql = "EXEC ECQM - File Transfer - Manual";
+    $sql = "EXEC [dbo].[sp_Run_ECQM_Manual]";
+    $stmt = sqlsrv_prepare($conn, $sql, array());
+    if (sqlsrv_execute($stmt)) {
+        echo '<div id="msg" class="msg">Falló el proceso.!</div>';
+        die;
+    }else{
+        echo '<div id="msg" class="msg">Proceso iniciado!</div>';
+    }
+}
+
 // funcion para buscar empleado por id
 function gUtilEmployee($str){
     if($str > 0){
@@ -284,18 +300,6 @@ function getEmpTotalDet($alta){
     }
     $html .= '</table></div>';
     echo $html;
-}
-
-function runSpEcqm(){
-    $db = new ServidorBD();
-    $conn = $db->Conectar('a');
-    $sql = "EXEC ECQM - File Transfer - Manual";
-    $stmt = sqlsrv_prepare($conn, $sql, array());
-    if (!sqlsrv_execute($stmt)) {
-        return false;
-    }else{
-        return true;
-    }
 }
 
 // obtener reporte de altas
