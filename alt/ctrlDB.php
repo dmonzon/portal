@@ -75,7 +75,7 @@ function getAltas($dia){
     }
     $html='<table><tr class="noprint"><td style="text-align:left;border:0">';
     while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)){
-        $html .= '</br><a href="altas2.php?a='.$row['id'].'">'.date_format($row['Created'],'Y-m-d H:i:s').' - '.$row['Usuario']. '</a>';
+        $html .= '</br><a href="censo2.php?a='.$row['id'].'">'.date_format($row['Created'],'Y-m-d H:i:s').' - '.$row['Usuario']. '</a>';
     }
     $html .= '</tr></td></table>';
     return $html;
@@ -202,7 +202,7 @@ function getAltasDet($date = null,$id = 0,$opt = 1){
         <th colspan="21" style="text-align:center;"><!--For the period of: -->
             <!-----------------------------------------------------------------------------------------------------------------> 
             <!------------------------------------------- actualizar dia de las altas ----------------------------------------->
-            <form id="frmRefresh" action="altas2.php" method="post">
+            <form id="frmRefresh" action="censo2.php" method="post">
                 <input type="date" id="ddPeriod" name="ddPeriod" value="'. $date .'" required>
                 <input type="hidden" name="opt" value="2">
                 <button type="Submit" style="border: 0; background-color: #FFF7F9;" id="btnRefresh">'.$btn.'</button>
@@ -230,7 +230,7 @@ function getAltasDet($date = null,$id = 0,$opt = 1){
         </tr>
         </thead>
         <tbody>
-        <form id="main2" name="main2" action="altas2.php" target="_blank" method="POST">';
+        <form id="main2" name="main2" action="censo2.php" target="_blank" method="POST">';
         $html = $html1.$html;
 
     // }
@@ -384,7 +384,7 @@ function getAltasRpt($date = null,$id = 0){
         <thead>
         <tr class="noprint">
         <th colspan="21" style="text-align:center;"><!--For the period of: -->
-            <form id="frmRefresh" action="altas2.php" method="post"><a href="altas.php"><i class="far fa-arrow-alt-circle-left fa-lg"></i></a>
+            <form id="frmRefresh" action="censo2.php" method="post"><a href="censo.php"><i class="far fa-arrow-alt-circle-left fa-lg"></i></a>
                 <input type="date" id="ddPeriod" name="ddPeriod" value="'. $date .'" required>
                 <input type="hidden" name="opt" value="2">
                 <button type="Submit" style="border: 0; background-color: #FFF7F9;" id="btnRefresh"><i class="fas fa-sync-alt fa-2x" style="background: none;"></i></button>
@@ -556,9 +556,9 @@ function gGroups(){
     // $g = allGroups()
     // echo "<pre>";
     // print_r($_SESSION);
-    if ($_SESSION['Grupox']){
+    if (@$_SESSION['Grupox']){
         $dd = '<select id="aGroups" name="GroupName">';
-        for ($i=0; $i < count($_SESSION['Grupox']); $i++) { 
+        for ($i=0; $i < count(@$_SESSION['Grupox']); $i++) { 
             $dd .= '<option value="' . $_SESSION['Grupox'][$i] . '">' . $_SESSION['Grupox'][$i] . '</option>';
         } //end while
         $dd .= '</select>';
@@ -568,7 +568,7 @@ function gGroups(){
     <form name="main1" action="webadmin.php" target="_self" method="POST">
         <td>Añadir grupo</td>
         <td style="text-align:left;"><!--<input type="text" name="GroupName" placeholder="Nombre" required>-->
-        '.$dd.'</td>
+        '.@$dd.'</td>
         <td colspan="3" style="text-align:left;"><input type="text" name="GroupOU" placeholder="Descripcion" required>
         <td colspan="2">
             <input type="hidden" name="req" value="doGroup">
@@ -839,47 +839,6 @@ function FormatErrors( $errors )
         echo "Message: ".$error['message']."<br/>";  
     }  
 }  
-function allGroups($name,$pass) {
-    global $host, $port, $protocol, $base_dn, $domain;
-    $adServer = "auxiliomutuo.com";
-    $ldapconn = ldap_connect($adServer) or die("Could not connect to LDAP server.");
-    $account = $name;
-    $password = $pass;
-    $ldaprdn = $account.'@auxiliomutuo.com';
-    $ldappass = $password;
 
-    if ($ldapconn) {
-    $ldapbind = ldap_bind($ldapconn, $ldaprdn, $ldappass)  or die("Couldn't bind to AD!");
-    }
-
-    $dn = 'OU=Auxilio_Groups,DC=auxiliomutuo,DC=com';
-    $filter="(objectcategory=group)";
-    $justthese = array("dn","ou");
-    $sr=ldap_search($ldapconn, $dn, $filter, $justthese);
-    $info = ldap_get_entries($ldapconn, $sr);
-    sort($info);
-    // $token = $info[0]['primarygroupid'][0];
-    // echo $token."<br/>";
-    // array_shift($info);
-    // echo "<pre>";
-    // print_r($info);
-
-    // OU=Application Security
-
-    // $filteres = array_filter($info[1], function($str) {
-    //     return $str === 'OU=Application Security';
-    // });
-
-    for ($i=0; $i < $info[0]; $i++) {
-        @$row = explode(",",$info[$i]["dn"]);
-        //echo $info[$i]["dn"]."<br>";
-        $group = str_replace("CN=",'',$row[0]);
-        if(@$row[1] === 'OU=Application Security' || @$row[1] === 'OU=Platform Security') $groups[] = trim($group);
-    }
-    ldap_free_result($sr);
-    ldap_unbind($ldapconn);
-
-    return $groups;
-}
 
 ?>

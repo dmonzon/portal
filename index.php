@@ -74,11 +74,12 @@ if($_POST){
     if($html){
         // guardando valores de la sesion
         $_SESSION["user_id"] = $_POST["username"].date('His');
-        $_SESSION["user_name"] = $_POST["username"];
+        $_SESSION["username"] = $_POST["username"];
         $_SESSION['loggedin_time'] = time();
         $_SESSION["nav"] = $html;
+        
         // redirigir al dashboard o desconectar
-        if(isset($_SESSION["user_name"]))
+        if(isset($_SESSION["username"]))
             header("Location:alt/dashboard.php");
         else
             header("Location:alt/logout.php?session_expired=1");

@@ -72,7 +72,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         <i class="fa-solid fa-tower-cell"></i>
     <form id="frmM" method="post">
         <button id="btnSm"><img src="./imgs/arrows-rotate-solid.svg" alt="" height="100" weight="100" onclick="return confirm('Está seguro?')"></button>
-        <i class="fa-solid fa-building-circle-exclamation"></i>
     </form>
     </div>
     <div id="msg" class="msg" style="display: none">Job Initiated.</div>

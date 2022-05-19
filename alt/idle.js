@@ -3,7 +3,7 @@
         var defaults = {
 
             //how long to wait (in seconds) before showing inactivity notification
-            inactivityWait: 60, //default 10 minutes
+            inactivityWait: 300, //default 10 minutes
 
             //how long to show inactivity dialog (in seconds) before automatically logging out.
             dialogWait: 25, //default 1 minute

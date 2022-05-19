@@ -85,7 +85,7 @@
                     }
                     sqlsrv_free_stmt( $stmt);  
                     sqlsrv_close( $conn);
-                    header("Location:altas.php");
+                    header("Location:censo.php");
                     break;
                     
                 default:

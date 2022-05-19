@@ -99,7 +99,7 @@
 			}
 			sqlsrv_free_stmt( $stmt);  
 			sqlsrv_close( $conn);
-			//sheader("Location:altas.php");
+			//sheader("Location:censo.php");
         }
 ?>
 

@@ -9,18 +9,22 @@ table {
 	margin-left: auto;
 	margin-right: auto;
 	color: black;
-	}
+}
+
 
 table.thead { 
-  height: auto;
+	height: auto;
 	color: #000;
 	background:#FFF7F9;
 	padding: 1px; 
 	border: 1px solid red; 
 	text-align: left; 
 	font-size: 13px;
-	}
-
+}
+tr {
+	background: #000;
+	background-color: #000;
+}
 th { 
 	height: auto;
 	color: #000;
@@ -57,7 +61,7 @@ td.aleft {
 	text-align: left; 
 	font-size: 15px;
   }
-  td.right { 
+td.right { 
 	height: auto;
 	color: #000;
 	background: #ffffff;
@@ -287,7 +291,6 @@ summary {
 	padding-left: 2.2rem;
 	position: relative;
 	cursor: pointer;
-  
 }
 details[open] summary,
 summary:hover {

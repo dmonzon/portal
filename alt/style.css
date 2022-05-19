@@ -183,7 +183,10 @@ only screen and (max-width: 760px),
 		position: relative;
 		padding-left: 50%; 
 	}
-
+	tr:nth-child(even) {
+		background-color: Lightgreen !important;
+	}
+	
 	td:before { 
 		/* Now like a table header */
 		position: absolute;
