@@ -57,7 +57,13 @@ function sortTabla(tabla,columnName){
 }
 
 $(document).on('change','#selTable',function(){
-    // alert(this.value);
+    // m = $("#txtValue").val();
+    // alert(m);
+    // $("#frmSearch")[0].reset();
+    $('#txtValue').val('');
+    $('#txtValue2').val('');
+    $('#txtValue3').val('');
+    
     v = this.value;
     $('.selField').empty()
     switch (v) {
@@ -279,9 +285,43 @@ $(document).on('change','#selTable',function(){
             $('.selField').append('<option value="Modified">Modificado en</option>');
             $('.selField').append('<option value="ModifiedBy">Modificado por</option>');//28
         break;        
-        
-        default:
-            break;
+        case 'Sleep_Comunicacion_HSAT':
+            $('.selField').append('<option value="Fecha">Fecha y Hora de llamada</option>');
+            $('.selField').append('<option value="Nombre_Paciente">Nombre del Paciente</option>');
+            $('.selField').append('<option value="Llama_al_centro">Persona que llama al centro</option>');
+            $('.selField').append('<option value="Numero de identificación del dispositivo">Numero de identificación del dispositivo</option>');
+            $('.selField').append('<option value="Asunto">Asunto identificado o problema con el equipo</option>');
+            $('.selField').append('<option value="Solucion">Recomendación brindada al paciente</option>');
+            $('.selField').append('<option value="Tecnico">Tecnico</option>');
+            $('.selField').append('<option value="Created">Creado en</option>');
+            $('.selField').append('<option value="CreatedBy">Creado por</option>');
+            $('.selField').append('<option value="Modified">Modificado en</option>');
+            $('.selField').append('<option value="ModifiedBy">Modificado por</option>');
+        break;  
+        case 'Sleep_Registro_HSAT':
+            $('.selField').append('<option value="Fecha">Fecha y Hora de llamada</option>');
+            $('.selField').append('<option value="Nombre_Paciente">Nombre del Paciente</option>');
+            $('.selField').append('<option value="Equipo">Tipo de equipo prestado</option>');
+            $('.selField').append('<option value="Fecha_Devolucion">Fecha y Hora de devolución del equipo</option>');
+            $('.selField').append('<option value="Inspeccion">Inspeccion de rutina</option>');
+            $('.selField').append('<option value="Comentarios">Comentarios</option>');
+            $('.selField').append('<option value="Tecnico">Nombre del tecnico</option>');
+            $('.selField').append('<option value="Created">Creado en</option>');
+            $('.selField').append('<option value="CreatedBy">Creado por</option>');
+            $('.selField').append('<option value="Modified">Modificado en</option>');
+            $('.selField').append('<option value="ModifiedBy">Modificado por</option>');
+        break;  
+        case 'Sleep_HSAT':            
+            $('.selField').append('<option value="Fecha">Fecha de desinfección</option>');
+            $('.selField').append('<option value="Modelo">Modelo</option>');
+            $('.selField').append('<option value="Tecnico">Nombre del Técnico</option>');
+            $('.selField').append('<option value="Created">Creado en</option>');
+            $('.selField').append('<option value="CreatedBy">Creado por</option>');
+            $('.selField').append('<option value="Modified">Modificado en</option>');
+            $('.selField').append('<option value="ModifiedBy">Modificado por</option>');
+        break;  
+    default:
+        break;
     }
 });
 

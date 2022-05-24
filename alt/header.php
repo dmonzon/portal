@@ -1,7 +1,7 @@
 
 <?php
 //session_start();
-if (!isset($_SESSION['user_name'])) {
+if (!isset($_SESSION['username'])) {
     header('location:./logout.php');
     exit();
 }
@@ -16,10 +16,10 @@ if (!isset($_SESSION['user_name'])) {
     <div>
     <div>
         <ul id="menu" class="noprint">
-            <li><a href="dashboard.php" class="drop"><?php echo $_SESSION['user_name'];?></a>     
+            <li><a href="dashboard.php" class="drop"><?php echo $_SESSION['username'];?></a>     
                 <div class="dropdown_2columns">
                     <div class="col_2">
-                        <img src="./imgs/ham.jpg" width="125" height="50" alt="" />
+                        <img src="./imgs/ham-logo.png" width="230" height="70" alt="" />
                     </div>  
                 <div class="col_1">   
                 </div>

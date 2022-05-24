@@ -8,7 +8,7 @@
 <body></br></br>
   <center>
     <h2>
-    <p><img src="alt/imgs/ham.jpg"></p></br></br>
+    <p><img src="alt/imgs/ham-logo.png"></p></br></br>
     <?php
       echo isset($_GET['expired']) ? 'You\'ve been logged out due to inactivity, please login again.</br>' : 'Please login.</br>' ;
     ?>
@@ -79,10 +79,11 @@ if($_POST){
         $_SESSION["nav"] = $html;
         
         // redirigir al dashboard o desconectar
-        if(isset($_SESSION["username"]))
-            header("Location:alt/dashboard.php");
-        else
-            header("Location:alt/logout.php?session_expired=1");
+        if(isset($_SESSION["username"])){
+          header("Location:alt/dashboard.php");
+        }else{
+          header("Location:alt/logout.php?session_expired=1");
+        }
         // echo '<pre>';
   }
   }else{

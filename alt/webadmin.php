@@ -35,7 +35,7 @@
     session_start();
     require_once("ctrlDB.php");
     include('header.php');
-    if (!isset($_SESSION['user_name'])) {
+    if (!isset($_SESSION['username'])) {
         header('location:logout.php');
         exit();
     }

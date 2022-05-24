@@ -1,7 +1,7 @@
 <?php 
 require_once("cno.php");
 $divs = 
-'<center><img src="imgs/ham.jpg"></center>
+'<!--<center><img src="imgs/hamlogo.png"></center>-->
 <div id="SleepStudies" class="noprint content">
 <div class="contentt">
 <tr>Sleep Studies Results - <a href="rpt.php?tb=Sleep_Studies_Results"><i class="fa-solid fa-file-lines fa-2x"></i></a></td></tr><hr></br>
@@ -272,19 +272,30 @@ $divs =
                 <td style="text-align: left;border: none ;width:20%;"><label for="ddTrans">Transcutaneo</label></td>
                 <td style="text-align: left;border: none ;width:20%;">
                     <select id="ddTrans" name="ddTrans">
-                        <option value="-" selected>N/A</option>
+                        <option value="N/A" selected>N/A</option>
                         <option value="Intacto">Intacto</option>
                         <option value="Alterado">Alterado</option>
                     </select>
                 </td>
-                <td style="text-align: left;border: none ;width:10%;"><label for="ddETCO">ETCO</label></td>
+                <td style="text-align: left;border: none ;width:10%;"><label for="ddETCO">ETCO2</label></td>
                 <td style="text-align: left;border: none ;width:50%;">
                 <select id="ddETCO" name="ddETCO">
-                    <option value="-" selected>N/A</option>
+                    <option value="N/A" selected>N/A</option>
                     <option value="Intacto">Intacto</option>
                     <option value="Alterado">Alterado</option>
                 </select>
                 </td>
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="ddTrans">CO2</label></td>
+                <td style="text-align: left;border: none ;width:20%;">
+                    <select id="ddCO2" name="ddCO2">
+                        <option value="N/A" selected>N/A</option>
+                        <option value="Intacto">Intacto</option>
+                        <option value="Alterado">Alterado</option>
+                    </select>
+                </td>
+                <td style="text-align: left;border: none ;width:10%;"></td>
             </tr>
             <tr>
                 <td style="text-align: left;border: none ;width:20%;"><label for="accionTomada">Acción Tomada</label></td>
@@ -381,7 +392,7 @@ $divs =
                 <label for="ddReferidoMD"></label></td>
             </tr>
             <tr>
-                <td style="text-align: left;border: none ;width:30%;"><label for="valPaciente"># Paciente </label></td>
+                <td style="text-align: left;border: none ;width:30%;"><label for="valPaciente">Visit ID del Paciente </label></td>
                 <td style="text-align: left;border: none ;width:30%;"><input type="number" id="valPaciente" name="valPaciente" placeholder="# Paciente"></br></td>
                 <td style="text-align: left;border: none ;width:30%;"></td>
                 <td style="text-align: left;border: none ;width:30%;"></td>
@@ -399,8 +410,14 @@ $divs =
                 <td style="text-align: left;border: none ;width:30%;"></td>
             </tr>
             <tr>
-                <td style="text-align: left;border: none ;width:30%;"><label for="valAccion">Acción que se tomo</label></td>
+                <td style="text-align: left;border: none ;width:30%;"><label for="valAccion">Acción que se tomó</label></td>
                 <td style="text-align: left;border: none ;width:30%;"><input type="text" id="valAccion" name="valAccion" placeholder="Acción que se tomo"></br></td>
+                <td style="text-align: left;border: none ;width:30%;"></td>
+                <td style="text-align: left;border: none ;width:30%;"></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:30%;"><label for="mdAccion">Acción tomada por el médico (si aplicada)</label></td>
+                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="mdAccion" name="mdAccion" placeholder="Acción del médico"></br></td>
                 <td style="text-align: left;border: none ;width:30%;"></td>
                 <td style="text-align: left;border: none ;width:30%;"></td>
             </tr>
@@ -429,8 +446,8 @@ $divs =
         <table>
         </style>
             <tr>
-                <td style="text-align: left;border: none ;width:30%;"><label for="exClinico"># Expediente clínico </label></td>
-                <td style="text-align: left;border: none ;width:30%;"><input type="number" id="exClinico" name="exClinico" placeholder="# Expediente clínico"></br></td>
+                <td style="text-align: left;border: none ;width:30%;"><label for="cpacpName">Nombre del paciente</label></td>
+                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="cpacpName" name="cpacpName" placeholder="Nombre del paciente"></br></td>
                 <td style="text-align: left;border: none ;width:30%;"></td>
                 <td style="text-align: left;border: none ;width:30%;"></td>
             </tr>
@@ -448,7 +465,7 @@ $divs =
                 <label for="ddReferidoMD"></label></td>
             </tr>
             <tr>
-                <td style="text-align: left;border: none ;width:30%;"><label for="tecEntrega">Techico de entrega</label></td>
+                <td style="text-align: left;border: none ;width:30%;"><label for="tecEntrega">Techico que entrega</label></td>
                 <td style="text-align: left;border: none ;width:30%;"><input type="text" id="tecEntrega" name="tecEntrega" placeholder="Techico de entrega" required></br></td>
                 <td style="text-align: left;border: none ;width:30%;"></td>
                 <td style="text-align: left;border: none ;width:30%;"></td>
@@ -460,7 +477,7 @@ $divs =
                 <td style="text-align: left;border: none ;width:30%;"></td>
             </tr>
             <tr>
-                <td style="text-align: left;border: none ;width:30%;"><label for="fecha_Entrega">Fecha y hora de entrega que el equipo debe ser entregado al Sleep Center</label></td>
+                <td style="text-align: left;border: none ;width:30%;"><label for="fecha_Entrega">Fecha y hora de entrega en que el equipo debe ser entregado al laboratorio del sueño</label></td>
                 <td style="text-align: left;border: none ;width:30%;"><input type="datetime-local" name="fecha_Entrega" id="fecha_Entrega"></br></td>
                 <td style="text-align: left;border: none ;width:30%;" colspan="2">
                 <!--<input type="time" id="fecha">-->
@@ -473,7 +490,7 @@ $divs =
                 <td style="text-align: left;border: none ;width:30%;"></td>
             </tr>
             <tr>
-                <td style="text-align: left;border: none ;width:30%;"><label for="fRecibe">Fecha y hora de recibe</label></td>
+                <td style="text-align: left;border: none ;width:30%;"><label for="fRecibe">Fecha y hora que recibe</label></td>
                 <td style="text-align: left;border: none ;width:30%;"><input type="datetime-local" name="fRecibe" id="fRecibe"></br></td>
                 <td style="text-align: left;border: none ;width:30%;" colspan="2">
                 <!--<input type="time" id="fecha">-->
@@ -486,7 +503,7 @@ $divs =
                 <td style="text-align: left;border: none ;width:30%;"></td>
             </tr>            
             <tr>
-                <td style="text-align: left;border: none ;width:30%;"><label for="cpapFecha">Fecha y hora</label></td>
+                <td style="text-align: left;border: none ;width:30%;"><label for="cpapFecha">Fecha y hora de desinfectado</label></td>
                 <td style="text-align: left;border: none ;width:30%;"><input type="datetime-local" id="cpapFecha" name="cpapFecha"></br></td>
                 <td style="text-align: left;border: none ;width:30%;" colspan="2">
                 <!--<input type="time" id="fecha">-->
@@ -520,22 +537,22 @@ $divs =
         <table>
         </style>
             <tr>
-                <td style="text-align: left;border: none ;width:20%;"><label for="tecComunicacion">Techico de entrega</label></td>
+                <td style="text-align: left;border: none ;width:20%;"><label for="tecComunicacion">Nombre del techico</label></td>
                 <td style="text-align: left;border: none ;width:30%;"><input type="text" id="tecComunicacion" name="tecComunicacion" placeholder="Técnico de entrega" required></br></td>
                 <td style="text-align: left;border: none ;width:40%;"></td>
             </tr>
             <tr>
-                <td style="text-align: left;border: none ;width:20%;"><label for="comFecha">Fecha</label></td>
+                <td style="text-align: left;border: none ;width:20%;"><label for="comFecha">Fecha y Hora:</label></td>
                 <td style="text-align: left;border: none ;width:30%;"><input type="datetime-local" id="comFecha" name="comFecha"></br></td>
                 <td style="text-align: left;border: none ;width:40%;" colspan="2">
             </tr>
             <tr>
-                <td style="text-align: left;border: none ;width:20%;"><label for="comPrestado">Equipo prestado</label></td>
-                <td style="text-align: left;border: none ;width:30%;">
-                <select id="comPrestado" name="comPrestado">
+                <td style="text-align: left;border: none ;width:20%;"><label for="txtLlama">A quién se llama</label></td>
+                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="txtLlama" name="txtLlama"></br>
+                <!--<select id="comPrestado" name="comPrestado">
                     <option value="si">DR</option>
                     <option value="no" selected>Dra</option>
-                </select></td>     
+                </select></td>  -->   
                 <td style="text-align: left;border: none ;width:40%;"></td>
             </tr>
             <tr>
@@ -554,16 +571,118 @@ $divs =
     </div>
 </div>
 
+<div id="logComunicacionHSAT" class="noprint content">
+<div class="contentt">
+    <tr> Log de Comunicación HSAT - <a href="rpt.php?tb=Sleep_Comunicacion_HSAT"><i class="fa-solid fa-file-lines fa-2x"></i></a></tr><hr></br>
+    <form id="frmlogComunicacionH" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Comunicacion_HSAT" name="tb">
+        <table>
+        </style>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="chFecha">Fecha y Hora de llamada:</label></td>
+                <td style="text-align: left;border: none ;width:30%;"><input type="datetime-local" id="chFecha" name="chFecha"></br></td>
+                <td style="text-align: left;border: none ;width:40%;" colspan="2">
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="chName">Nombre del paciente</label></td>
+                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="chName" name="chName" placeholder="Técnico de entrega" required></br></td>
+                <td style="text-align: left;border: none ;width:40%;"></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="chCaller">Persona que llama al centro:</label></td>
+                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="chCaller" name="chCaller" placeholder="Técnico de entrega" required></br></td>
+                <td style="text-align: left;border: none ;width:40%;"></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="chDispositivo">Numero de identificación del dispositivo:</label></td>
+                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="chDispositivo" name="chDispositivo" value="(SN-BWM2022-7101)" required></br></td>
+                <td style="text-align: left;border: none ;width:40%;"></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="chAsunto">Asunto identificado o problema con el equipo:</label></td>
+                <td style="text-align: left;border: none ;width:30%;"><textarea id="chAsunto" name="chAsunto"></textarea></br></td>
+                <td style="text-align: left;border: none ;width:40%;"></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="chSolucion">Solución o recomendación brindada al paciente:</label></td>
+                <td style="text-align: left;border: none ;width:30%;"><textarea id="chSolucion" name="chSolucion"></textarea></br></td>
+                <td style="text-align: left;border: none ;width:40%;"></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="chTecnico">Nombre del tecnico</label></td>
+                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="chTecnico" name="chTecnico" placeholder="Técnico de entrega" required></br></td>
+                <td style="text-align: left;border: none ;width:40%;"></td>
+            </tr>
+            <tr>
+                <td style="text-align: center;border:none;width:20%;" colspan="3">
+                    <input type="submit" id="btnSubmit31" value="Guardar">
+                    <input type="button" id="btnCancel31" value="Cancelar">
+                </td><td style="text-align: left;border:none;"></td>
+            </tr>
+        </table>
+    </form>
+    </div>
+</div>
+
+<div id="logResgistroHSAT" class="noprint content">
+<div class="contentt">
+    <tr>Log de Registro y Mantenimiento del HSAT - <a href="rpt.php?tb=Sleep_Registro_HSAT"><i class="fa-solid fa-file-lines fa-2x"></i></a></tr><hr></br>
+    <form id="frmlogComHSAT" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Registro_HSAT" name="tb">
+        <table>
+        </style>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="rhFecha">Fecha y Hora de llamada:</label></td>
+                <td style="text-align: left;border: none ;width:30%;"><input type="datetime-local" id="rhFecha" name="rhFecha"></br></td>
+                <td style="text-align: left;border: none ;width:40%;" colspan="2">
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="rhName">Nombre del paciente</label></td>
+                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="rhName" name="rhName" placeholder="Técnico de entrega" required></br></td>
+                <td style="text-align: left;border: none ;width:40%;"></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="rhEquipo">Tipo de equipo prestado:</label></td>
+                <td style="text-align: left;border: none ;width:30%;"><input type="radio" id="rhEquipo" name="rhEquipo" value="HSAT-SN-BWM2022-7101" checked><label for="radio1">HSAT-SN-BWM2022-7101</label></br></td>
+                <td style="text-align: left;border: none ;width:40%;"></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="rhDevolucion">Fecha y Hora de devolución del equipo:</label></td>
+                <td style="text-align: left;border: none ;width:30%;"><input type="datetime-local" id="rhDevolucion" name="rhDevolucion" placeholder="Técnico de entrega" required></br></td>
+                <td style="text-align: left;border: none ;width:40%;"></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="rhInspeccion">Inspeccion de rutina:</label></td>
+                <td style="text-align: left;border: none ;width:30%;">
+                    <input type="radio" id="chAsunto1" name="rhInspeccion" value="Funcional" checked><label for="radio1">Funcional</label></br>
+                    <input type="radio" id="chAsunto2" name="rhInspeccion" value="Defectuoso"><label for="radio2">Defectuoso</option>
+                <td style="text-align: left;border: none ;width:40%;"></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="rhComentarios">Comentarios:</label></td>
+                <td style="text-align: left;border: none ;width:30%;"><textarea id="rhComentarios" name="rhComentarios"></textarea></br></td>
+                <td style="text-align: left;border: none ;width:40%;"></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="rhTecnico">Nombre del tecnico</label></td>
+                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="rhTecnico" name="rhTecnico" placeholder="Técnico de entrega" required></br></td>
+                <td style="text-align: left;border: none ;width:40%;"></td>
+            </tr>
+            <tr>
+                <td style="text-align: center;border:none;width:20%;" colspan="3">
+                    <input type="submit" id="btnSubmit31" value="Guardar">
+                    <input type="button" id="btnCancel31" value="Cancelar">
+                </td><td style="text-align: left;border:none;"></td>
+            </tr>
+        </table>
+    </form>
+    </div>
+</div>
+
 <div id="logRechazo" class="noprint content">
 <div class="contentt">
     <tr> Rechazo de Tratamiento - <a href="rpt.php?tb=Sleep_Rechazo"><i class="fa-solid fa-file-lines fa-2x"></i></a></tr><hr></br>
     <form id="frmlogRechazo" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Rechazo" name="tb">
     <table>
         </style>
-            <tr>
-                <td style="text-align: left;border: none ;width:20%;"><label for="pacienteRechazo" class="lrequired">Nombre del Paciente *</label></td>
-                <td style="text-align: left;border: none ;width:80%;"><input type="text" id="pacienteRechazo" name="pacienteRechazo" placeholder="Nombre del Paciente" required></br></td>
-            </tr>
             <tr>
                 <td style="text-align: left;border: none ;width:20%;"><label for="visitRechazo" class="lrequired">Visit ID *</label></td>
                 <td style="text-align: left;border: none ;width:80%;"><input type="number" id="visitRechazo" name="visitRechazo" required></br></td>
@@ -573,11 +692,30 @@ $divs =
                 <td style="text-align: left;border: none ;width:80%;"><input type="date" id="fechaRechazo" name="fechaRechazo"></br></td>
             </tr>
             <tr>
-                <td style="text-align: left;border: none ;width:20%;"><label for="razonRechazo" class="lrequired">Razón por la que rechazo *</label></td>
+                <td style="text-align: left;border: none ;width:20%;"><label for="radPasos">Se tomaron pasos de adaptación?</label></td>
+                <td style="text-align: left;border: none ;width:80%;">
+                    <input type="radio" id="radPasos1" name="radPasos" value="Si"><label for="radio1">Si</label></br>
+                    <input type="radio" id="radPasos2" name="radPasos" value="No"><label for="radio2">No</option>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label>Firmó documento de rechazo?</label></td>
+                <td style="text-align: left;border: none ;width:80%;">
+                    <input type="radio" id="radFirma1" name="radFirma" value="Si"><label for="radFirma1">Si</label></br>
+                    <input type="radio" id="radFirma2" name="radFirma" value="No"><label for="radFirma2">No</option>
+                </td>
+            </tr>
+
+            <!-- <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="pacienteRechazo" class="lrequired">Nombre del Paciente *</label></td>
+                <td style="text-align: left;border: none ;width:80%;"><input type="text" id="pacienteRechazo" name="pacienteRechazo" placeholder="Nombre del Paciente" required></br></td>
+            </tr> -->
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="razonRechazo" class="lrequired">Razón por la que rechazo tratamiento*</label></td>
                 <td style="text-align: left;border: none ;width:80%;"><textarea id="razonRechazo" name="razonRechazo" cols="50" rows="4" required></textarea></br></td>
             </tr>
             <tr>
-                <td style="text-align: left;border: none ;width:20%;"><label for="techRechazo">Técnico</label></td>
+                <td style="text-align: left;border: none ;width:20%;"><label for="techRechazo">Nombre del técnico</label></td>
                 <td style="text-align: left;border: none ;width:80%;"><input type="text" id="techRechazo" name="techRechazo"></br></td>
             </tr>
             <tr>
@@ -682,7 +820,7 @@ $divs =
                 </select></td>     
             </tr>
             <tr>
-                <td style="text-align: left;border: none ;width:20%;"><label for="txtCorrectivas">Acciones Correctivas (si necesarias)</label></td>
+                <td style="text-align: left;border: none ;width:20%;"><label for="txtCorrectivas">Acciones Correctivas (si es necesaria)</label></td>
                 <td style="text-align: left;border: none ;width:80%;"><input type="text" name="txtCorrectivas"></br></td>
             </tr>
             <tr>
@@ -761,7 +899,7 @@ $divs =
             </tr>            
             <tr>
                 <td style="text-align: left;border: none ;width:20%;"><label for="expiraTirilla">Fecha de Expiración (Frasco de Tirillas)</label></td>
-                <td style="text-align: left;border: none ;width:80%;"><input type="date" id="expiraTirilla" name="expiraTirilla" ></br></td>
+                <td style="text-align: left;border: none ;width:80%;"><input type="date" id="expiraTirilla" name="expiraTirilla"> (luego de abrir el frasco 90 dias)</br></td>
             </tr>
             <tr>
                 <td style="text-align: left;border: none ;width:20%;"><label for="ddResultadoTirilla1">1. Resultado Prueba de las Tirillas con Cidex OPA (PURO)</label></td>
@@ -816,16 +954,16 @@ $divs =
                 <td style="text-align: left;border: none ;width:80%;"><input type="text" id="txtAccionesCorrectivas" name="txtAccionesCorrectivas"></br></td>
             </tr>
             <tr>
-                <td style="text-align: left;border: none ;width:20%;"><label for="techTest">Quien realiza la prueba o abre el frasco?</label></td>
+                <td style="text-align: left;border: none ;width:20%;"><label for="techTest">Nombre de quien abre el frasco o realiza la prueba.</label></td>
                 <td style="text-align: left;border: none ;width:80%;"><input type="text" id="ddAbreFrasco" name="techTest"></br></td>
             </tr>
             <tr>
                 <td style="text-align: left;border: none ;width:20%;"><label for="expiracionSolucion" class="lrequired">Fecha de expiración del frasco de la solución</label></td>
-                <td style="text-align: left;border: none ;width:80%;"><input type="date" id="expiracionSolucion" name="expiracionSolucion"></br></td>
+                <td style="text-align: left;border: none ;width:80%;"><input type="date" id="expiracionSolucion" name="expiracionSolucion"> (Frasco cerrado)</br></td>
             </tr>   
             <tr>
                 <td style="text-align: left;border: none ;width:20%;"><label for="expiracionTirillas">Fecha de expiración del frasco de tirillas</label></td>
-                <td style="text-align: left;border: none ;width:80%;"><input type="date" id="expiracionTirillas" name="expiracionTirillas"></br></td>
+                <td style="text-align: left;border: none ;width:80%;"><input type="date" id="expiracionTirillas" name="expiracionTirillas"> (Frasco cerrado)</br></td>
             </tr>   
             <tr>
                 <td style="text-align: center;border:none;width:20%;">
@@ -892,30 +1030,93 @@ $divs =
     <tr> Desinfeccion ETCO2 - <a href="rpt.php?tb=Sleep_ETCO"><i class="fa-solid fa-file-lines fa-2x"></i></a></tr><hr></br>
     <form id="frmETCO2" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_ETCO" name="tb">
     <table>
-        </style>
-            <tr>
-                <td style="text-align: left;border: none ;width:20%;"><label for="etcoDesinfeccion">Fecha de desinfección</label></td>
-                <td style="text-align: left;border: none ;width:80%;"><input type="date" name="etcoDesinfeccion"></br></td>
-            </tr>
-            <tr>
-                <td style="text-align: left;border: none ;width:20%;"><label for="etcoTecnico" class="lrequired">Nombre del Técnico</label></td>
-                <td style="text-align: left;border: none ;width:80%;"><input type="text" name="etcoTecnico" required></br></td>
-            </tr>
-            <tr>
-                <td style="text-align: left;border: none ;width:20%;"><label for="etcoModelo" class="lrequired">Modelo</label></td>
-                <td style="text-align: left;border: none ;width:80%;"><!--<input type="text" name="etcoModelo"></br></td>-->
-                <input type="radio" name="etcoModelo" id="radio1" value="I Resp Sense LS1R-9R-MMHG (#serie 590000107)"><label for="radio1">I Resp Sense LS1R-9R-MMHG (#serie 590000107)</label></br>
-                <input type="radio" name="etcoModelo" id="radio2" value="II Resp Sense LS1R-9R (#serie 501967844)"><label for="radio2">II Resp Sense LS1R-9R (#serie 501967844)</option>
-                  <!--  <option value="II Resp Sense LS1R-9R (#serie 501967844)">II Resp Sense LS1R-9R (#serie 501967844)</option>
-                </select></td> -->    
-            </tr>
-            <tr>
-                <td style="text-align: center;border:none;width:20%;" colspan="3">
-                    <input type="submit" id="btnSubmit3" value="Guardar">
-                    <input type="button" id="btnCancel3" value="Cancelar">
-                </td><td style="text-align: left;border:none;"></td>
-            </tr>
-        </table>
+        <tr>
+            <td style="text-align: left;border: none ;width:20%;"><label for="etcoDesinfeccion">Fecha de desinfección</label></td>
+            <td style="text-align: left;border: none ;width:80%;"><input type="date" name="etcoDesinfeccion"></br></td>
+        </tr>
+        <tr>
+            <td style="text-align: left;border: none ;width:20%;"><label for="etcoTecnico" class="lrequired">Nombre del Técnico</label></td>
+            <td style="text-align: left;border: none ;width:80%;"><input type="text" name="etcoTecnico" required></br></td>
+        </tr>
+        <tr>
+            <td style="text-align: left;border: none ;width:20%;"><label for="etcoModelo" class="lrequired">Modelo</label></td>
+            <td style="text-align: left;border: none ;width:80%;"><!--<input type="text" name="etcoModelo"></br></td>-->
+            <input type="radio" name="etcoModelo" id="radio1" value="I Resp Sense LS1R-9R-MMHG (#serie 590000107)"><label for="radio1">I Resp Sense LS1R-9R-MMHG (#serie 590000107)</label></br>
+            <input type="radio" name="etcoModelo" id="radio2" value="II Resp Sense LS1R-9R (#serie 501967844)"><label for="radio2">II Resp Sense LS1R-9R (#serie 501967844)</option>
+                <!--  <option value="II Resp Sense LS1R-9R (#serie 501967844)">II Resp Sense LS1R-9R (#serie 501967844)</option>
+            </select></td> -->    
+        </tr>
+        <tr>
+            <td style="text-align: center;border:none;width:20%;" colspan="3">
+                <input type="submit" id="btnSubmit3" value="Guardar">
+                <input type="button" id="btnCancel3" value="Cancelar">
+            </td><td style="text-align: left;border:none;"></td>
+        </tr>
+    </table>
+    </form>
+    </div>
+</div>
+
+<div id="tcPCO2" class="noprint content">
+<div class="contentt">
+    <tr> Log de Desinfección de tcPCO2 - <a href="rpt.php?tb=Sleep_TCPCO"><i class="fa-solid fa-file-lines fa-2x"></i></a></tr><hr></br>
+    <form id="frmETCO2" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_TCPCO" name="tb">
+    <table>
+        <tr>
+            <td style="text-align: left;border: none ;width:20%;"><label for="tcpcFecha">Fecha de desinfección</label></td>
+            <td style="text-align: left;border: none ;width:80%;"><input type="date" name="tcpcFecha"></br></td>
+        </tr>
+        <tr>
+            <td style="text-align: left;border: none ;width:20%;"><label for="tcpcTecnico" class="lrequired">Nombre del Técnico</label></td>
+            <td style="text-align: left;border: none ;width:80%;"><input type="text" name="tcpcTecnico" required></br></td>
+        </tr>
+        <tr>
+            <td style="text-align: left;border: none ;width:20%;"><label for="tcpcModelo" class="lrequired">Modelo</label></td>
+            <td style="text-align: left;border: none ;width:80%;"><!--<input type="text" name="tcpcModelo"></br></td>-->
+            <input type="radio" name="tcpcModelo" id="radio1" value="(Sentec Digital Monitoring System – SDMS)#serie 320125"><label for="radio1">(Sentec Digital Monitoring System – SDMS)#serie 320125</label></br>
+            <!--<input type="radio" name="tcpcModelo" id="radio2" value="II Resp Sense LS1R-9R (#serie 501967844)"><label for="radio2">II Resp Sense LS1R-9R (#serie 501967844)</option>
+              <option value="II Resp Sense LS1R-9R (#serie 501967844)">II Resp Sense LS1R-9R (#serie 501967844)</option>
+            </select></td> -->    
+        </tr>
+        <tr>
+            <td style="text-align: center;border:none;width:20%;" colspan="3">
+                <input type="submit" id="btnSubmit13" value="Guardar">
+                <input type="button" id="btnCancel13" value="Cancelar">
+            </td><td style="text-align: left;border:none;"></td>
+        </tr>
+    </table>
+    </form>
+    </div>
+</div>
+
+<div id="HSAT" class="noprint content">
+<div class="contentt">
+    <tr> Log de Desinfección del HSAT - <a href="rpt.php?tb=Sleep_HAST"><i class="fa-solid fa-file-lines fa-2x"></i></a></tr><hr></br>
+    <form id="frmHAST" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_HSAT" name="tb">
+    <table>
+        <tr>
+            <td style="text-align: left;border: none ;width:20%;"><label for="hsatFecha">Fecha de desinfección</label></td>
+            <td style="text-align: left;border: none ;width:80%;"><input type="date" name="hsatFecha"></br></td>
+        </tr>
+        <tr>
+            <td style="text-align: left;border: none ;width:20%;"><label for="hsatTecnico" class="lrequired">Nombre del Técnico</label></td>
+            <td style="text-align: left;border: none ;width:80%;"><input type="text" name="hsatTecnico" required></br></td>
+        </tr>
+        <tr>
+            <td style="text-align: left;border: none ;width:20%;"><label for="hsatModelo" class="lrequired">Modelo</label></td>
+            <td style="text-align: left;border: none ;width:80%;"><!--<input type="text" name="hsatModelo"></br></td>-->
+            <input type="radio" name="hsatModelo" id="radio1" value="BWMini: HST Compass (#serie: BWM2022-7101)" checked><label for="radio1">BWMini: HST Compass (#serie: BWM2022-7101)</label></br>
+            <!--<input type="radio" name="hsatModelo" id="radio2" value="II Resp Sense LS1R-9R (#serie 501967844)"><label for="radio2">II Resp Sense LS1R-9R (#serie 501967844)</option>
+              <option value="II Resp Sense LS1R-9R (#serie 501967844)">II Resp Sense LS1R-9R (#serie 501967844)</option>
+            </select></td> -->    
+        </tr>
+        <tr>
+            <td style="text-align: center;border:none;width:20%;" colspan="3">
+                <input type="submit" id="btnSubmit14" value="Guardar">
+                <input type="button" id="btnCancel14" value="Cancelar">
+            </td><td style="text-align: left;border:none;"></td>
+        </tr>
+    </table>
     </form>
     </div>
 </div>
@@ -926,7 +1127,7 @@ $divs =
     <form id="frmDuchasOjos" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Ojos" name="tb">
     <table>
             <tr>
-                <td style="text-align: left;border: none ;width:20%;"><label for="fechaDucha">Fecha de lavado</label></td>
+                <td style="text-align: left;border: none ;width:20%;"><label for="fechaDucha">Fecha de prueba de lavado de ojos</label></td>
                 <td style="text-align: left;border: none ;width:80%;"><input type="datetime-local" name="fechaDucha" value="'.date('Y-m-d\TH:s').'"></br></td>
             </tr>
             <tr>
@@ -985,7 +1186,7 @@ $divs =
         <tr>
             <td colspan="2">
                 <b>Buscar en:</b>
-                <select id="selTable" name="selTable">
+                <select id="selTable" name="selTable" required>
                     <option value="" selected>Seleccione</option>
                     <option value="Sleep_Studies_Results">Sleep Studies Results</option>:
                     <option value="Sleep_Listado_Expedientes">Listado de Expedientes de la Clínica</option>
@@ -1000,6 +1201,9 @@ $divs =
                     <option value="Sleep_Ojos">Duchas de lavado de ojos</option>
                     <option value="Sleep_ETCO">Desinfección ETCO2 Monitor</option>
                     <option value="Sleep_Desinfeccion_CPAP">Desinfección CPAP</option>
+                    <option value="Sleep_Comunicacion_HSAT">Log de Comunicación HSAT</option>
+                    <option value="Sleep_HSAT">Log de Desinfección del HSAT</option>
+                    <option value="Sleep_Registro_HSAT">Log de Registro y Mantenimiento del HSAT</option>
                     <option value="Sleep_Frasco_Cidex">Registro de Verificación de Frasco de Cidex OPA y Frasco de las Tirillas para las Pruebas Durante el Proceso de Desinfección de Alto Nivel</option>
                     <option value="Sleep_Solucion_Cidex">Registro de la Verificación de la Solución Cidex OPA e Inmersión del Equipo Durante el Proceso de Desinfección de Alto Nivel"</option>
                 </select>
@@ -1019,7 +1223,7 @@ $divs =
                     <option value="<="><= (menor o igual a)</option>
                     <option value="like">Contiene</option>
                 </select>
-                <input type="text" name="txtValue" id="txtValue">
+                <input type="text" name="txtValue" id="txtValue" required>
                 <select id="selOperator" name="selOperator">
                     <option value="n" selected></option>
                     <option value="and">Y</option>
@@ -1085,6 +1289,7 @@ $divs =
     </p>
     </form>
 </div>
+
 <div id="resultados"></div>
 </div>
 </div>

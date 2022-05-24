@@ -5,7 +5,7 @@
 	session_start();
 	include('header.php');
 	include("funcs.php");
-	if (!isset($_SESSION['user_name'])) {
+	if (!isset($_SESSION['username'])) {
 		header('location:./logout.php');
 		exit();
 	}
@@ -20,7 +20,7 @@
 	<script src="idle.js"></script>
 	<style>
 		.item{
-			/* background-image: url('./imgs/ham.jpg'); */
+			/* background-image: url('./imgs/ham-logo.png'); */
 			display:table-cell;
 			text-align: center;
         	/* vertical-align: middle; */

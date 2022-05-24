@@ -43,7 +43,7 @@
 <body>
     <div id="main">
     <div id="top" style="text-align:center;width=95%;">
-        <img src="imgs/ham.jpg"></br></br>
+        <img src="imgs/ham-logo.png"></br></br>
         <button class="noprint" style="border:none;color:red;background:none;" alt="Back" onclick="javascript:history.back();"><i class="fa-solid fa-arrow-left-long fa-lg"></i></button>
         <button class="noprint" style="border:none;color:red;background:none;" alt="Print" onclick="javascript:window.print();"><i class="fa-solid fa-print fa-lg"></i></button>
         <!-- <button class="noprint" style="border:none;color:red;background:none;" alt="search"><i class="fa-solid fa-magnifying-glass fa-lg"></i></button> -->

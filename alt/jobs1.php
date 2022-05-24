@@ -11,7 +11,7 @@ include("funcs.php");
  * 20210630
  ********************************************/
 session_start();
-if (!isset($_SESSION['user_name'])) {
+if (!isset($_SESSION['username'])) {
     header('location:logout.php');
     exit();
 }

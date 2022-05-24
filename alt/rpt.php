@@ -105,12 +105,13 @@
 <body>
 <?php
 require_once('cno.php');
-// echo "<pre>GET";
-// var_dump($_GET);
+
 $db = new ServidorBD();
 $conn = $db->Conectar('x');
-$tabla = $_GET['tb'];
 if($_GET){
+    // echo "<pre>GET";
+    // var_dump($_GET);
+    $tabla = $_GET['tb'];
     if($_GET['tb'] === 'fnd')
     {
 
@@ -118,7 +119,7 @@ if($_GET){
         $tsql = "SELECT * FROM $tabla" ;
     ?>
         <div style="text-align:center;width=95%;">
-            <img src="imgs/ham.jpg"></br></br>
+            <img src="imgs/ham-logo.png"></br></br>
             <?php echo '<span style="color:red;font-style:oblique;font-size: 30px;font-stretch: expanded;font-weight: bold;">'.getRepTittle($tabla).'</span>';?></br></br>
             <button class="noprint" style="border:none;color:red;background:none;" alt="Back" onclick="javascript:history.back();"><i class="fa-solid fa-arrow-left-long fa-lg"></i></button>
             <button class="noprint" style="border:none;color:red;background:none;" alt="Print" onclick="javascript:window.print();"><i class="fa-solid fa-print fa-lg"></i></button>
@@ -131,35 +132,43 @@ if($_GET){
         <?php 
         $getResults = sqlsrv_query($conn, $tsql);
         $i =0;
-        // echo '<tr><th bgcolor="#FF7979" colspan="100">'.getRepTittle($tabla).'</td>';
-        // echo '</tr>';
         echo '<tr>'; //#FFF7F9
-        foreach(sqlsrv_field_metadata($getResults) as $field){
-            echo '<th><span onclick=\'sortTable("'.$tabla.'","'.$field['Name'].'");\'>'.$field['Name'].'</span></th>';
-            $i++;
-        }
-        echo '</tr>';
-        echo "<tr>";
-        $x =0;
-        while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_BOTH)){
-            for ($j = 0; $j < $i; $j++) {
-                //if($j==0) {'<td><button></button></td>'}
-                if ($row[$j] instanceof DateTime) {
-                    echo "<td>".str_replace( ' 00:00:00','',$row[$j]->format('m/d/Y H:i:s'))."</td>";
-                }else{
-                    echo "<td>".$row[$j]."</td>";
+        if($getResults){
+            $res = sqlsrv_has_rows( $getResults );
+            if($res > 0){
+                foreach(sqlsrv_field_metadata($getResults) as $field){
+                    $titulo = str_replace("_"," ",$field['Name']);
+                    echo '<th><span onclick=\'sortTable("'.$tabla.'","'.$field['Name'].'");\'>'.$titulo.'</span></th>';
+                    $i++;
+                }
+                echo '</tr>';
+                echo "<tr>";
+                $x =0;
+                // var_dump(sqlsrv_num_rows($getResults));
+                while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_BOTH)){
+                    for ($j = 0; $j < $i; $j++) {
+                        //if($j==0) {'<td><button></button></td>'}
+                        if ($row[$j] instanceof DateTime) {
+                            echo "<td>".str_replace( ' 00:00:00','',$row[$j]->format('m/d/Y H:i:s'))."</td>";
+                        }else{
+                            echo "<td>".$row[$j]."</td>";
+                        }
+                    }
+                    $x++;
+                    echo '</tr>';
                 }
             }
-            $x++;
-            echo '</tr>';
+            // echo '<tr><td style="color:red;"><h2>No se generaron resultados</h2><td/></tr>';
+        }else{
+            echo '<td style="color:#000;" colspan="100"><b>No se generon resultados.</b></br></td></tr>';
         }
     }
 }
 if($_POST){
     // echo '<pre>';
     // var_dump($_POST);
-    $tb = @$_POST['tb'];
-    
+    // $tb = @$_POST['tb'];
+    extract($_POST);
     if($tb ==='s'){
         echo 'zumba yandellll';
     }else{

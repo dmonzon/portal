@@ -6,7 +6,7 @@
     <script src="idle.js"></script>
 
 </head>
-<body><div style="padding: 200px 0; text-align: center;"><img src="ham.jpg"></br></br></br>
+<body><div style="padding: 200px 0; text-align: center;"><img src="ham-logo.png"></br></br></br>
         <?php 
 		ini_set('display_errors',1);
 		ini_set('log_errors',0);
@@ -68,7 +68,7 @@
 			extract($_POST);
 			if($opt == 'regAu'){
 				$mydate = date('Y-m-d H:i:s');
-				$user = $_SESSION['user_name'];
+				$user = $_SESSION['username'];
 				//$ename = $_POST['nombre'.$id];
 				$tsql = "INSERT into Utilizacion_AusenciasDet
 						([id_Ausencia],[Desde],[Hasta],[Created],[Modified],[Modifier],[id_Empleado])

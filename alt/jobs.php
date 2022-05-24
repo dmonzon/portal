@@ -11,7 +11,7 @@ include("funcs.php");
  * Danny Monzon
  * 20210630
  ********************************************/
-if (!isset($_SESSION['user_name'])) {
+if (!isset($_SESSION['username'])) {
     header('location:logout.php');
     exit();
 }

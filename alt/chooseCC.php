@@ -6,7 +6,7 @@
     <script src="jq.js"></script>
     <script src="idle.js"></script>
 </head>
-<body><div style="  padding: 200px 0; text-align: center;"><img src="ham.jpg"></br></br></br>
+<body><div style="  padding: 200px 0; text-align: center;"><img src="ham-logo.png"></br></br></br>
         <?php 
         if($_GET){
             require("cno.php");

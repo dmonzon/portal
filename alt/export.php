@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once("cno.php");
-if (!isset($_SESSION['user_name'])) {
+if (!isset($_SESSION['username'])) {
     if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
         $url = "https://";   
     else  

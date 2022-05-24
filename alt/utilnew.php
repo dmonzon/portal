@@ -31,7 +31,7 @@
         }
     </style>
 </head>
-<body><meta name="viewport" content="width=device-width, initial-scale=1"><div style="padding: 200px 0; text-align: center;"><img src="ham.jpg"></br></br></br>
+<body><meta name="viewport" content="width=device-width, initial-scale=1"><div style="padding: 200px 0; text-align: center;"><img src="ham-logo.png"></br></br></br>
         <?php 
         //echo '<pre>';
 

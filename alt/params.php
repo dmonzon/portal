@@ -7,7 +7,7 @@
     require_once("cno.php");
     require_once("control.php");
     include('header.php');
-    if (!isset($_SESSION['user_name'])) {
+    if (!isset($_SESSION['username'])) {
         header('location:logout.php');
         exit();
     }

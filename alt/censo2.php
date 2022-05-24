@@ -84,10 +84,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $tot  = trim($x['hid'][$i]);
             $unidad  = trim($x['uid'][$i]);
             $campos[]=array($unidad,$manejador1,$qty1,$manejador2,$qty2,$planificador1,$qty3,$planificador2,$qty4,$tot);
-            $qrys .= '('.$unidad.",'".date('Y-m-d')."',".$manejador1.','.$qty1.','.$manejador2.','.$qty2.','.$planificador1.','.$qty3.','.$tot.','.$planificador2.','.$qty4.','.$alta.",'".$_SESSION['user_name']."'),";
+            $qrys .= '('.$unidad.",'".date('Y-m-d')."',".$manejador1.','.$qty1.','.$manejador2.','.$qty2.','.$planificador1.','.$qty3.','.$tot.','.$planificador2.','.$qty4.','.$alta.",'".$_SESSION['username']."'),";
         }
         $sql=' values';
-        $empid  = 'empid';$qty = 'q';$u = 0;$username = $_SESSION['user_name'];
+        $empid  = 'empid';$qty = 'q';$u = 0;$username = $_SESSION['username'];
         //insertar reocrd en tabla de altas y pbtener el id
         // insertar los totales de los empleados
         foreach ($x['revi'] as $key => $value) {

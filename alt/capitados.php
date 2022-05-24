@@ -13,7 +13,7 @@ include('header.php');
  * 20210909
  ********************************************/
 
-if (!isset($_SESSION['user_name'])) {
+if (!isset($_SESSION['username'])) {
     header('location:logout.php');
     exit();
 }

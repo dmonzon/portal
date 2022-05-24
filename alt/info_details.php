@@ -15,7 +15,8 @@ if($_GET){
         $html = '<tr>';
         $i = 0;
         foreach(sqlsrv_field_metadata($stmt) as $field){
-            $html .= '<th><span onclick=\'sortTabla("'.$tabla.'","'.$field['Name'].'","3");\'>'.$field['Name'].'</span></th>';
+            $titulo = str_replace("_"," ",$field['Name']);
+            $html .= '<th><span onclick=\'sortTabla("'.$tabla.'","'.$field['Name'].'","3");\'>'.$titulo.'</span></th>';
             $i++;
         }
         // $html .= '</tr>';
@@ -68,23 +69,30 @@ if($_GET){
         $x=0;
         echo '<table class="hd-table" id="empTable"><tr>';
         $stmt = sqlsrv_query($conn, $sql);
-        foreach(sqlsrv_field_metadata($stmt) as $field){
-            echo '<th><span onclick=\'sortTabla("'.$tabla.'","'.$field['Name'].'");\'>'.$field['Name'].'</span></th>';
-            $x++;
-        }
-        echo '</tr>';
-        while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_BOTH)){
-            for ($j = 0; $j < $x; $j++) {
-                if ($row[$j] instanceof DateTime) {
-                    echo "<td class='hd-table'>".$row[$j]->format('m/d/Y H:i:s')."</td>";
-                }else{
-                    echo "<td class='hd-table'>".($row[$j] == '' ? '0' : $row[$j]) ."</td>";
-                }
+        //echo count($stmt);
+        $res = sqlsrv_has_rows( $stmt );
+        if($res > 0){
+            foreach(sqlsrv_field_metadata($stmt) as $field){
+                $titulo = str_replace("_"," ",$field['Name']);
+                echo '<th><span onclick=\'sortTabla("'.$tabla.'","'.$field['Name'].'");\'>'.$titulo.'</span></th>';
+                $x++;
             }
-            //$x++;
-            echo '</tr><br>';
+            echo '</tr>';
+            while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_BOTH)){
+                for ($j = 0; $j < $x; $j++) {
+                    if ($row[$j] instanceof DateTime) {
+                        echo "<td class='hd-table'>".$row[$j]->format('m/d/Y H:i:s')."</td>";
+                    }else{
+                        echo "<td class='hd-table'>".($row[$j] == '' ? '0' : $row[$j]) ."</td>";
+                    }
+                }
+                //$x++;
+                echo '</tr><br>';
+            }
+            echo "</table><br>";
+        }else{
+            echo '<tr><td style="color:red;"><h2>No se generaron resultados</h2><td/></tr>';
         }
-        echo "</table><br>";
     }
 }
 if($_POST){

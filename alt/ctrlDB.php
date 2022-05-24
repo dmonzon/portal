@@ -416,7 +416,7 @@ function getAltasRpt($date = null,$id = 0){
 function RegisterAltas(){
     $db = new ServidorBD();
     $conn = $db->Conectar('a');
-    $un = $_SESSION['user_name'];
+    $un = $_SESSION['username'];
     $params = array($un);
     $tsql = "INSERT into [dbo].[Utilizacion_Altas] ([Dia],[Created],[Usuario])
             values (CONVERT (date, GETDATE()),getdate(),?);SELECT SCOPE_IDENTITY() as 'id';";

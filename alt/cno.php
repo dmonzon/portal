@@ -249,10 +249,12 @@ function CreateTable($tabla){
 }
 
 function SleepQrys($data){
-    //$ur = $_SESSION['user_name'];
+    //$ur = $_SESSION['username'];
     $ur = 'user_name';
     //$myarray = array_map('trim', $_POST);
+    echo "<pre>";
     extract($_POST);
+    var_dump($_POST);
     switch ($tb) {
         case 'Sleep_Studies_Results':
             $tsql ="INSERT INTO [Sleep_Studies_Results]
@@ -279,12 +281,12 @@ function SleepQrys($data){
         case 'Sleep_Inspeccion_Rutina':
             $tsql ="INSERT INTO Sleep_Inspeccion_Rutina
                 ([Fecha_Inspeccion],[Habitacion],[Amplificador],[Headbox],[Oximetro],[CPAP],[Cama],[Bandas],[Sensores]
-                ,[Electrodos],[Oxigeno],[Intercome],[PC],[Accion_Tomada],[Iniciales_Tecnico],[Transcutaneo],[ETCO],[Created],[CreatedBy],[Modified],[ModifiedBy])
+                ,[Electrodos],[Oxigeno],[Intercome],[PC],[Accion_Tomada],[Iniciales_Tecnico],[Transcutaneo],[ETCO],[CO2],[Created],[CreatedBy],[Modified],[ModifiedBy])
             VALUES
-            (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,getdate(),?,getdate(),?)";
+            (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,getdate(),?,getdate(),?)";
             $dt = str_replace('T', ' ', $fechaInspeccion);
             $par = array($dt,$ddHabitacion,$ddAmplificador,$ddHeadbox,$ddOximetro,$ddCPAP,$ddCama1,$ddBandas,$ddSensores,
-                        $ddElectrodos,$ddOxigeno,$ddIntrcome,$ddPC,$accionTomada,trim($techRutina),$ddTrans,$ddETCO,$ur,$ur);
+                        $ddElectrodos,$ddOxigeno,$ddIntrcome,$ddPC,$accionTomada,ucwords(strtolower(trim($techRutina))),$ddTrans,$ddETCO,$ddCO2,$ur,$ur);
             doSleepDB($tsql,$par,$tb);
         break;
         case 'Sleep_Registro_Paciente':
@@ -297,38 +299,56 @@ function SleepQrys($data){
         break;
         case 'Sleep_Valores_Criticos':
             $tsql ="INSERT INTO Sleep_Valores_Criticos
-                ([Tecnico],[Fecha],[Num_Paciente],[Valor_Critico],[ReportadoA],[Accion],[Fecha_Reportado],[Created],[CreatedBy],[Modified],[ModifiedBy])
+                ([Tecnico],[Fecha],[Num_Paciente],[Valor_Critico],[ReportadoA],[Accion],[Accion_MD],[Fecha_Reportado],[Created],[CreatedBy],[Modified],[ModifiedBy])
             VALUES
-                (?,?,?,?,?,?,?,getdate(),?,getdate(),?)";
+                (?,?,?,?,?,?,?,?,getdate(),?,getdate(),?)";
             $dt = str_replace('T', ' ', $valFecha); $dt2 = str_replace('T', ' ', $valReportado);
-            $par = array(ucwords(strtolower($valExpediente)),$dt,$valPaciente,$valorCritico,ucwords(strtolower($repotadoa)),$valAccion,$dt2,$ur,$ur);
+            $par = array(ucwords(strtolower($valExpediente)),$dt,$valPaciente,$valorCritico,ucwords(strtolower($repotadoa)),$valAccion,$mdAccion,$dt2,$ur,$ur);
             doSleepDB($tsql,$par,$tb);
         break;
         case 'Sleep_CPAP_Prestados':
             $tsql ="INSERT INTO Sleep_CPAP_Prestados
                 ([Num_Expediente],[Telefono],[Fecha_Prestado],[Fecha_Entrega],[Tecnico_Entrega],[Pago],[Tecnico_Recibe],[Fecha_Recibo]
-                ,[Desinfectado],[Fecha_Desinfectado],[Equipo],[Created],[CreatedBy],[Modified],[ModifiedBy])
+                ,[Desinfectado_Por],[Fecha_Desinfectado],[Equipo],[Created],[CreatedBy],[Modified],[ModifiedBy])
                 VALUES (?,?,?,?,?,?,?,?,?,?,?,getdate(),?,getdate(),?)";
             $dt = str_replace('T', ' ', $fechaPrestado); 
             $dt2 = str_replace('T', ' ', $fecha_Entrega);
             $dt3 = str_replace('T', ' ', $cpapFecha); 
             $dt4 = str_replace('T', ' ', $fRecibe);
-            $par = array($exClinico,$pTelefono,$dt,$dt2,ucwords(strtolower($tecEntrega)),$pago50,ucwords(strtolower($techRecibe)),$dt4,$desinfecto,$dt3,$ePrestado,$ur,$ur);
+            $par = array(ucwords(strtolower($cpacpName)),$pTelefono,$dt,$dt2,ucwords(strtolower($tecEntrega)),$pago50,ucwords(strtolower($techRecibe)),$dt4,ucwords(strtolower($desinfecto)),$dt3,$ePrestado,$ur,$ur);
             doSleepDB($tsql,$par,$tb);
         break;
         case 'Sleep_Comunicacion':
             $tsql ="INSERT INTO Sleep_Comunicacion
-                    ([Tecnico],[Fecha_Entrega],[Equipo],[Situacion],[Created],[CreatedBy],[Modified],[Modifiedby])
+                    ([Tecnico],[Fecha_Entrega],[Contacto],[Situacion],[Created],[CreatedBy],[Modified],[Modifiedby])
                 VALUES (?,?,?,?,getdate(),?,getdate(),?)";
             $dt = str_replace('T', ' ', $comFecha); 
-            $par = array($tecComunicacion,$dt,$comPrestado,$comSituacion,$ur,$ur);
+            $par = array(ucwords(strtolower($tecComunicacion)),$dt,ucwords(strtolower($txtLlama)),$comSituacion,$ur,$ur);
+            doSleepDB($tsql,$par,$tb);
+        break;
+        case 'Sleep_Comunicacion_HSAT':
+            $tsql ="INSERT INTO Sleep_Comunicacion_HSAT
+                    ([Fecha],[Nombre_Paciente],[Llama_al_centro],[Num_Identificacion],[Asunto],[Solucion],[Tecnico],[Created],[CreatedBy],[Modified],[ModifiedBy])
+                VALUES (?,?,?,?,?,?,?,getdate(),?,getdate(),?)";
+            $dt = str_replace('T', ' ', $chFecha); 
+            $par = array($dt,ucwords(strtolower($chName)),ucwords(strtolower($chCaller)),$chDispositivo,$chAsunto,$chSolucion,ucwords(strtolower($chTecnico)),$ur,$ur);
+            doSleepDB($tsql,$par,$tb);
+        break;
+        case 'Sleep_Registro_HSAT':
+            $tsql ="INSERT INTO Sleep_Registro_HSAT
+                    ([Fecha],[Nombre_Paciente],[Equipo],[Fecha_Devolucion],[Inspeccion],[Comentarios],[Tecnico],[Created],[CreatedBy],[Modified],[ModifiedBy])
+                VALUES (?,?,?,?,?,?,?,getdate(),?,getdate(),?)";
+            $dt = str_replace('T', ' ', $rhFecha); 
+            $dt2 = str_replace('T', ' ', $rhDevolucion); 
+            $par = array($dt,ucwords(strtolower($rhName)),$rhEquipo,$dt2,$rhInspeccion,$rhComentarios,ucwords(strtolower($rhTecnico)),$ur,$ur);
+            //ucwords(strtolower($tecComunicacion)),$dt,ucwords(strtolower($txtLlama)),$comSituacion,$ur,$ur);
             doSleepDB($tsql,$par,$tb);
         break;
         case 'Sleep_Rechazo':
-            $tsql ="INSERT INTO Sleep_Rechazo ([Nombre],[Visit_ID],[Fecha],[Razon],[Tecnico],[Created],[CreatedBy],[Modified],[ModifiedBy])
-                VALUES (?,?,?,?,?,getdate(),?,getdate(),?)";
+            $tsql ="INSERT INTO Sleep_Rechazo ([Visit_ID],[Fecha],[Razon],[Pasos_Adaptacion],[Firmado],[Tecnico],[Created],[CreatedBy],[Modified],[ModifiedBy])
+                VALUES (?,?,?,?,?,?,getdate(),?,getdate(),?)";
             //$dt = str_replace('T', ' ', $fechaRechazo); 
-            $par = array(ucwords(strtolower($pacienteRechazo)),$visitRechazo,$fechaRechazo,$razonRechazo,ucwords(strtolower($techRechazo)),$ur,$ur);
+            $par = array($visitRechazo,$fechaRechazo,$razonRechazo,$radPasos,$radFirma,ucwords(strtolower($techRechazo)),$ur,$ur);
             doSleepDB($tsql,$par,$tb);
         break;
         case 'Sleep_Endozime':
@@ -388,6 +408,27 @@ function SleepQrys($data){
                 $tiempoInmersion,$txtLiqueo,ucwords(strtolower($techPrueba)),$terminacion,$ur,$ur);//
             doSleepDB($tsql,$par,$tb);
         break;
+        case 'Sleep_HSAT':
+            $tsql ="INSERT INTO Sleep_HSAT
+            ([Fecha],[Tecnico],[Modelo],[Created],[CreatedBy],[Modified],[ModifiedBy])
+                VALUES (?,?,?,getdate(),?,getdate(),?)";
+            $par = array($hsatFecha,ucwords(strtolower($hsatTecnico)),$hsatModelo,$ur,$ur);
+            doSleepDB($tsql,$par,$tb);
+        break;
+        case 'Sleep_TCPCO':
+            $tsql ="INSERT INTO Sleep_TCPCO
+            ([Fecha],[Tecnico],[Modelo],[Created],[CreatedBy],[Modified],[ModifiedBy])
+                VALUES (?,?,?,getdate(),?,getdate(),?)";
+            $par = array($tcpcDesinfeccion,ucwords(strtolower($tcpcTecnico)),$tcpcModelo,$ur,$ur);
+            doSleepDB($tsql,$par,$tb);
+        break;
+        case 'Sleep_ETCO':
+            $tsql ="INSERT INTO Sleep_ETCO
+            ([Fecha],[Tecnico],[Modelo],[Created],[CreatedBy],[Modified],[ModifiedBy])
+                VALUES (?,?,?,getdate(),?,getdate(),?)";
+            $par = array($etcoDesinfeccion,ucwords(strtolower($etcoTecnico)),$etcoModelo,$ur,$ur);
+            doSleepDB($tsql,$par,$tb);
+        break;
         default:
         break;
     }
@@ -416,6 +457,21 @@ function doSleepDB($tsql,$params,$tb){
 
 function getRepTittle($tb){
     switch ($tb) {
+        case 'Sleep_Comunicacion_HSAT':
+            return 'Log de Desinfección del HSAT';
+        break;
+        case 'Sleep_Comunicacion_HSAT':
+            return 'Log de comunicación HSAT';
+        break;
+        case 'Sleep_Registro_HSAT':
+            return 'Log de Registro y Mantenimiento del HSAT';
+        break;
+        case 'Sleep_HSAT':
+            return 'Log de Desinfección del HSAT';
+        break;
+        case 'Sleep_TCPC':
+            return 'Log de Desinfección de tcPCO2';
+        break;
         case 'Sleep_Studies_Results':
             return 'Sleep Studies Results';
         break;

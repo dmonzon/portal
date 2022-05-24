@@ -18,7 +18,7 @@ ini_set('display_errors',0);
 ini_set('log_errors', 0);
 error_reporting(E_ALL & ~E_NOTICE);
 require_once("cno.php");
-if (!isset($_SESSION['user_name'])) {
+if (!isset($_SESSION['username'])) {
     if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
         $url = "https://";   
     else  
