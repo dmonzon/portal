@@ -17,7 +17,7 @@ $(document).on("change", ".pago", function() {
 });
 
 $(document).on("change", ".total", function() {
-    alert('hola');
+    // alert('hola');
     if($("#TotalPagos").val() >= 0 && $("#TotalCapitados").val() >= 0)
         $('#btnSometer').prop('disabled', false);
 });

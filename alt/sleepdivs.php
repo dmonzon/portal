@@ -1,5 +1,8 @@
 <?php 
 require_once("cno.php");
+$dt = getdate();
+date_default_timezone_set("America/Puerto_Rico");
+$today = getdate();
 $divs = 
 '<!--<center><img src="imgs/hamlogo.png"></center>-->
 <div id="SleepStudies" class="noprint content">
@@ -7,6 +10,7 @@ $divs =
 <tr>Sleep Studies Results - <a href="rpt.php?tb=Sleep_Studies_Results"><i class="fa-solid fa-file-lines fa-2x"></i></a></td></tr><hr></br>
     <table>
         <form id="frmStudies" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Studies_Results" name="tb">
+        <input type="hidden" value="0" name="update">
             <tr>
                 <td style="text-align: left;border: none ;width:20%;"><label for="expedienteResults" class="lrequired">Numero de expediente </label></td>
                 <td style="text-align: left;border: none ;width:80%;"><input type="text" id="expedienteResults" name="expedienteResults" placeholder="Numero de expediente" required></br></td>
@@ -64,7 +68,7 @@ $divs =
 <div id="lstExpedientes" class="noprint content">
 <div class="contentt">
 <tr>Listado de Expedientes de la Clínica - <a href="rpt.php?tb=Sleep_Listado_Expedientes"><i class="fa-solid fa-file-lines fa-2x"></i></a></tr><hr></br>
-    <form id="frmExpedientes" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Listado_Expedientes" name="tb">
+    <form id="frmExpedientes" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Listado_Expedientes" name="tb"><input type="hidden" value="0" name="update">
     <table>
         </style>
             <tr>
@@ -101,7 +105,7 @@ $divs =
 <div id="lstReferidos" class="noprint content">
 <div class="contentt">
     <tr>Listado de Referidos - <a href="rpt.php?tb=Sleep_Listado_Referidos"><i class="fa-solid fa-file-lines fa-2x"></i></a></tr><hr></br>
-    <form id="frmReferidos" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Listado_Referidos" name="tb">
+    <form id="frmReferidos" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Listado_Referidos" name="tb"><input type="hidden" value="0" name="update">
         <table>
         </style>
             <tr>
@@ -154,12 +158,12 @@ $divs =
 <div id="InspeccionVisual" class="noprint content">
 <div class="contentt">
     <tr>Inspección Visual de Rutina - <a href="rpt.php?tb=Sleep_Inspeccion_Rutina"><i class="fa-solid fa-file-lines fa-2x"></i></a></tr><hr></br>
-    <form id="frmInspeccionVisual" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Inspeccion_Rutina" name="tb">
+    <form id="frmInspeccionVisual" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Inspeccion_Rutina" name="tb"><input type="hidden" value="0" name="update">
         <table>
         </style>
             <tr>
                 <td style="text-align: left;border: none ;width:20%;"><label for="fechaInspeccion">Fecha de Inspeccion</label></td>
-                <td style="text-align: left;border: none ;width:20%;"><input type="datetime-local" id="fechaInspeccion" name="fechaInspeccion" value="'.date('Y-m-d\TH:s').'"></br></td>
+                <td style="text-align: left;border: none ;width:20%;"><input type="datetime-local" id="fechaInspeccion" name="fechaInspeccion" value=""></br></td>
                 <td style="text-align: left;border: none ;width:10%;"></br></td>
                 <td style="text-align: left;border: none ;width:50%;"></br></td>
             </tr>
@@ -192,8 +196,8 @@ $divs =
                 <td style="text-align: left;border: none ;width:20%;"><label for="ddAmplificador">Amplificador</label></td>
                 <td style="text-align: left;border: none ;width:20%;">
                     <select id="ddAmplificador" name="ddAmplificador">
-                        <option value="Intactos" selected>Intacto</option>
-                        <option value="Alterados">Alterado</option>
+                        <option value="Intacto" selected>Intacto</option>
+                        <option value="Alterado">Alterado</option>
                     </select>
                 </td>
                 <td style="text-align: left;border: none ;width:10%;"><label for="ddBandas">Bandas</label></td>
@@ -208,8 +212,8 @@ $divs =
                 <td style="text-align: left;border: none ;width:20%;"><label for="ddHeadbox">Headbox</label></td>
                 <td style="text-align: left;border: none ;width:20%;">
                     <select id="ddHeadbox" name="ddHeadbox">
-                        <option value="Intactos" selected>Intacto</option>
-                        <option value="Alterados">Alterado</option>
+                        <option value="Intacto" selected>Intacto</option>
+                        <option value="Alterado">Alterado</option>
                     </select>
                 </td>
                 <td style="text-align: left;border: none ;width:10%;"><label for="ddSensores">Sensores</label></td>
@@ -224,8 +228,8 @@ $divs =
                 <td style="text-align: left;border: none ;width:20%;"><label for="ddOximetro">Oxímetro</label></td>
                 <td style="text-align: left;border: none ;width:20%;">
                     <select id="ddOximetro" name="ddOximetro">
-                        <option value="Intactos" selected>Intacto</option>
-                        <option value="Alterados">Alterado</option>
+                        <option value="Intacto" selected>Intacto</option>
+                        <option value="Alterado">Alterado</option>
                     </select>
                 </td>
                 <td style="text-align: left;border: none ;width:10%;"><label for="ddElectrodos">Electrodos</label></td>
@@ -240,8 +244,8 @@ $divs =
                 <td style="text-align: left;border: none ;width:20%;"><label for="ddOxigeno">Metro de Oxígeno</label></td>
                 <td style="text-align: left;border: none ;width:20%;">
                 <select id="ddOxigeno" name="ddOxigeno">
-                    <option value="Intactos" selected>Intacto</option>
-                    <option value="Alterados">Alterado</option>
+                    <option value="Intacto" selected>Intacto</option>
+                    <option value="Alterado">Alterado</option>
                 </select>
                 </td>
                 <td style="text-align: left;border: none ;width:10%;"><label for="ddIntrcome">Intercome</label></td>
@@ -256,8 +260,8 @@ $divs =
                 <td style="text-align: left;border: none ;width:20%;"><label for="ddCPAP">CPAP</label></td>
                 <td style="text-align: left;border: none ;width:20%;">
                     <select id="ddCPAP" name="ddCPAP">
-                        <option value="Intactos">Intacto</option>
-                        <option value="Alterados">Alterado</option>
+                        <option value="Intacto">Intacto</option>
+                        <option value="Alterado">Alterado</option>
                     </select>
                 </td>
                 <td style="text-align: left;border: none ;width:10%;"><label for="ddPC">PC</label></td>
@@ -286,7 +290,7 @@ $divs =
                 </select>
                 </td>
             </tr>
-            <tr>
+           <!-- <tr>
                 <td style="text-align: left;border: none ;width:20%;"><label for="ddTrans">CO2</label></td>
                 <td style="text-align: left;border: none ;width:20%;">
                     <select id="ddCO2" name="ddCO2">
@@ -296,7 +300,7 @@ $divs =
                     </select>
                 </td>
                 <td style="text-align: left;border: none ;width:10%;"></td>
-            </tr>
+            </tr>-->
             <tr>
                 <td style="text-align: left;border: none ;width:20%;"><label for="accionTomada">Acción Tomada</label></td>
                 <td style="text-align: left;border: none ;width:20%;" colspan="3">
@@ -321,7 +325,7 @@ $divs =
 <div id="MaskFitting" class="noprint content">
 <div class="contentt">
     <tr>Registro de Paciente-Class/Mask Fitting - <a href="rpt.php?tb=Sleep_Registro_Paciente"><i class="fa-solid fa-file-lines fa-2x"></i></a></tr><hr></br>
-    <form id="frmMaskFitting" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Registro_Paciente" name="tb">
+    <form id="frmMaskFitting" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Registro_Paciente" name="tb"><input type="hidden" value="0" name="update">
         <table>
         </style>
             <tr>
@@ -340,17 +344,28 @@ $divs =
                 <td style="text-align: left;border: none ;width:20%;"><label for="ddPlanMedico">Plan Medico </label></td>
                 <td style="text-align: left;border: none ;width:80%;">
                 <select id="ddPlanMedico" name="ddPlanMedico">
+                    <option value="Constalation">Constalation</option>
+                    <option value="First Medical">First Medical</option>
+                    <option value="Humana">Humana</option>
+                    <option value="MCS">MCS</option>
+                    <option value="MCS Classicare">MCS Classicare</option>
+                    <option value="MMM">MMM</option>
                     <option value="SSS">SSS</option>
-                    <option value="ASP" selected>Salud Plus</option>
+                    <option value="SSS Advanced">SSS Advanced</option>
+                    <option value="Veterano">Veterano</option>
                 </select></td>    
             </tr>
             <tr>
                 <td style="text-align: left;border: none ;width:20%;"><label for="ddProcedimiento1">Procedimiento</label></td>
-                <td style="text-align: left;border: none ;width:80%;"><input type="text" id="ddProcedimiento1" name="ddProcedimiento1"></br></td>
-                <!--<select id="ddProcedimiento1" name="ddProcedimiento1">
-                    <option value="si">XXXXX</option>
-                    <option value="no" selected>WWWWWWWWWW</option>
-                </select></td> -->    
+                <td style="text-align: left;border: none ;width:80%;"><!--<input type="text" id="ddProcedimiento1" name="ddProcedimiento1"></td>-->
+                <select id="ddProcedimiento1" name="ddProcedimiento1">
+                    <option value="Mask Fitting">Mask Fitting</option>
+                    <option value="Orientación">Orientación</option>
+                    <option value="Recomendación de PAP NAP">Recomendación de PAP NAP</option>
+                    <option value="CPAP programming/Calibration">CPAP programming/Calibration</option>
+                    <option value="Otros">Otros</option>
+                </select></td>
+                </br>
             </tr>
             <tr>
                 <td style="text-align: left;border: none ;width:20%;"><label for="ddProcedimiento2">Otro Procedimiento</label></td>
@@ -358,7 +373,11 @@ $divs =
             </tr>
             <tr>
                 <td style="text-align: left;border: none ;width:20%;"><label for="mdRefiere" class="lrequired">Médico que refiere</label></td>
-                <td style="text-align: left;border: none ;width:80%;"><input type="text" id="mdRefiere" name="mdRefiere" placeholder="Médico que refiere" required></br></td>
+                <td style="text-align: left;border: none ;width:80%;"><input type="text" id="mdRefiere" name="mdRefiere" required></br></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="tecnicoMask" class="lrequired">Iniciales del técnico</label></td>
+                <td style="text-align: left;border: none ;width:80%;"><input type="text" id="tecnicoMask" name="tecnicoMask"></br></td>
             </tr>
             <tr>
                 <td style="text-align: center;border:none;width:20%;">
@@ -375,7 +394,7 @@ $divs =
 <div id="ValCriticos" class="noprint content">
 <div class="contentt">
     <tr> Valores Críticos - <a href="rpt.php?tb=Sleep_Valores_Criticos"><i class="fa-solid fa-file-lines fa-2x"></i></a></tr><hr></br>
-    <form id="frmValCriticos" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Valores_Criticos" name="tb">
+    <form id="frmValCriticos" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Valores_Criticos" name="tb"><input type="hidden" value="0" name="update">
         <table>
         </style>
             <tr>
@@ -442,7 +461,7 @@ $divs =
 <div id="LogCPAP" class="noprint content">
 <div class="contentt">
     <tr> Log de Auto CPAP Prestados - <a href="rpt.php?tb=Sleep_CPAP_Prestados"><i class="fa-solid fa-file-lines fa-2x"></i></a></tr><hr></br>
-    <form id="frmLogCPAP" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_CPAP_Prestados" name="tb">
+    <form id="frmLogCPAP" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_CPAP_Prestados" name="tb"><input type="hidden" value="0" name="update">
         <table>
         </style>
             <tr>
@@ -533,12 +552,12 @@ $divs =
 <div id="logComunicacion" class="noprint content">
 <div class="contentt">
     <tr> Log de Comunicación - <a href="rpt.php?tb=Sleep_Comunicacion"><i class="fa-solid fa-file-lines fa-2x"></i></a></tr><hr></br>
-    <form id="frmlogComunicacion" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Comunicacion" name="tb">
+    <form id="frmlogComunicacion" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Comunicacion" name="tb"><input type="hidden" value="0" name="update">
         <table>
         </style>
             <tr>
                 <td style="text-align: left;border: none ;width:20%;"><label for="tecComunicacion">Nombre del techico</label></td>
-                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="tecComunicacion" name="tecComunicacion" placeholder="Técnico de entrega" required></br></td>
+                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="tecComunicacion" name="tecComunicacion" required></br></td>
                 <td style="text-align: left;border: none ;width:40%;"></td>
             </tr>
             <tr>
@@ -574,7 +593,7 @@ $divs =
 <div id="logComunicacionHSAT" class="noprint content">
 <div class="contentt">
     <tr> Log de Comunicación HSAT - <a href="rpt.php?tb=Sleep_Comunicacion_HSAT"><i class="fa-solid fa-file-lines fa-2x"></i></a></tr><hr></br>
-    <form id="frmlogComunicacionH" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Comunicacion_HSAT" name="tb">
+    <form id="frmlogComunicacionH" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Comunicacion_HSAT" name="tb"><input type="hidden" value="0" name="update">
         <table>
         </style>
             <tr>
@@ -584,12 +603,12 @@ $divs =
             </tr>
             <tr>
                 <td style="text-align: left;border: none ;width:20%;"><label for="chName">Nombre del paciente</label></td>
-                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="chName" name="chName" placeholder="Técnico de entrega" required></br></td>
+                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="chName" name="chName" required></br></td>
                 <td style="text-align: left;border: none ;width:40%;"></td>
             </tr>
             <tr>
                 <td style="text-align: left;border: none ;width:20%;"><label for="chCaller">Persona que llama al centro:</label></td>
-                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="chCaller" name="chCaller" placeholder="Técnico de entrega" required></br></td>
+                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="chCaller" name="chCaller"  required></br></td>
                 <td style="text-align: left;border: none ;width:40%;"></td>
             </tr>
             <tr>
@@ -609,7 +628,7 @@ $divs =
             </tr>
             <tr>
                 <td style="text-align: left;border: none ;width:20%;"><label for="chTecnico">Nombre del tecnico</label></td>
-                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="chTecnico" name="chTecnico" placeholder="Técnico de entrega" required></br></td>
+                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="chTecnico" name="chTecnico" required></br></td>
                 <td style="text-align: left;border: none ;width:40%;"></td>
             </tr>
             <tr>
@@ -626,17 +645,22 @@ $divs =
 <div id="logResgistroHSAT" class="noprint content">
 <div class="contentt">
     <tr>Log de Registro y Mantenimiento del HSAT - <a href="rpt.php?tb=Sleep_Registro_HSAT"><i class="fa-solid fa-file-lines fa-2x"></i></a></tr><hr></br>
-    <form id="frmlogComHSAT" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Registro_HSAT" name="tb">
+    <form id="frmlogComHSAT" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Registro_HSAT" name="tb"><input type="hidden" value="0" name="update">
         <table>
         </style>
             <tr>
-                <td style="text-align: left;border: none ;width:20%;"><label for="rhFecha">Fecha y Hora de llamada:</label></td>
+                <td style="text-align: left;border: none ;width:20%;"><label for="vstId">Visit ID</label></td>
+                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="vstId" name="vstId"></br></td>
+                <td style="text-align: left;border: none ;width:40%;" colspan="2">
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="rhFecha">Fecha y Hora de entrega:</label></td>
                 <td style="text-align: left;border: none ;width:30%;"><input type="datetime-local" id="rhFecha" name="rhFecha"></br></td>
                 <td style="text-align: left;border: none ;width:40%;" colspan="2">
             </tr>
             <tr>
                 <td style="text-align: left;border: none ;width:20%;"><label for="rhName">Nombre del paciente</label></td>
-                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="rhName" name="rhName" placeholder="Técnico de entrega" required></br></td>
+                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="rhName" name="rhName" required></br></td>
                 <td style="text-align: left;border: none ;width:40%;"></td>
             </tr>
             <tr>
@@ -646,7 +670,7 @@ $divs =
             </tr>
             <tr>
                 <td style="text-align: left;border: none ;width:20%;"><label for="rhDevolucion">Fecha y Hora de devolución del equipo:</label></td>
-                <td style="text-align: left;border: none ;width:30%;"><input type="datetime-local" id="rhDevolucion" name="rhDevolucion" placeholder="Técnico de entrega" required></br></td>
+                <td style="text-align: left;border: none ;width:30%;"><input type="datetime-local" id="rhDevolucion" name="rhDevolucion" required></br></td>
                 <td style="text-align: left;border: none ;width:40%;"></td>
             </tr>
             <tr>
@@ -663,7 +687,7 @@ $divs =
             </tr>
             <tr>
                 <td style="text-align: left;border: none ;width:20%;"><label for="rhTecnico">Nombre del tecnico</label></td>
-                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="rhTecnico" name="rhTecnico" placeholder="Técnico de entrega" required></br></td>
+                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="rhTecnico" name="rhTecnico" required></br></td>
                 <td style="text-align: left;border: none ;width:40%;"></td>
             </tr>
             <tr>
@@ -680,12 +704,16 @@ $divs =
 <div id="logRechazo" class="noprint content">
 <div class="contentt">
     <tr> Rechazo de Tratamiento - <a href="rpt.php?tb=Sleep_Rechazo"><i class="fa-solid fa-file-lines fa-2x"></i></a></tr><hr></br>
-    <form id="frmlogRechazo" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Rechazo" name="tb">
+    <form id="frmlogRechazo" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Rechazo" name="tb"><input type="hidden" value="0" name="update">
     <table>
         </style>
             <tr>
                 <td style="text-align: left;border: none ;width:20%;"><label for="visitRechazo" class="lrequired">Visit ID *</label></td>
                 <td style="text-align: left;border: none ;width:80%;"><input type="number" id="visitRechazo" name="visitRechazo" required></br></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="paciente">Nombre del paciente</label></td>
+                <td style="text-align: left;border: none ;width:80%;"><input type="text" id="paciente" name="paciente"></br></td>
             </tr>
             <tr>
                 <td style="text-align: left;border: none ;width:20%;"><label for="fechaRechazo">Fecha del estudio</label></td>
@@ -732,7 +760,7 @@ $divs =
 <div id="solucionCidex" class="noprint content">
 <div class="contentt">
     <tr> Registro de la Verificación de la Solución Cidex OPA e Inmersión del Equipo Durante el Proceso de Desinfección de Alto Nivel - <a href="rpt.php?tb=Sleep_Solucion_Cidex"><i class="fa-solid fa-file-lines fa-2x"></i></a></tr><hr></br>
-    <form id="frmsolucionCidex" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Solucion_Cidex" name="tb">
+    <form id="frmsolucionCidex" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Solucion_Cidex" name="tb"><input type="hidden" value="0" name="update">
     <table>
         </style>
             <tr>
@@ -741,11 +769,8 @@ $divs =
             </tr>
             <tr>
                 <td style="text-align: left;border: none ;width:20%;"><label for="txtDept">Departamento</label></td>
-                <td style="text-align: left;border: none ;width:80%;"><input type="text" name="txtDept" placeholder="Núm. Lote del Frasco de Tirillas"></td>
-                <!--<select name="dept">
-                    <option value="no" selected>Centro de Desórdenes de Sueño</option>
-                    <option value="si">DDDDDD</option>
-                </select></td> -->    
+                <td style="text-align: left;border: none ;width:80%;"><!--<input type="text" name="txtDept"></td>-->
+                <input type="radio" id="txtDept" name="txtDept" value="Centro De Desordenes Del Sueño" checked><label for="radio1">Centro De Desordenes Del Sueño</label> 
             </tr>
             <tr>
                 <td style="text-align: left;border: none ;width:20%;"><label for="fechaFrasco">Fecha Abierto Frasco de Tirillas</label></td>
@@ -757,7 +782,7 @@ $divs =
             </tr>
             <tr>
                 <td style="text-align: left;border: none ;width:20%;"><label for="numeroLote">Núm. Lote del Frasco de Tirillas</label></td>
-                <td style="text-align: left;border: none ;width:80%;"><input type="text" name="numeroLote" placeholder="Núm. Lote del Frasco de Tirillas"></br></td>
+                <td style="text-align: left;border: none ;width:80%;"><input type="text" name="numeroLote" ></br></td>
             </tr>
             <tr>
                 <td style="text-align: left;border: none ;width:20%;"><label for="ddPruebaRes">Resultados Pruebas de Calidad</label></td>
@@ -826,10 +851,10 @@ $divs =
             <tr>
                 <td style="text-align: left;border: none ;width:20%;"><label>Descripción de Equipo</label></td>
                 <td style="text-align: left;border: none ;width:80%;">        
-                    <input type="checkbox" name="ckEquipo[]" id="ckElec" value="Electrodes">Electrodes<br>
-                    <input type="checkbox" name="ckEquipo[]" id="ckHumi" value="Humidifier">Humidifier<br>
-                    <input type="checkbox" name="ckEquipo[]" id="ckMask" value="Mask">Mask<br>
-                    <input type="checkbox" name="ckEquipo[]" id="ckTube" value="Tubes">Tubes<br>
+                    <input type="checkbox" name="ckEquipo[]" id="ckElec" checked value="Electrodes">Electrodes<br>
+                    <input type="checkbox" name="ckEquipo[]" id="ckHumi" checked value="Humidifier">Humidifier<br>
+                    <input type="checkbox" name="ckEquipo[]" id="ckMask" checked value="Mask">Mask<br>
+                    <input type="checkbox" name="ckEquipo[]" id="ckTube" checked value="Tubes">Tubes<br>
                 </td>
             </tr>
             <tr>
@@ -866,7 +891,7 @@ $divs =
 <div id="frascoCIdex" class="noprint content">
 <div class="contentt">
     <tr> Registro de Verificación de Frasco de Cidex OPA y Frasco de las Tirillas para las Pruebas Durante el Proceso de Desinfección de Alto Nivel - <a href="rpt.php?tb=Sleep_Frasco_Cidex"><i class="fa-solid fa-file-lines fa-2x"></i></a></tr><hr></br>
-    <form id="frmfrascoCIdex" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Frasco_Cidex" name="tb">
+    <form id="frmfrascoCIdex" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Frasco_Cidex" name="tb"><input type="hidden" value="0" name="update">
     <table>
         </style>
             <tr>
@@ -874,7 +899,7 @@ $divs =
                 <td style="text-align: left;border: none ;width:80%;"><input type="date" id="fechaDePrueba" name="fechaDePrueba" value="'.date('Y-m-d').'"></br></td>
             </tr>
             <tr>
-                <td style="text-align: left;border: none ;width:20%;"><label for="txtTemperatura" class="lrequired">Temperatura del cuarto de almacenaje (15-80 Grados Celsius)</label></td>
+                <td style="text-align: left;border: none ;width:20%;"><label for="txtTemperatura" class="lrequired">Temperatura del cuarto (15-30 Grados)</label></td>
                 <td style="text-align: left;border: none ;width:80%;"><input type="text" id="txtTemperatura" name="txtTemperatura">
             </tr>
             <tr>
@@ -979,7 +1004,7 @@ $divs =
 <div id="CPAP" class="noprint content">
 <div class="contentt">
     <tr> Desinfeccion CPAP - <a href="rpt.php?tb=Sleep_Desinfeccion_CPAP"><i class="fa-solid fa-file-lines fa-2x"></i></a></tr><hr></br>
-    <form id="frmCPAP" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Desinfeccion_CPAP" name="tb">
+    <form id="frmCPAP" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Desinfeccion_CPAP" name="tb"><input type="hidden" value="0" name="update">
     <table>
         </style>
             <tr>
@@ -1028,7 +1053,7 @@ $divs =
 <div id="ETCO2" class="noprint content">
 <div class="contentt">
     <tr> Desinfeccion ETCO2 - <a href="rpt.php?tb=Sleep_ETCO"><i class="fa-solid fa-file-lines fa-2x"></i></a></tr><hr></br>
-    <form id="frmETCO2" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_ETCO" name="tb">
+    <form id="frmETCO2" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_ETCO" name="tb"><input type="hidden" value="0" name="update">
     <table>
         <tr>
             <td style="text-align: left;border: none ;width:20%;"><label for="etcoDesinfeccion">Fecha de desinfección</label></td>
@@ -1043,8 +1068,6 @@ $divs =
             <td style="text-align: left;border: none ;width:80%;"><!--<input type="text" name="etcoModelo"></br></td>-->
             <input type="radio" name="etcoModelo" id="radio1" value="I Resp Sense LS1R-9R-MMHG (#serie 590000107)"><label for="radio1">I Resp Sense LS1R-9R-MMHG (#serie 590000107)</label></br>
             <input type="radio" name="etcoModelo" id="radio2" value="II Resp Sense LS1R-9R (#serie 501967844)"><label for="radio2">II Resp Sense LS1R-9R (#serie 501967844)</option>
-                <!--  <option value="II Resp Sense LS1R-9R (#serie 501967844)">II Resp Sense LS1R-9R (#serie 501967844)</option>
-            </select></td> -->    
         </tr>
         <tr>
             <td style="text-align: center;border:none;width:20%;" colspan="3">
@@ -1061,6 +1084,7 @@ $divs =
 <div class="contentt">
     <tr> Log de Desinfección de tcPCO2 - <a href="rpt.php?tb=Sleep_TCPCO"><i class="fa-solid fa-file-lines fa-2x"></i></a></tr><hr></br>
     <form id="frmETCO2" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_TCPCO" name="tb">
+    <input type="hidden" value="0" name="update">
     <table>
         <tr>
             <td style="text-align: left;border: none ;width:20%;"><label for="tcpcFecha">Fecha de desinfección</label></td>
@@ -1073,10 +1097,7 @@ $divs =
         <tr>
             <td style="text-align: left;border: none ;width:20%;"><label for="tcpcModelo" class="lrequired">Modelo</label></td>
             <td style="text-align: left;border: none ;width:80%;"><!--<input type="text" name="tcpcModelo"></br></td>-->
-            <input type="radio" name="tcpcModelo" id="radio1" value="(Sentec Digital Monitoring System – SDMS)#serie 320125"><label for="radio1">(Sentec Digital Monitoring System – SDMS)#serie 320125</label></br>
-            <!--<input type="radio" name="tcpcModelo" id="radio2" value="II Resp Sense LS1R-9R (#serie 501967844)"><label for="radio2">II Resp Sense LS1R-9R (#serie 501967844)</option>
-              <option value="II Resp Sense LS1R-9R (#serie 501967844)">II Resp Sense LS1R-9R (#serie 501967844)</option>
-            </select></td> -->    
+            <input type="radio" name="tcpcModelo" id="radio1" value="(Sentec Digital Monitoring System – SDMS)#serie 320125" checked><label for="radio1">(Sentec Digital Monitoring System – SDMS)#serie 320125</label></br>   
         </tr>
         <tr>
             <td style="text-align: center;border:none;width:20%;" colspan="3">
@@ -1091,8 +1112,8 @@ $divs =
 
 <div id="HSAT" class="noprint content">
 <div class="contentt">
-    <tr> Log de Desinfección del HSAT - <a href="rpt.php?tb=Sleep_HAST"><i class="fa-solid fa-file-lines fa-2x"></i></a></tr><hr></br>
-    <form id="frmHAST" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_HSAT" name="tb">
+    <tr> Log de Desinfección del HSAT - <a href="rpt.php?tb=Sleep_HSAT"><i class="fa-solid fa-file-lines fa-2x"></i></a></tr><hr></br>
+    <form id="frmHAST" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_HSAT" name="tb"><input type="hidden" value="0" name="update">
     <table>
         <tr>
             <td style="text-align: left;border: none ;width:20%;"><label for="hsatFecha">Fecha de desinfección</label></td>
@@ -1124,11 +1145,11 @@ $divs =
 <div id="DuchasOjos" class="noprint content">
 <div class="contentt">
     <tr> Duchas de lavado de ojos - <a href="rpt.php?tb=Sleep_Ojos"><i class="fa-solid fa-file-lines fa-2x"></i></a></tr><hr></br>
-    <form id="frmDuchasOjos" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Ojos" name="tb">
+    <form id="frmDuchasOjos" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Ojos" name="tb"><input type="hidden" value="0" name="update">
     <table>
             <tr>
                 <td style="text-align: left;border: none ;width:20%;"><label for="fechaDucha">Fecha de prueba de lavado de ojos</label></td>
-                <td style="text-align: left;border: none ;width:80%;"><input type="datetime-local" name="fechaDucha" value="'.date('Y-m-d\TH:s').'"></br></td>
+                <td style="text-align: left;border: none ;width:80%;"><input type="date" name="fechaDucha" value="'.date('Y-m-d').'"></br></td>
             </tr>
             <tr>
                 <td style="text-align: left;border: none ;width:20%;"><label for="tecDucha" class="lrequired">Nombre del Técnico</label></td>
@@ -1148,7 +1169,7 @@ $divs =
 <div id="UsoManejo" class="noprint content">
 <div class="contentt">
     <tr> Uso y Manejo de Endozime AW Plus - <a href="rpt.php?tb=Sleep_Endozime"><i class="fa-solid fa-file-lines fa-2x"></i></a></tr><hr></br>
-    <form id="frmUsoManejo" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Endozime" name="tb">
+    <form id="frmUsoManejo" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Endozime" name="tb"><input type="hidden" value="0" name="update">
     <table>
         </style>
             <tr>
@@ -1160,7 +1181,7 @@ $divs =
                 <td style="text-align: left;border: none ;width:80%;"><input type="date" name="expiracionEndozime"></br></td>
             </tr>
             <tr>
-                <td style="text-align: left;border: none ;width:20%;"><label for="tempEndozime">Temperatura del cuarto de almacenaje 15 a 80 grados C</label></td>
+                <td style="text-align: left;border: none ;width:20%;"><label for="tempEndozime">Temperatura del cuarto de almacenaje 15 a 30 grados C</label></td>
                 <td style="text-align: left;border: none ;width:80%;"><input type="text" name="tempEndozime" required></br></td>
             </tr>
             <tr>
@@ -1181,16 +1202,13 @@ $divs =
 <div id="Buscador" class="content">
 <div class="contentt">
 <div id="head" class="noprint">
-    <form id="frmSearch" methop="post"><input type="hidden" name="opt" value="2">
+    <form id="frmSearch" methop="post"><input type="hidden" name="opt" value="2"><input type="hidden" value="0" name="update">
     <table style="margin-left: auto;margin-right: auto;border-collapse: collapse;">
         <tr>
             <td colspan="2">
                 <b>Buscar en:</b>
-                <select id="selTable" name="selTable" required>
+                <select id="tb" name="tb" required>
                     <option value="" selected>Seleccione</option>
-                    <option value="Sleep_Studies_Results">Sleep Studies Results</option>:
-                    <option value="Sleep_Listado_Expedientes">Listado de Expedientes de la Clínica</option>
-                    <option value="Sleep_Listado_Referidos">Listado de Referidos</option>
                     <option value="Sleep_Inspeccion_Rutina">Inspección Visual de Rutina</option>
                     <option value="Sleep_Registro_Paciente">Registro de Paciente-Class/Mask Fitting</option>
                     <option value="Sleep_Valores_Criticos">Valores Críticos</option>
@@ -1281,12 +1299,15 @@ $divs =
                 </select>
             </td>
         </tr>
-        <tr><td></td><td><button type="submit" id="btnBuscar" style="border:none;background:none;color:red;"><i class="fa-solid fa-magnifying-glass fa-lg"></i></button>
-        <button class="noprint" style="border:none;background:none;color:red;" alt="Print" onclick="javascript:closeNav();window.print();">
-            <i class="fa-solid fa-print fa-lg"></i>
-        </button></td></tr>
+        <tr><td></td>
+            <td>
+                <button type="submit" id="btnBuscar" style="border:none;background:none;color:red;cursor:pointer;"><i class="fa-solid fa-magnifying-glass fa-lg"></i></button>
+                <button class="noprint" style="border:none;background:none;color:red;" alt="Print" onclick="javascript:closeNav();window.print();">
+                    <i class="fa-solid fa-print fa-lg"></i>
+                </button>
+            </td>
+        </tr>
     </table>
-    </p>
     </form>
 </div>
 

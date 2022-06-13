@@ -11,28 +11,7 @@ $(document).ready(function() {
     });
 });
 
-function sortTable(columnName){
-    // alert("Table");
-    var sort = $("#sort").val();
-    
-    $.ajax({
-        url:'info_details.php',
-        type:'post',
-        data:{tabla:tabla,columnName:columnName,sort:sort},
-        success: function(response){
 
-        $("#empTable tr:not(:first)").remove();
-
-        $("#empTable").append(response);
-        if(sort == "asc"){
-            $("#sort").val("desc");
-        }else{
-            $("#sort").val("asc");
-        }
-
-        }
-    });
-}
 function sortTabla(tabla,columnName){
     // alert("Tabla");
     var sort = $("#sort").val();
@@ -56,7 +35,7 @@ function sortTabla(tabla,columnName){
     });
 }
 
-$(document).on('change','#selTable',function(){
+$(document).on('change','#tb',function(){
     // m = $("#txtValue").val();
     // alert(m);
     // $("#frmSearch")[0].reset();
@@ -65,8 +44,10 @@ $(document).on('change','#selTable',function(){
     $('#txtValue3').val('');
     
     v = this.value;
-    $('.selField').empty()
+    $('.selField').empty();
+    //a~nadir opciones a los dropdowns
     switch (v) {
+        /*
         case 'Sleep_Studies_Results':
             $('.selField').append('<option value="Expediente">Num. Expediente</option>');
             $('.selField').append('<option value="Nombre">Nombre</option>');
@@ -83,7 +64,7 @@ $(document).on('change','#selTable',function(){
             $('.selField').append('<option value="Modified">Modified</option>');
             $('.selField').append('<option value="ModifiedBy">ModifiedBy</option>');
         break;
-        case 'Sleep_Listado_Expedientes':
+         case 'Sleep_Listado_Expedientes':
             $('.selField').append('<option value="num_expediente">Num. Expediente</option>');
             $('.selField').append('<option value="Nombre">Nombre</option>');
             $('.selField').append('<option value="Apelidos">Apelidos</option>');
@@ -107,7 +88,7 @@ $(document).on('change','#selTable',function(){
             $('.selField').append('<option value="CreatedBy">Creado Por</option>');
             $('.selField').append('<option value="Modified">Modificado</option>');
             $('.selField').append('<option value="ModifiedBy">Modificado por</option>');
-        break;
+        break;*/
         case 'Sleep_Inspeccion_Rutina':
             $('.selField').append('<option value="Fecha_Inspeccion">Fecha Inspeccion</option>');
             $('.selField').append('<option value="Habitacion">Habitacion</option>');
@@ -119,13 +100,13 @@ $(document).on('change','#selTable',function(){
             $('.selField').append('<option value="Bandas">Bandas</option>');
             $('.selField').append('<option value="Sensores">Sensores</option>');
             $('.selField').append('<option value="Electrodos">Electrodos</option>');
-            $('.selField').append('<option value="Oxigeno">Oxigeno</option>');
+            $('.selField').append('<option value="Oxigeno">Metro de Oxígeno</option>');
             $('.selField').append('<option value="Intercome">Intercome</option>');
             $('.selField').append('<option value="PC">PC</option>');
+            $('.selField').append('<option value="Transcutaneo">Transcutaneo</option>');
+            $('.selField').append('<option value="ETCO">ETCO2</option>');
             $('.selField').append('<option value="Accion_Tomada">Accion Tomada</option>');
             $('.selField').append('<option value="Iniciales_Tecnico">Iniciales del Tecnico</option>');
-            $('.selField').append('<option value="ETCO">ETCO</option>');
-            $('.selField').append('<option value="Transcutaneo">Transcutaneo</option>');
             $('.selField').append('<option value="Created">Creado en</option>');
             $('.selField').append('<option value="CreatedBy">Creado Por ...</option>');
             $('.selField').append('<option value="Modified">Modificado en</option>');
@@ -184,9 +165,11 @@ $(document).on('change','#selTable',function(){
             $('.selField').append('<option value="ModifiedBy">Modificado por</option>');
         break;        
         case 'Sleep_Rechazo':
-            $('.selField').append('<option value="Nombre">Nombre</option>');
+            $('.selField').append('<option value="Paciente">Nombre</option>');
             $('.selField').append('<option value="Visit_ID">Visit ID</option>');
             $('.selField').append('<option value="Fecha">Fecha</option>');
+            $('.selField').append('<option value="Pasos_Adaptacion">Pasos de adaptación</option>');
+            $('.selField').append('<option value="Firmado">Firmó documento?</option>');
             $('.selField').append('<option value="Razon">Razon</option>');
             $('.selField').append('<option value="Tecnico">Tecnico</option>');
             $('.selField').append('<option value="Created">Creado en</option>');
@@ -299,6 +282,7 @@ $(document).on('change','#selTable',function(){
             $('.selField').append('<option value="ModifiedBy">Modificado por</option>');
         break;  
         case 'Sleep_Registro_HSAT':
+            $('.selField').append('<option value="Visit_id">Visit ID</option>');
             $('.selField').append('<option value="Fecha">Fecha y Hora de llamada</option>');
             $('.selField').append('<option value="Nombre_Paciente">Nombre del Paciente</option>');
             $('.selField').append('<option value="Equipo">Tipo de equipo prestado</option>');
@@ -339,6 +323,12 @@ $(document).ready(function(){
          return false; // cancel original event to prevent form submitting
      }); 
    });
+
+    $('.btnEdit').on('click', function () {
+        id = this.id;
+        // alert(id);
+        $('.sp'+id).hide();
+    });
 });
 
 function ShowHideF(){

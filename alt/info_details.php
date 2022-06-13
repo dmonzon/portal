@@ -2,8 +2,8 @@
 require_once('cno.php');
 $db = new ServidorBD();
 $conn = $db->Conectar('x');
-$opt = @$_POST['opt'];
-
+// echo "<pre>";
+// var_dump($_POST);
 if($_GET){
     extract($_GET);
     // echo "<pre>GET</br>";
@@ -14,32 +14,19 @@ if($_GET){
         $stmt = sqlsrv_query($conn, $tsql);
         $html = '<tr>';
         $i = 0;
-        foreach(sqlsrv_field_metadata($stmt) as $field){
-            $titulo = str_replace("_"," ",$field['Name']);
-            $html .= '<th><span onclick=\'sortTabla("'.$tabla.'","'.$field['Name'].'","3");\'>'.$titulo.'</span></th>';
-            $i++;
-        }
-        // $html .= '</tr>';
-        $x = 0;
-        echo '<tr><input type="hidden" id="sort" value="asc">';
-        while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_BOTH)){
-            for ($j = 0; $j < $i; $j++) {
-            if ($row[$j] instanceof DateTime) {
-                echo "<td class='hd-table'>".$row[$j]->format('m/d/Y H:i:s')."</td>";
-            }else{
-                echo "<td class='hd-table'>".($row[$j] == '' ? '0' : $row[$j]) ."</td>";
-            }
-            }
-            $x++;
-            echo '</tr>';
-        }
+        $res = sqlsrv_has_rows( $stmt );
+        if($res > 0){
+            echo gSleepTable($stmt,$tabla,$tsql, $opt = "0");
+        }else{
+            echo '<tr><td style="color:red;"><h2>No se generaron resultados</h2><td/></tr>';
+        }  
     }elseif($opt =='2'){
         extract($_GET);
         // echo"<pre>";
         // var_dump($_GET);
-        if (!@$tb) {
-            $tabla = "$selTable";
-            $sql = "SELECT * FROM $selTable ";
+        // if (!@$tb) {
+            $tabla = "$tb";
+            $sql = "SELECT * FROM $tb ";
             if($selOpt1 === 'like') {
                 $sql .= "WHERE $selField like '%$txtValue%'";
             }else{
@@ -62,68 +49,79 @@ if($_GET){
                 }
             }
             $sql .= " order by $selField4 $selOrderby";
-        }else{
-            $tabla = $_GET['tb'];
-            $sql = "SELECT * FROM $tabla ";
-        }
+        // }else{
+        //     $tabla = $_GET['tb'];
+        //     $sql = "SELECT * FROM $tabla ";
+        // }
         $x=0;
         echo '<table class="hd-table" id="empTable"><tr>';
         $stmt = sqlsrv_query($conn, $sql);
-        //echo count($stmt);
-        $res = sqlsrv_has_rows( $stmt );
-        if($res > 0){
-            foreach(sqlsrv_field_metadata($stmt) as $field){
-                $titulo = str_replace("_"," ",$field['Name']);
-                echo '<th><span onclick=\'sortTabla("'.$tabla.'","'.$field['Name'].'");\'>'.$titulo.'</span></th>';
-                $x++;
+            //echo count($stmt);
+        if($stmt){
+            $res = sqlsrv_has_rows( $stmt );
+            if($res > 0){
+                echo gSleepTable($stmt,$tabla,$sql,'0');
+            }else{
+                echo '<tr><td style="color:red;"><h2>No se generaron resultados</h2><td/></tr>';
             }
-            echo '</tr>';
-            while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_BOTH)){
-                for ($j = 0; $j < $x; $j++) {
-                    if ($row[$j] instanceof DateTime) {
-                        echo "<td class='hd-table'>".$row[$j]->format('m/d/Y H:i:s')."</td>";
-                    }else{
-                        echo "<td class='hd-table'>".($row[$j] == '' ? '0' : $row[$j]) ."</td>";
-                    }
-                }
-                //$x++;
-                echo '</tr><br>';
-            }
-            echo "</table><br>";
         }else{
-            echo '<tr><td style="color:red;"><h2>No se generaron resultados</h2><td/></tr>';
+            echo '<tr><td style="color:red;"><h2>No se generaron resultados, verifique los datos e intente nuevamente</h2><td/></tr>';
         }
     }
 }
 if($_POST){
     // echo "<pre>";
     // var_dump($_POST);
+    // echo "</pre>";
     extract($_POST);
-    $tsql = "SELECT * FROM $tabla ORDER BY ".$columnName." ".@$sort." ";
-    //echo "<br>$tsql<br>";
-    $stmt = sqlsrv_query($conn, $tsql);
-    $html = '<tr>';
-    $i = 0;
-    foreach(sqlsrv_field_metadata($stmt) as $field){
-    // $html .= '<th><span onclick=\'sortTable("'.$tabla.'","'.$field['Name'].'");\'>'.$field['Name'].'</span></th>';
-        $i++;
-    }
-    // $html .= '</tr>';
-    $x = 0;
-    echo '<tr>';
-    while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_BOTH)){
-        for ($j = 0; $j < $i; $j++) {
-            if ($row[$j] instanceof DateTime) {
-                echo "<td class='hd-table'>".$row[$j]->format('m/d/Y H:i:s')."</td>";
-            }else{
-                echo "<td class='hd-table'>".($row[$j] == '' ? '0' : $row[$j]) ."</td>";
-            }
+    // echo "((( $tsql )))<br>";
+    // echo "[[[ $tsql ]]]<br>";
+    if(!$tsql){
+        $tsql = "SELECT * FROM $tabla ORDER BY ".$columnName." ".@$sort." ";
+    }else{ 
+        $pos = strpos($tsql,'order');
+        echo '===='. $pos;
+        //substr($tsql,0,strpos($tsql,'order'));
+        if($pos>0) {
+            $newSql = substr($tsql,0,strpos($tsql,'order'));   
+            $tsql = $newSql . " ORDER BY ".$columnName." ".@$sort." ";
+        }else{
+            $tsql .= " ORDER BY ".$columnName." ".@$sort." ";
         }
-        $x++;
-        echo '</tr>';
     }
-// echo "<pre>";
-// var_dump($_POST);
+    $stmt = sqlsrv_query($conn, $tsql);
+    // echo "<tr><td colspan='500'>$tabla</td></tr>";
+    // echo gSleepTable($stmt,$tabla);
+    $html ='';
+    $i = 0;
+    if($stmt){
+        foreach(sqlsrv_field_metadata($stmt) as $field){
+            // $html .= '<th><span onclick=\'sortTable("'.$tabla.'","'.$field['Name'].'");\'>'.$field['Name'].'</span></th>';
+            $i++;
+        }
+        // $html .= '</tr>';
+        $x = 0;
+        $html .= "<tr>";
+        while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_BOTH)){
+            for ($j = 0; $j < $i; $j++) {
+                if($j > 0){
+                    if ($row[$j] instanceof DateTime) {
+                        $html .= "<td class='hd-table'>".$row[$j]->format('m/d/Y H:i:s')."</td>";
+                    }else{
+                        $html .= "<td class='hd-table'>".($row[$j] == '' ? '0' : $row[$j]) ."</td>";
+                    }
+                }else{
+                    if(!@$id) $id =$row[$j];
+                    $html .= '<td class="noprint hd-table"><a href="#" data-toggle="modal" id="myBtn" class="noprint edit" data-id="sleepedit.php?id='.$id.'&tb='.$tabla.'"><i class="fa-solid fa-pencil"></i></a></td>';
+                }
+            }
+            $x++;
+            $html .= '</tr>';
+        }
+    }else{
+        $html .= '<td class="noprint hd-table">No se encontraron resultados, verifique sus datos e intente nuevmente.</td>';
+    }
+    echo $html;
 }
 
 ?>

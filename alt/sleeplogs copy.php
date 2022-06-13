@@ -15,64 +15,7 @@ require_once("sleepdivs.php");
 <script src="https://kit.fontawesome.com/f95af9be80.js" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="sleeplogs.js"></script>
-<!-- <script>
-    $(document).ready(function() {
-        $(".cambia").click(function() {
-            //esconder todos DIVs
-            $(".content").hide();
-            //obtener nombre del enlace
-            nombre = $(this).attr("label");
-            //mostrar el panel segun el nombre del enlace oprimido
-            $("#" + nombre).show();
-        });
-    });
 
-    function sortTable(columnName){
-        //alert("hola");
-        var sort = $("#sort").val();
-        $.ajax({
-        url:'info_details.php',
-        type:'post',opt:1,
-        data:{tabla:tabla,columnName:columnName,sort:sort,opt:opt},
-        success: function(response){
-
-        $("#empTable tr:not(:first)").remove();
-
-        $("#empTable").append(response);
-        if(sort == "asc"){
-            $("#sort").val("desc");
-        }else{
-            $("#sort").val("asc");
-        }
-
-        }
-        });
-    }
-
-    function DoNav(){
-        m = $("#mySidebar").width();
-        if (m > 0){
-            document.getElementById("mySidebar").style.width = "0";
-            document.getElementById("main").style.marginLeft= "0";
-            $("#lnk").show();
-        }else{
-            document.getElementById("mySidebar").style.width = "350px";
-            document.getElementById("main").style.marginLeft = "350px";
-            $("#lnk").hide();
-        }
-    }
-    function openNav() {
-        // alert($("#mySidebar").width());
-        document.getElementById("mySidebar").style.width = "350px";
-        document.getElementById("main").style.marginLeft = "350px";
-    }
-
-    function closeNav() {
-        // alert($("#mySidebar").width());
-        document.getElementById("mySidebar").style.width = "0";
-        document.getElementById("main").style.marginLeft= "0";
-    }
-</script> -->
 <style>    
     a:link {
 	    color: red;

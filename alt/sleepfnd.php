@@ -1,53 +1,124 @@
 <!DOCTYPE html>
+<?php 
+    require_once("cno.php");
+    extract($_GET);
+    // echo"<pre>";
+    // var_dump($_GET);
+    // echo "</pre>";
+    //if(!@$tb) $tb = $tb;
+?>  
 <head>
-    <title></title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="sleeplogs.js"></script>
-    <script src="https://kit.fontawesome.com/f95af9be80.js" crossorigin="anonymous"></script>
-    <style type = "text/css">
-        @media screen,print{
-            .tab {
-                tab-size: 4;
-                background:#FEE5E5;
-                border:none;
-            }
-            span:hover{
-                cursor:pointer;
-                color:red;
-            }
-            .hd-table {
-                border-collapse: collapse;
-                width: 95%;
-                margin-left: auto;
-                margin-right: auto;
-            }
-            .hd-table th, td {
-                text-align: left;
-                padding: 5px;
-            }        
-            .hd-table tr:nth-child(odd) {background-color: #FEE5E5 !important;}
-            /* tr:nth-child(odd) {background-color: white !important;} */
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" type="text/css" href="w.css"> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="jquery-ui.css" rel="stylesheet">
+<script src="https://kit.fontawesome.com/f95af9be80.js" crossorigin="anonymous"></script>
+<script src="sleeplogs.js"></script>
+<script src="idle.js"></script>
+<script>
+    function sortTable(tabla,columnName){
+        var sort = $("#sort").val();
+        var tsql = $("#tsql").val();
+        // alert(tsql);
+        $.ajax({
+        url:'info_details.php',
+        type:'post',
+        data:{tabla:tabla,columnName:columnName,sort:sort,tsql:tsql},
+        success: function(response){
+
+        $("#empTable tr:not(:first)").remove();
+        // $("#empTable tr:gt(1)").remove();
+
+
+        $("#empTable").append(response);
+        if(sort == "asc"){
+            $("#sort").val("desc");
+        }else{
+            $("#sort").val("asc");
         }
-        @media print
-            {
-            .noprint {display: none !important;}
-            }
+
         }
-    </style>    
+        });
+    }
+
+    $(document).ready(function(){
+        $(".edit").click(function(){
+            url = $(this).attr("data-id");
+            // alert(url);
+            $("#myModal").modal();
+            load_page(url);
+        });
+    });
+
+    function load_page(url){
+        $('#modal-body').load(url,function(){});
+    }
+</script>
+<style type = "text/css">
+    a:link {
+	    color: red;
+	}
+	
+	/* visited link */
+	a:visited {
+	    color: red;
+	}
+	
+	/* mouse over link */
+	a:hover {
+	    color:darkred;
+	}
+	
+	/* selected link */
+	a:active {
+	    color: chocolate;
+    }
+    @media screen,print{
+        body { font-family: "Open Sans", sans-serif; font-size:12px; }
+        .tab {
+            tab-size: 4;
+            background:#FEE5E5;
+            border:none;
+        }
+        table {
+            border-collapse: collapse;
+            width: 95%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        span:hover{
+            cursor:pointer;
+            color:red;
+        }
+        th, td {
+            text-align: left;
+            padding: 5px;
+            border: 1px solid red; 
+        }        
+        tr:nth-child(odd) {background-color: #FEE5E5 !important;}
+    }
+    @media print
+        {
+        .noprint {display: none !important;}
+        }
+    }
+</style>
 </head>
 <html>
 <body>
     <div id="main">
     <div id="top" style="text-align:center;width=95%;">
         <img src="imgs/ham-logo.png"></br></br>
-        <button class="noprint" style="border:none;color:red;background:none;" alt="Back" onclick="javascript:history.back();"><i class="fa-solid fa-arrow-left-long fa-lg"></i></button>
+        <button class="noprint" style="border:none;color:red;background:none;" alt="Back" onclick="window.location.href = 'sleeplogs.php';"><i class="fa-solid fa-house-crack fa-lg"></i></button>
+        <!-- <button class="noprint" style="border:none;color:red;background:none;" alt="Back" onclick="javascript:history.back();"><i class="fa-solid fa-arrow-left-long fa-lg"></i></button> -->
         <button class="noprint" style="border:none;color:red;background:none;" alt="Print" onclick="javascript:window.print();"><i class="fa-solid fa-print fa-lg"></i></button>
         <!-- <button class="noprint" style="border:none;color:red;background:none;" alt="search"><i class="fa-solid fa-magnifying-glass fa-lg"></i></button> -->
         <button id="btnf" class="noprint" style="border:none;color:red;background:none;" alt="show/hide" onclick="ShowHideF();"><i class="fa-solid fa-eye-slash fa-lg"></i></button>
+        <?php echo '</br><span style="color:red;font-style:oblique;font-size: 30px;font-stretch: expanded;font-weight: bold;">'.getRepTittle($tb).'</span>';?>
     </div>
     <div class="noprint" id="head" style="width=95%;"></br>
         <form id="frmSearch" action="sleepfnd.php" target="_self"><input type="hidden" name="opt" value="2">
@@ -55,11 +126,11 @@
                 <tr>
                     <td colspan="2">
                         <b>Buscar en:</b>
-                        <select id="selTable" name="selTable">
-                            <option value="" selected>Seleccione</option>
-                            <option value="Sleep_Studies_Results">Sleep Studies Results</option>:
+                        <select id="tb" name="tb">
+                            <option value="">Seleccione</option>
+                            <!--<option value="Sleep_Studies_Results">Sleep Studies Results</option>:
                             <option value="Sleep_Listado_Expedientes">Listado de Expedientes de la Clínica</option>
-                            <option value="Sleep_Listado_Referidos">Listado de Referidos</option>
+                            <option value="Sleep_Listado_Referidos">Listado de Referidos</option>-->
                             <option value="Sleep_Inspeccion_Rutina">Inspección Visual de Rutina</option>
                             <option value="Sleep_Registro_Paciente">Registro de Paciente-Class/Mask Fitting</option>
                             <option value="Sleep_Valores_Criticos">Valores Críticos</option>
@@ -76,8 +147,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td></td>
-                    <td>
+                    <td style="border-right:none;"></td>
+                    <td style="border-left:none;">
                         <select id="selField" name="selField"  class="selField">
                         </select>
                         <select id="selOpt1" name="selOpt1">
@@ -98,8 +169,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td></td>
-                    <td>
+                    <td style="border-right:none;"></td>
+                    <td style="border-left:none;">
                         <select id="selField2" name="selField2" class="selField">
                         </select>
                         <select id="selOpt2" name="selOpt2">
@@ -120,8 +191,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td></td>
-                    <td>
+                    <td style="border-right:none;"></td>
+                    <td style="border-left:none;">
                         <select id="selField3" name="selField3" class="selField">
                         </select>
                         <select id="selOpt3" name="selOpt3">
@@ -137,8 +208,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td></td>
-                    <td>
+                    <td style="border-right:none;"></td>
+                    <td style="border-left:none;">
                         Ordenar por <select id="selField4" name="selField4" class="selField">
                         </select>
                         <select id="selOrderby" name="selOrderby">
@@ -147,7 +218,7 @@
                         </select>
                     </td>
                 </tr>
-                <tr><td></td><td><button type="submit" id="btnBuscar1">Buscar</button></td></tr>
+                <tr><td style="border-right:none;"></td><td style="border-left:none;"><button type="submit" id="btnBuscar1">Buscar</button></td></tr>
             </table>
         </p>
         </form>
@@ -158,12 +229,13 @@ require_once('cno.php');
 $db = new ServidorBD();
 $conn = $db->Conectar('x');
 if($_GET){
-    extract($_GET);
     // echo"<pre>";
     // var_dump($_GET);
-    if (!@$tb) {
-        $tabla = "$selTable";
-        $sql = "SELECT * FROM $selTable ";
+    // if (!@$tb) {
+    //$tabla = "$tb";
+    $sql = "SELECT * FROM $tb ";
+    if(@$opt > 0)
+    {
         if($selOpt1 === 'like') {
             $sql .= "WHERE $selField like '%$txtValue%'";
         }else{
@@ -186,34 +258,27 @@ if($_GET){
             }
         }
         $sql .= " order by $selField4 $selOrderby";
-    }else{
-        $tabla = $_GET['tb'];
-        $sql = "SELECT * FROM $tabla ";
     }
-       $x=0;
-        echo '<table class="hd-table" id="empTable"><tr>';
+    // }else{
+    //     echo "<pre>";
+    //     var_dump($_GET);
+    //     echo "</pre>";
+
+    //     $tabla = $_GET['tb'];
+    //     $sql = "SELECT * FROM $tabla order by modified desc";
+    // }
+        $x=0;
+        echo '<input type="hidden" id="tsql" value="'.$sql.'"><table class="hd-table" id="empTable">';//<table width='95%' id='empTable'>
         $stmt = sqlsrv_query($conn, $sql);
-        foreach(sqlsrv_field_metadata($stmt) as $field){
-            echo '<th>'.$field['Name'].'</th>';
-            $x++;
-        }
+        gSleepTable($stmt,$tb,$sql,'0');
         echo '</tr>';
-        while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_BOTH)){
-            for ($j = 0; $j < $x; $j++) {
-                if ($row[$j] instanceof DateTime) {
-                    echo "<td>".$row[$j]->format('m/d/Y H:i:s')."</td>";
-                }else{
-                    echo "<td>".($row[$j] == '' ? '0' : $row[$j]) ."</td>";
-                }
-            }
-            //$x++;
-            echo '</tr><br>';
-        }
-        echo "</table><br>";
-        
     }
 
 ?>
+    </div>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-body" id="modal-body">
     </div>
 </div>
 </body>

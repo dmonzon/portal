@@ -740,10 +740,10 @@ class ADODB_Replicate {
 			$srcwheress = implode(' AND ',$srcwheres);
 
 
-		$seltable = $table;
-		if ($this->readUncommitted && strpos($src->databaseType,'mssql')) $seltable .= ' with (NOLOCK)';
+		$tb = $table;
+		if ($this->readUncommitted && strpos($src->databaseType,'mssql')) $tb .= ' with (NOLOCK)';
 
-		$sa['SEL'] = "SELECT $fldss FROM $seltable $wheresrc";
+		$sa['SEL'] = "SELECT $fldss FROM $tb $wheresrc";
 		$sa['INS'] = "INSERT INTO $desttable ($insfldss) VALUES ($paramss) /**INS**/";
 		$sa['UPD'] = "UPDATE $desttable SET $setss WHERE $wheress /**UPD**/";
 

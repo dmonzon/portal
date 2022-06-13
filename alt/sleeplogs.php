@@ -15,64 +15,6 @@ require_once("sleepdivs.php");
 <script src="https://kit.fontawesome.com/f95af9be80.js" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="sleeplogs.js"></script>
-<!-- <script>
-    $(document).ready(function() {
-        $(".cambia").click(function() {
-            //esconder todos DIVs
-            $(".content").hide();
-            //obtener nombre del enlace
-            nombre = $(this).attr("label");
-            //mostrar el panel segun el nombre del enlace oprimido
-            $("#" + nombre).show();
-        });
-    });
-
-    function sortTable(columnName){
-        //alert("hola");
-        var sort = $("#sort").val();
-        $.ajax({
-        url:'info_details.php',
-        type:'post',opt:1,
-        data:{tabla:tabla,columnName:columnName,sort:sort,opt:opt},
-        success: function(response){
-
-        $("#empTable tr:not(:first)").remove();
-
-        $("#empTable").append(response);
-        if(sort == "asc"){
-            $("#sort").val("desc");
-        }else{
-            $("#sort").val("asc");
-        }
-
-        }
-        });
-    }
-
-    function DoNav(){
-        m = $("#mySidebar").width();
-        if (m > 0){
-            document.getElementById("mySidebar").style.width = "0";
-            document.getElementById("main").style.marginLeft= "0";
-            $("#lnk").show();
-        }else{
-            document.getElementById("mySidebar").style.width = "350px";
-            document.getElementById("main").style.marginLeft = "350px";
-            $("#lnk").hide();
-        }
-    }
-    function openNav() {
-        // alert($("#mySidebar").width());
-        document.getElementById("mySidebar").style.width = "350px";
-        document.getElementById("main").style.marginLeft = "350px";
-    }
-
-    function closeNav() {
-        // alert($("#mySidebar").width());
-        document.getElementById("mySidebar").style.width = "0";
-        document.getElementById("main").style.marginLeft= "0";
-    }
-</script> -->
 <style>
     body { font-family: "Open Sans", sans-serif; padding-bottom: 100px; }
     span:hover{
@@ -87,7 +29,19 @@ require_once("sleepdivs.php");
 	a:visited {
 	    color: red;
 	}
-	
+	i {
+        color:red;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+    li {
+        padding-left: .5em;
+        /* padding-right: .1em; */
+    }
+
 	/* mouse over link */
 	a:hover {
 	    color:darkred;
@@ -258,13 +212,13 @@ require_once("sleepdivs.php");
     }
     @media print
 	{
-	.noprint {
-		display: none !important;
-	}
-	#btnPrint, #lblMain{
-		display: none;
-	  }
-}
+        .noprint {
+            display: none !important;
+        }
+        #btnPrint, #lblMain{
+            display: none;
+        }
+    }
 </style>
 </head>
 <body>
@@ -280,23 +234,23 @@ require_once("sleepdivs.php");
         <li><a class="cambia" label="lstReferidos">Listado de Referidos</a></li></br>
         <li><a class="cambia" label="SleepStudies">Sleep Studies Results</li></a></br><hr> -->
         <h3><span style="color:red;">Logs</span></h3><hr>
-        <li><a class="cambia" label="InspeccionVisual">Inspección Visual de Rutina</a></li></br>
-        <li><a class="cambia" label="MaskFitting">Registro de Paciente-Class/Mask Fitting</a></li></br>
-        <li><a class="cambia" label="ValCriticos">Valores Críticos</a></li></br>
-        <li><a class="cambia" label="LogCPAP">Auto CPAP Prestados</a></li></br>
-        <li><a class="cambia" label="logComunicacion">Comunicación</a></li></br>
-        <li><a class="cambia" label="logComunicacionHSAT">Comunicación HSAT</a></li></br>
-        <li><a class="cambia" label="logRechazo">Rechazo de Tratamiento</a></li></br>
-        <li><a class="cambia" label="logResgistroHSAT">Registro y Mantenimiento del HSAT</a></li></br>
+        <li><a href="rpt.php?tb=Sleep_Inspeccion_Rutina"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="InspeccionVisual">Inspección Visual de Rutina</a></li></br>
+        <li><a href="rpt.php?tb=Sleep_Registro_Paciente"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="MaskFitting">Registro de Paciente-Class/Mask Fitting</a></li></br>
+        <li><a href="rpt.php?tb=Sleep_Valores_Criticos"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="ValCriticos">Valores Críticos</a></li></br>
+        <li><a href="rpt.php?tb=Sleep_CPAP_Prestados"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="LogCPAP">Auto CPAP Prestados</a></li></br>
+        <li><a href="rpt.php?tb=Sleep_Comunicacion"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="logComunicacion">Comunicación</a></li></br>
+        <li><a href="rpt.php?tb=Sleep_Comunicacion_HSAT"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="logComunicacionHSAT">Comunicación HSAT</a></li></br>
+        <li><a href="rpt.php?tb=Sleep_Rechazo"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="logRechazo">Rechazo de Tratamiento</a></li></br>
+        <li><a href="rpt.php?tb=Sleep_Registro_HSAT"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="logResgistroHSAT">Registro y Mantenimiento del HSAT</a></li></br>
         <hr><h3><span style="color:red;">Logs de Desinfección</span></h3><hr>
-        <li><a class="cambia" label="CPAP">Desinfección CPAP</a></li></br>
-        <li><a class="cambia" label="tcPCO2">Desinfección de tcPCO2</a></li></br>
-        <li><a class="cambia" label="HSAT">Desinfección del HSAT</a></li></br>
-        <li><a class="cambia" label="ETCO2">Desinfección ETCO2 Monitor</a></li></br>
-        <li><a class="cambia" label="DuchasOjos">Duchas de lavado de ojos</a></li></br>
-        <li><a class="cambia" label="UsoManejo">Uso y Manejo de Endozime AW Plus</a></li></br>
-        <li><a class="cambia" label="solucionCidex">Registro de la Verificación de la Solución Cidex OPA e Inmersión del Equipo Durante el Proceso de Desinfección de Alto Nivel</a></li></br>
-        <li><a class="cambia" label="frascoCIdex">Registro de Verificación de Frasco de Cidex OPA y Frasco de las Tirillas para las Pruebas Durante el Proceso de Desinfección de Alto Nivel</a></li></br>
+        <li><a href="rpt.php?tb=Sleep_Desinfeccion_CPAP"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="CPAP">Desinfección CPAP</a></li></br>
+        <li><a href="rpt.php?tb=Sleep_TCPCO"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="tcPCO2">Desinfección de tcPCO2</a></li></br>
+        <li><a href="rpt.php?tb=Sleep_HSAT"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="HSAT">Desinfección del HSAT</a></li></br>
+        <li><a href="rpt.php?tb=Sleep_ETCO"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="ETCO2">Desinfección ETCO2 Monitor</a></li></br>
+        <li><a href="rpt.php?tb=Sleep_Ojos"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="DuchasOjos">Duchas de lavado de ojos</a></li></br>
+        <li><a href="rpt.php?tb=Sleep_Endozime"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="UsoManejo">Uso y Manejo de Endozime AW Plus</a></li></br>
+        <li><a href="rpt.php?tb=Sleep_Solucion_Cidex"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="solucionCidex">Registro de la Verificación de la Solución Cidex OPA e Inmersión del Equipo Durante el Proceso de Desinfección de Alto Nivel</a></li></br>
+        <li><a href="rpt.php?tb=Sleep_Frasco_Cidex"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="frascoCIdex">Registro de Verificación de Frasco de Cidex OPA y de las Tirillas Durante el Proceso de Desinfección de Alto Nivel</a></li></br>
     </ul>
 </div>
 

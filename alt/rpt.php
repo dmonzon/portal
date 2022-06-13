@@ -12,36 +12,18 @@
 <script src="sleeplogs.js"></script>
 <script src="idle.js"></script>
 <script>
-    $(document).on('click','.btn',function() {
-        num = this.id;
-        $.ajax({
-        type:'GET',
-        url: "info.php",
-        dataType: "json",
-        data: {num:num},
-            success: function(dataResult){
-                var dataResult = JSON.parse(dataResult);
-                if(dataResult.statusCode=='ok'){
-                    //$('#editEmployeeModal').modal('hide');
-                    // alert('Data updated successfully !'); 
-                    //location.reload();						
-                }
-                else if(dataResult.statusCode=='error'){
-                    alert(dataResult);
-                }
-            }
-        });
-    });
-
     function sortTable(tabla,columnName){
         var sort = $("#sort").val();
+        var tsql = $("#tsql").val();
+        // alert(tsql);
         $.ajax({
         url:'info_details.php',
         type:'post',
-        data:{tabla:tabla,columnName:columnName,sort:sort},
+        data:{tabla:tabla,columnName:columnName,sort:sort,tsql:tsql},
         success: function(response){
 
-        $("#empTable tr:not(:first)").remove();
+        // $("#empTable tr:not(:first)").remove();
+        $("#empTable tr:gt(1)").remove();
 
         $("#empTable").append(response);
         if(sort == "asc"){
@@ -52,6 +34,18 @@
 
         }
         });
+    }
+    $(document).ready(function(){
+        $(".edit").click(function(){
+            url = $(this).attr("data-id");
+            // alert(url);
+            $("#myModal").modal();
+            load_page(url);
+        });
+    });
+
+    function load_page(url){
+        $('#modal-body').load(url,function(){});
     }
 </script>
 <style type = "text/css">
@@ -74,6 +68,7 @@
 	    color: chocolate;
     }
     @media screen,print{
+        body { font-family: "Open Sans", sans-serif; font-size:12px; }
         .tab {
             tab-size: 4;
             background:#FEE5E5;
@@ -92,8 +87,9 @@
         th, td {
             text-align: left;
             padding: 5px;
+            border: 1px solid red; 
         }        
-        tr:nth-child(odd) {background-color: #FEE5E5 !important;}
+        tr:nth-child(even) {background-color: #FEE5E5 !important;}
     }
     @media print
         {
@@ -105,7 +101,6 @@
 <body>
 <?php
 require_once('cno.php');
-
 $db = new ServidorBD();
 $conn = $db->Conectar('x');
 if($_GET){
@@ -116,67 +111,54 @@ if($_GET){
     {
 
     }else{
-        $tsql = "SELECT * FROM $tabla" ;
-    ?>
-        <div style="text-align:center;width=95%;">
-            <img src="imgs/ham-logo.png"></br></br>
-            <?php echo '<span style="color:red;font-style:oblique;font-size: 30px;font-stretch: expanded;font-weight: bold;">'.getRepTittle($tabla).'</span>';?></br></br>
-            <button class="noprint" style="border:none;color:red;background:none;" alt="Back" onclick="javascript:history.back();"><i class="fa-solid fa-arrow-left-long fa-lg"></i></button>
-            <button class="noprint" style="border:none;color:red;background:none;" alt="Print" onclick="javascript:window.print();"><i class="fa-solid fa-print fa-lg"></i></button>
-            <a href="sleepfnd.php?tb=<?php echo $tabla ?>" target="_self"><i class="fa-solid fa-magnifying-glass fa-lg"></i></a>
-        </div>
-        <div style="width=95%;">
-        </br>
-        <input type='hidden' id='sort' value='asc'>
-        <table width='90%' id='empTable'>
-        <?php 
-        $getResults = sqlsrv_query($conn, $tsql);
-        $i =0;
-        echo '<tr>'; //#FFF7F9
-        if($getResults){
-            $res = sqlsrv_has_rows( $getResults );
-            if($res > 0){
-                foreach(sqlsrv_field_metadata($getResults) as $field){
-                    $titulo = str_replace("_"," ",$field['Name']);
-                    echo '<th><span onclick=\'sortTable("'.$tabla.'","'.$field['Name'].'");\'>'.$titulo.'</span></th>';
-                    $i++;
-                }
-                echo '</tr>';
-                echo "<tr>";
-                $x =0;
-                // var_dump(sqlsrv_num_rows($getResults));
-                while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_BOTH)){
-                    for ($j = 0; $j < $i; $j++) {
-                        //if($j==0) {'<td><button></button></td>'}
-                        if ($row[$j] instanceof DateTime) {
-                            echo "<td>".str_replace( ' 00:00:00','',$row[$j]->format('m/d/Y H:i:s'))."</td>";
-                        }else{
-                            echo "<td>".$row[$j]."</td>";
-                        }
-                    }
-                    $x++;
-                    echo '</tr>';
-                }
-            }
-            // echo '<tr><td style="color:red;"><h2>No se generaron resultados</h2><td/></tr>';
-        }else{
-            echo '<td style="color:#000;" colspan="100"><b>No se generon resultados.</b></br></td></tr>';
-        }
+        $sql = "SELECT * FROM $tabla ";
+        $tsql = $sql . "order by Modified desc" ;
     }
 }
 if($_POST){
     // echo '<pre>';
     // var_dump($_POST);
-    // $tb = @$_POST['tb'];
+    $tabla = @$_POST['tb'];
     extract($_POST);
     if($tb ==='s'){
         echo 'zumba yandellll';
     }else{
         SleepQrys($_POST);
+        $tsql = "SELECT * FROM $tabla order by Modified desc" ;
     }
 }
-
+?>
+    <div style="text-align:center;width=95%;">
+        <img src="imgs/ham-logo.png"></br></br>
+        <?php echo '<span style="color:red;font-style:oblique;font-size: 30px;font-stretch: expanded;font-weight: bold;">'.getRepTittle($tabla).'</span>';?></br></br>
+        <!-- <button class="noprint" style="border:none;color:red;background:none;" alt="Back" onclick="javascript:history.back();"><i class="fa-solid fa-arrow-left-long fa-lg"></i></button> -->
+        <button class="noprint" style="border:none;color:red;background:none;" alt="Back" onclick="window.location.href = 'sleeplogs.php';"><i class="fa-solid fa-house-crack fa-lg"></i></button>
+        <button class="noprint" style="border:none;color:red;background:none;" alt="Print" onclick="javascript:window.print();"><i class="fa-solid fa-print fa-lg"></i></button>
+        <a class="noprint" href="sleepfnd.php?tb=<?php echo $tabla ?>" target="_self"><i class="fa-solid fa-magnifying-glass fa-lg"></i></a>
+    </div>
+    <div style="width=95%;">
+        </br>
+        <input type='hidden' id='sort' value='asc'>
+        <input type='hidden' id='tsql' value='<?php echo $tsql?>'>
+        <?php 
+            // echo '<table class="hd-table" id="empTable"><tr><td colspan="500"><center><b><h4>'.getRepTittle($tabla).' - '.$opt."</h4></b></center></td></tr></table>";
+            echo '<table class="hd-table" id="empTable">';//<table width='95%' id='empTable'>
+            $getResults = sqlsrv_query($conn, $tsql);
+            $i =0;
+            echo '<tr>'; //#FFF7F9
+            if($getResults){
+                $res = sqlsrv_has_rows( $getResults );
+                if($res > 0){
+                    echo gSleepTable($getResults,$tabla,$tsql,'0');
+                }else{
+                    echo '<td style="color:#000;" colspan="100"><b>No se generon resultados.</b></br></td></tr>';
+                }
+            }
     ?>
-  </table>
+    </table>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-body" id="modal-body">
+      </div>
 </div>
 </body>

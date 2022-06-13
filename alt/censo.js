@@ -114,12 +114,6 @@ $(document).on("change", ".manejador", function() {
       $(this).css("background-color", "white");
       $(this).css("color", "black");
     }
-    // if($(this).val() < 1 ) {
-    //   //$('#circle'+id).css("background-color", "lightgray");
-    //   $(this).css("background-color", "white");
-    //   // $(this).css("font-weight", "regular");
-    //   $(this).css("color", "black");
-    // }
     setCircle(id);
 });
 
