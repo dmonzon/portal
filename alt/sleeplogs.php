@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <?php
-ini_set('display_errors',1);
+ini_set('display_errors',0);
 ini_set('log_errors',0);
 error_reporting(E_ALL & ~E_NOTICE);
 session_start();
 require_once("cno.php");
 require_once("sleepdivs.php");
+include('header.php');
+if (!isset($_SESSION['username'])) {
+    header('location:logout.php');
+    exit();
+}
 ?>
 <html>
 <head>
@@ -110,7 +115,7 @@ require_once("sleepdivs.php");
         width: 350px;
         position: fixed;
         z-index: 1;
-        top: 0;
+        top: 30;
         left: 0;
         background-color:#FFF7F9;
         overflow-x: hidden;
@@ -137,7 +142,7 @@ require_once("sleepdivs.php");
 
     .sidebar .closebtn {
         position: absolute;
-        top: 0;
+        top: 10;
         right: 25px;
         font-size: 30px;
         margin-left: 50px;
@@ -222,17 +227,21 @@ require_once("sleepdivs.php");
 </style>
 </head>
 <body>
-<div id="mySidebar" class="sidebar noprint"><center><img src="imgs/ham-logo.png"></center>
-    <!-- <a href="javascript:void(0)" class="closebtn" onclick="DoNav()"><i class="fa-solid fa-arrows-left-right-to-line"></i></a> -->
+<div id="mySidebar" class="sidebar noprint">
+    <!--<center><img src="imgs/ham-logo.png"></center>
+     <a href="javascript:void(0)" class="closebtn" onclick="DoNav()"><i class="fa-solid fa-arrows-left-right-to-line"></i></a> -->
     <!-- <button class="noprint" style="border:none;background:none;" alt="Print" onclick="javascript:window.print();"><i class="fa-solid fa-print fa-lg"></i></button> -->
     <a class="cambia closebtn" label="Buscador"><i class="fa-solid fa-magnifying-glass fa-lg"></i></a>
     <ul>
-        <!-- se comenta para eliminar por solicitud de Anthony y Enid
+        <!-- 
+        *****************************************    se comenta para eliminar por solicitud de Anthony y Enid ***********************************
         <h3><span style="color:red;">Listas</span></h3>
         <hr>
         <li><a class="cambia" label="lstExpedientes">Listado de Expedientes de la Clínica</a></li></br>
         <li><a class="cambia" label="lstReferidos">Listado de Referidos</a></li></br>
-        <li><a class="cambia" label="SleepStudies">Sleep Studies Results</li></a></br><hr> -->
+        <li><a class="cambia" label="SleepStudies">Sleep Studies Results</li></a></br><hr> 
+        ******************************************************************************************************************************************
+        -->
         <h3><span style="color:red;">Logs</span></h3><hr>
         <li><a href="rpt.php?tb=Sleep_Inspeccion_Rutina"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="InspeccionVisual">Inspección Visual de Rutina</a></li></br>
         <li><a href="rpt.php?tb=Sleep_Registro_Paciente"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="MaskFitting">Registro de Paciente-Class/Mask Fitting</a></li></br>
@@ -261,3 +270,6 @@ require_once("sleepdivs.php");
   
 </body>
 </html> 
+<script>
+    $(document).inactivityTimeout();
+</script>

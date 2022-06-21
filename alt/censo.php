@@ -2,7 +2,7 @@
 <?php
 date_default_timezone_set("America/Puerto_Rico");
 header('Content-Type: text/html; charset=utf-8');
-ini_set('display_errors',1);
+ini_set('display_errors',0);
 ini_set('log_errors',0);
 error_reporting(E_ALL & ~E_NOTICE);
 session_start();
@@ -28,7 +28,7 @@ if($_POST){
             newEmployee($_POST);
             break;
         default:
-            # code...
+            # nothing here
             break;
     }
 }
@@ -320,6 +320,7 @@ $dia2 = date("d/m/Y");
                         </td></tr>
                         </table>
                     </form></br>
+                    
                 </div>
                 <div class="modal-footer">
                     <input type="button" class="btn btn-default" data-dismiss="modal" value="Done">

@@ -6,7 +6,7 @@ function toConsole($data) {
 
   echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
 }
-// function to crate the menu
+// function to crate the top menu
 function buildMenu($menu,$conn)
 {
   $html = '';
@@ -36,7 +36,8 @@ function buildMenu($menu,$conn)
       echo $row['GroupID'] . ' | ' .$row['GroupName'] . ' | ' . $row['OptionID'] . ' | ' .$row['OptionName'] . ' | ' .$row['ParentGrpID']. '<br/>';
 
       if($row['ParentGrpID'] == 0){
-        $parents[] = ['id'=>$row['GroupID'],'name'=>$row['GroupName']];
+        $gn = str_replace("_"," ",$row['GroupName']);
+        $parents[] = ['id'=>$row['GroupID'],'name'=>$gn];
         
       }else{
         $childs[] = ['id'=>$row['ParentGrpID'],'name'=>$row['OptionName']];
@@ -46,7 +47,7 @@ function buildMenu($menu,$conn)
     foreach($parents as $parent)
     { 
       // foreach ($parents[$i] as $parent) {
-      $key = $parents[$i]['id'];
+      $key = str_replace("_"," ",$parents[$i]['id']);
       //$html .= "<dt>".$parents[$i]['name']."</dt>";
       $html .= '<li class="menu_left">
       <a href="#" class="drop">'.$parents[$i]['name'].'</a>
@@ -57,17 +58,22 @@ function buildMenu($menu,$conn)
         if($child['id']==$key){
           //echo $child['id'] . ' ==>'.$key.'</br>';
           //$html .= "<dd>".$child['name']."</dd>";
-          $html .= '<li><a href="'.strtolower($child['name']).'.php">'.$child['name'].'</a></li>';
-          $_SESSION['links'][] = $child['name'];
+          $name = str_replace("_"," ",$child['name']);
+          $html .= '<li><a href="'.strtolower($name).'.php">'.$name.'</a></li>';
+          $_SESSION['links'][] = $name;
         }
       }
       $i++;
       $html .= '</ul></div></div></li>';
     }
-    
+    // echo "pre>";
+    // var_dump($parent);
+    // var_dump($child);
+    // echo "</pre>";
     return $html;
   }
-  
+
+// funcion para autenticar el usuario contra el dominio
 function ldap_login($username, $password) {
     global $host, $port, $protocol, $base_dn, $domain;
     if ($username && $password) {
@@ -101,6 +107,7 @@ function ldap_login($username, $password) {
     return $returnval;    
 }
 
+//obtener los grupos del AD al que pertenece el usuario
 function get_groups($username,$password) {
     global $host, $port, $protocol, $base_dn, $domain;
     $domain = '@auxiliomutuo.com';
@@ -157,7 +164,7 @@ function get_groups($username,$password) {
 
 	return $output;
 }
-
+//obtener los todos grupos del AD
 function allGroups($name,$pass) {
       global $host, $port, $protocol, $base_dn, $domain;
       $adServer = "auxiliomutuo.com";
@@ -177,17 +184,6 @@ function allGroups($name,$pass) {
       $sr=ldap_search($ldapconn, $dn, $filter, $justthese);
       $info = ldap_get_entries($ldapconn, $sr);
       sort($info);
-      // $token = $info[0]['primarygroupid'][0];
-      // echo $token."<br/>";
-      // array_shift($info);
-      // echo "<pre>";
-      // print_r($info);
-
-      // OU=Application Security
-
-      // $filteres = array_filter($info[1], function($str) {
-      //     return $str === 'OU=Application Security';
-      // });
 
       for ($i=0; $i < $info[0]; $i++) {
           @$row = explode(",",$info[$i]["dn"]);

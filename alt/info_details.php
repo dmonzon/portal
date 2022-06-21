@@ -1,4 +1,12 @@
 <?php
+ini_set('display_errors',0);
+ini_set('log_errors',0);
+error_reporting(E_ALL & ~E_NOTICE);
+session_start();
+if (!isset($_SESSION['username'])) {
+    header('location:logout.php');
+    exit();
+}
 require_once('cno.php');
 $db = new ServidorBD();
 $conn = $db->Conectar('x');
@@ -125,3 +133,6 @@ if($_POST){
 }
 
 ?>
+ <script>
+    $(document).inactivityTimeout();
+</script>

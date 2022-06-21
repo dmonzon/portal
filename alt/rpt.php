@@ -100,7 +100,12 @@
 </head>
 <body>
 <?php
+ini_set('display_errors',0);
+ini_set('log_errors',0);
+error_reporting(E_ALL & ~E_NOTICE);
+session_start();
 require_once('cno.php');
+include('header.php');
 $db = new ServidorBD();
 $conn = $db->Conectar('x');
 if($_GET){
@@ -162,3 +167,6 @@ if($_POST){
       </div>
 </div>
 </body>
+<script>
+    $(document).inactivityTimeout();
+</script>
