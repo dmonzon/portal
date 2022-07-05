@@ -46,14 +46,18 @@ if($_POST){
   while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_NUMERIC)){
       $opciones[] = trim($row[1]);
   }
+  //  **********************
+  //  go create groups
+  //  **********************
   $groups = get_groups($ldaprdn,$ldappass);
   foreach ($groups as &$str) {
     //echo "</br>$str";
     $str = str_replace('CN=', '', strtok($str, ","));
     //echo "$str</br>";
   }
-  // echo '<pre>u';
-  // print_r($groups);
+  //  ******************************************************************
+  //  si tiene el grupo MIS Database, se le anadiran todos los accesos**
+  //  ******************************************************************
   if(in_array("MIS Database",$groups)){
     $temp = allGroups($ldaprdn,$ldappass);
     $final = array_values(array_diff($temp,$groups));

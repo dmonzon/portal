@@ -1,7 +1,6 @@
 
 $(document).on("change", ".capi", function() {
     var sum = 0; 
-    //alert('hola');
     $(".capi").each(function(){
         sum += parseFloat(+$(this).val(),10);
     });

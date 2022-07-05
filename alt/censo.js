@@ -70,10 +70,7 @@ $(document).on("change", ".manejador", function() {
     let id = but.substring(4, but.length);
     let idn = but.substring(0, 4);
     let hid = $('#hid' + id).attr('value');
-    /////////////////////////////////////////////////////// set pacient value to change circle to red ////////////////////////////////////////////////////
-    // Rango manejador de casos (25-30) Verde < 25 / Amarillo(25-30) / Rojo > 30
-    // Rango Planificador - (40-50) Verde < 40 / Amarillo(40-50) / Rojo > 50
-    // alert(dd1);
+
     ///////////////////////////////////////////////////////////////////////// calc ///////////////////////////////////////////////////////////////////////
     //////////////////////////////////////// Cuadra la cantidad de pacientes con relacion al total de pacientes //////////////////////////////////////////
     /////////////////////////////////////// (cantidad pacientes manejador 1) = (total de pacientes) - (cant. pacientes manejador 2) //////////////////////
@@ -100,6 +97,11 @@ $(document).on("change", ".manejador", function() {
       tot = totRevision(dd2);
       $('#revi' + dd2).val(tot);
     }
+    //*******************************************************************************************************************************************************
+    /////////////////////////////////////////////////////// set pacient value to change circle to red ////////////////////////////////////////////////////
+    // Rango manejador de casos (25-30) Verde < 25 / Amarillo(25-30) / Rojo > 30
+    // Rango Planificador - (40-50) Verde < 40 / Amarillo(40-50) / Rojo > 50
+    //*******************************************************************************************************************************************************
     $minPacientes = 25;
     $maxPacientes = 30;
     if($(this).val() > $maxPacientes){
@@ -117,6 +119,9 @@ $(document).on("change", ".manejador", function() {
     setCircle(id);
 });
 
+//*******************************************************************************************************************************************************
+//*************************** asignar el color del circulo **********************************************************************************************
+//*******************************************************************************************************************************************************
 function setCircle(id){
   var qty = $('#qtya' + id).val();
   $minPacientes = 25;
@@ -151,6 +156,7 @@ $(document).on("change", ".planificador", function() {
   let hid = $('#hid' + id).attr('value');
   $minPacientes = 40;
   $maxPacientes = 50;
+  
   /***********************************************************************************/
   // obtener num de empleado y llamar funcion para actualizar total de planificacion //
   /***********************************************************************************/

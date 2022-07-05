@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-ini_set('display_errors',1);
+ini_set('display_errors',0);
 ini_set('log_errors',0);
 error_reporting(E_ALL & ~E_NOTICE);
 session_start();
@@ -18,8 +18,8 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 $p1 = (@$_POST['periodo']) ? $_POST['periodo'] : date('Y'); 
-$decPagos = 2; // numeros decimales a mostrar para los pagos
-$decCapi = 0; // numeros decimales a mostrar para # de capitados
+$decPagos = 2;  // cantidad de numeros decimales a mostrar para los pagos
+$decCapi = 0;   // cantidad de numeros decimales a mostrar para # de capitados
 ?>
 <head>
     <title>Capitados</title>

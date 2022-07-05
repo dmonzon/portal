@@ -37,7 +37,6 @@ include_once('header.php');
                             die( print_r( sqlsrv_errors(), true));
                         }
                         //preparing to insert
-                        //echo "inserting ...";
                         //print_r($_POST);
                         $logDate = $_POST['txtDate'];$logid = $_POST['logid'];
                         $tot = $_POST['total'];
@@ -80,5 +79,4 @@ include_once('header.php');
             </tbody>    
         </table>
     </div>
-    <!-- <div class="noprint" style="text-align: center; color: red"><a href="jobs.php">Home</a></div> -->
 </body>

@@ -8,6 +8,7 @@
 </head>
 <body><div style="  padding: 200px 0; text-align: center;"><img src="ham-logo.png"></br></br></br>
         <?php 
+        // valres desde URL
         if($_GET){
             require("cno.php");
             $db = new ServidorBD();
@@ -26,6 +27,7 @@
                 <input type="text" id="cdesc" name="cdesc" value="'.$cdesc.'">
                 <input type="Submit" value="Submit"><button onclick="window.history.back();">Cancel</button>';
         }
+        // valores desde forma
         if($_POST){
             require("cno.php");
             $db = new ServidorBD();
