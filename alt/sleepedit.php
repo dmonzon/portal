@@ -111,7 +111,7 @@ if($_GET){
                             <input type="hidden" value="Sleep_Comunicacion_HSAT" name="tb"><input type="hidden" value="1" name="update">
                             <tr>
                                 <td style="text-align: left;border: none ;width:20%;"><label for="chFecha">Fecha y Hora de llamada:</label></td>
-                                <td style="text-align: left;border: none ;width:30%;"><input type="datetime-local" id="chFecha" name="chFecha" value="'.$row[1]->format('Y-m-d\TH:i').'"></br></td>
+                                <td style="text-align: left;border: none ;width:30%;"><input type="datetime-local" id="chFecha" name="chFecha" value="'.(!$row[1] == '' ? $row[1]->format('Y-m-d\TH:i'):'').'"></br></td>
                                 <td style="text-align: left;border: none ;width:40%;" colspan="2">
                             </tr>
                             <tr>
@@ -126,7 +126,7 @@ if($_GET){
                             </tr>
                             <tr>
                                 <td style="text-align: left;border: none ;width:20%;"><label for="chDispositivo">Numero de identificación del dispositivo:</label></td>
-                                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="chDispositivo" name="chDispositivo" value="'.($row[4] =='' ? 'SN-BWM2022-7101' : $row[4]).'" required></br></td>
+                                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="chDispositivo" name="chDispositivo" value="SN-BWM2022-7101" required></br></td>
                                 <td style="text-align: left;border: none ;width:40%;"></td>
                             </tr>
                             <tr>
@@ -173,41 +173,46 @@ if($_GET){
                         <form id="frmlogComHSAT" action="rpt.php" target="_self" method="post"><input type="hidden" value="Sleep_Registro_HSAT" name="tb"><input type="hidden" value="1" name="update">
                         <table>
                             <tr>
+                                <td style="text-align: left;border: none ;width:20%;"><label for="vstId">Visit ID</label></td>
+                                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="vstId" name="vstId" value="'.$row[1].'"></br></td>
+                                <td style="text-align: left;border: none ;width:40%;" colspan="2">
+                            </tr>
+                            <tr>
                                 <td style="text-align: left;border: none ;width:20%;"><label for="rhFecha">Fecha y Hora de entrega:</label></td>
-                                <td style="text-align: left;border: none ;width:30%;"><input type="datetime-local" id="rhFecha" name="rhFecha" value="'.$row[1]->format('Y-m-d\TH:i').'"></br></td>
+                                <td style="text-align: left;border: none ;width:30%;"><input type="datetime-local" id="rhFecha" name="rhFecha" value="'.(!$row[2] == '' ? $row[2]->format('Y-m-d\TH:i'):'').'"></br></td>
                                 <td style="text-align: left;border: none ;width:40%;" colspan="2">
                             </tr>
                             <tr>
                                 <td style="text-align: left;border: none ;width:20%;"><label for="rhName">Nombre del paciente</label></td>
-                                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="rhName" name="rhName" value="'.$row[2].'"  required></br></td>
+                                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="rhName" name="rhName" value="'.$row[3].'"  required></br></td>
                                 <td style="text-align: left;border: none ;width:40%;"></td>
                             </tr>
                             <tr>
                                 <td style="text-align: left;border: none ;width:20%;"><label for="rhEquipo">Tipo de equipo prestado:</label></td>
                                 <td style="text-align: left;border: none ;width:30%;">
-                                <input type="radio" id="rhEquipo" name="rhEquipo" value="HSAT-SN-BWM2022-7101" '.($row[3] ==='HSAT-SN-BWM2022-7101' ? 'checked' : '').'><label for="radio1">HSAT-SN-BWM2022-7101</label></br></td>
+                                <input type="radio" id="rhEquipo" name="rhEquipo" value="HSAT-SN-BWM2022-7101" checked><label for="radio1">HSAT-SN-BWM2022-7101</label></br></td>
                                 <td style="text-align: left;border: none ;width:40%;"></td>
                             </tr>
                             <tr>
                                 <td style="text-align: left;border: none ;width:20%;"><label for="rhDevolucion">Fecha y Hora de devolución del equipo:</label></td>
-                                <td style="text-align: left;border: none ;width:30%;"><input type="datetime-local" id="rhDevolucion" name="rhDevolucion" value="'.$row[4]->format('Y-m-d\TH:i').'" required></br></td>
+                                <td style="text-align: left;border: none ;width:30%;"><input type="datetime-local" id="rhDevolucion" name="rhDevolucion" value="'.(!$row[5] == '' ? $row[5]->format('Y-m-d\TH:i'):'').'" required></br></td>
                                 <td style="text-align: left;border: none ;width:40%;"></td>
                             </tr>
                             <tr>
                                 <td style="text-align: left;border: none ;width:20%;"><label for="rhInspeccion">Inspeccion de rutina:</label></td>
                                 <td style="text-align: left;border: none ;width:30%;">
-                                    <input type="radio" id="chAsunto1" name="rhInspeccion" value="Funcional" '.(trim($row[5]) =='Funcional' ? 'checked' : '').'><label for="radio1">Funcional</label></br>
-                                    <input type="radio" id="chAsunto2" name="rhInspeccion" value="Defectuoso"'.(trim($row[5]) =='Defectuoso' ? 'checked' : '').'><label for="radio2">Defectuoso</option>
+                                    <input type="radio" id="chAsunto1" name="rhInspeccion" value="Funcional" '.(trim($row[6]) =='Funcional' ? 'checked' : '').'><label for="radio1">Funcional</label></br>
+                                    <input type="radio" id="chAsunto2" name="rhInspeccion" value="Defectuoso"'.(trim($row[6]) =='Defectuoso' ? 'checked' : '').'><label for="radio2">Defectuoso</option>
                                 <td style="text-align: left;border: none ;width:40%;"></td>
                             </tr>
                             <tr>
                                 <td style="text-align: left;border: none ;width:20%;"><label for="rhComentarios">Comentarios:</label></td>
-                                <td style="text-align: left;border: none ;width:30%;"><textarea id="rhComentarios" name="rhComentarios">'.$row[6].'</textarea></br></td>
+                                <td style="text-align: left;border: none ;width:30%;"><textarea id="rhComentarios" name="rhComentarios">'.$row[7].'</textarea></br></td>
                                 <td style="text-align: left;border: none ;width:40%;"></td>
                             </tr>
                             <tr>
                                 <td style="text-align: left;border: none ;width:20%;"><label for="rhTecnico">Nombre del tecnico</label></td>
-                                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="rhTecnico" name="rhTecnico" value="'.$row[7].'" required></br></td>
+                                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="rhTecnico" name="rhTecnico" value="'.$row[8].'" required></br></td>
                                 <td style="text-align: left;border: none ;width:40%;"></td>
                             </tr>
                             <tr>
@@ -240,7 +245,7 @@ if($_GET){
                                 <table>
                                     <tr>
                                         <td style="text-align: left;border: none ;width:20%;"><label for="hsatFecha">Fecha de desinfección</label></td>
-                                        <td style="text-align: left;border: none ;width:80%;"><input type="date" name="hsatFecha" value="'.$row[1]->format('Y-m-d').'"></br></td>
+                                        <td style="text-align: left;border: none ;width:80%;"><input type="date" name="hsatFecha" value="'.(!$row[1] == '' ? $row[1]->format('Y-m-d'):'').'"></br></td>
                                     </tr>
                                     <tr>
                                         <td style="text-align: left;border: none ;width:20%;"><label for="hsatTecnico" class="lrequired">Nombre del Técnico</label></td>
@@ -249,7 +254,7 @@ if($_GET){
                                     <tr>
                                         <td style="text-align: left;border: none ;width:20%;"><label for="hsatModelo" class="lrequired">Modelo</label></td>
                                         <td style="text-align: left;border: none ;width:80%;">
-                                        <input type="radio" name="hsatModelo" id="radio1" value="BWMini: HST Compass (#serie: BWM2022-7101)" '.(trim($row[2]) =='BWMini: HST Compass (#serie: BWM2022-7101)' ? 'checked' : '').'><label for="radio1">BWMini: HST Compass (#serie: BWM2022-7101)</label></br>
+                                        <input type="radio" name="hsatModelo" id="radio1" value="BWMini: HST Compass (#serie: BWM2022-7101)" checked><label for="radio1">BWMini: HST Compass (#serie: BWM2022-7101)</label></br>
                                     </tr>
                                     <tr>
                                         <td style="text-align: center;border:none;width:20%;" colspan="3">
@@ -282,7 +287,7 @@ if($_GET){
                                 <table>
                                     <tr>
                                         <td style="text-align: left;border: none ;width:20%;"><label for="tcpcFecha">Fecha de desinfección</label></td>
-                                        <td style="text-align: left;border: none ;width:80%;"><input type="date" name="tcpcFecha" value="'.$row[1]->format('Y-m-d').'"></br></td>
+                                        <td style="text-align: left;border: none ;width:80%;"><input type="date" name="tcpcFecha" value="'.(!$row[1] == '' ? $row[1]->format('Y-m-d'):'').'"></br></td>
                                     </tr>
                                     <tr>
                                         <td style="text-align: left;border: none ;width:20%;"><label for="tcpcTecnico" class="lrequired">Nombre del Técnico</label></td>
@@ -382,119 +387,8 @@ if($_GET){
                 </div>
                 </div>';
         break;
-        case 'Sleep_Listado_Expedientes':
-            echo '
-            <div id="lstExpedientes" >
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">					
-                            Listado de Expedientes de la Clínica
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        </div>
-                        <div class="modal-body">
-                        <form id="frmExpedientes" action="rpt.php" target="_self" method="post"><input type="hidden" value="Sleep_Listado_Expedientes" name="tb"><input type="hidden" value="1" name="update">
-                            <table>
-                                <tr>
-                                    <td style="text-align: left;border: none ;width:20%;"><label for="numExpediente" class="lrequired">Numero de expediente </label></td>
-                                    <td style="text-align: left;border: none ;width:80%;"><input type="text" id="numExpediente" name="numExpediente" placeholder="Numero de expediente" required></br></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: left;border: none ;width:20%;"><label for="nombre2" class="lrequired">Nombre</label></td>
-                                    <td style="text-align: left;border: none ;width:80%;"><input type="text" id="nombre2" name="nombre2" placeholder="Nombre" required></br></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: left;border: none ;width:20%;"><label for="apellidos2" class="lrequired">Apellidos </label></td>
-                                    <td style="text-align: left;border: none ;width:80%;"><input type="text" id="apellidos2" name="apellidos2" placeholder="Apellidos" required></br></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: left;border: none ;width:20%;"><label for="txtTelefono">Telefono (1)</label></td>
-                                    <td style="text-align: left;border: none ;width:80%;"><input type="tel" id="txtTelefono" name="txtTelefono" placeholder="123-456-7890"></br></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: left;border: none ;width:20%;"><label for="txtTelefono2">Telefono (2)</label></td>
-                                    <td style="text-align: left;border: none ;width:80%;"><input type="tel" id="txtTelefono2" name="txtTelefono2" placeholder="123-456-7890"></br></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center;border:none;width:20%;" colspan="5">
-                                        <input type="hidden" name="id" value="'.$row[0].'">
-                                        <input type="submit" id="btnSubmit2" value="Someter">
-                                        <input type="button" id="btnCancel2" value="Cancel">
-                                    </td>
-                                    <td style="text-align: left;border:none;"></td>
-                                </tr>
-                                </table>
-                                </form>
-                        </div>
-                        <div class="modal-footer">
-                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Done">
-                        </div>
-                    </div>
-                </div>
-            </div>';
-        break;
-        case 'Sleep_Listado_Referidos':
-            echo '<div id="lstReferidos" >
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">					
-                        Listado de Referidos
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    </div>
-                    <div class="modal-body">
-                    <form id="frmReferidos" action="rpt.php" target="_self" method="post"><input type="hidden" value="Sleep_Listado_Referidos" name="tb"><input type="hidden" value="1" name="update">
-                        <table>
-                            <tr>
-                                <td style="text-align: left;border: none ;width:20%;"><label for="expediente" class="lrequired">Numero de expediente </label></td>
-                                <td style="text-align: left;border: none ;width:80%;"><input type="text" id="expediente" name="expediente" placeholder="Numero de expediente"></br></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: left;border: none ;width:20%;"><label for="nombreReferido">Nombre </label></td>
-                                <td style="text-align: left;border: none ;width:80%;"><input type="text" id="nombreReferido" name="nombreReferido" placeholder="Nombre"></br></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: left;border: none ;width:20%;"><label for="apellidosReferido">Apellidos </label></td>
-                                <td style="text-align: left;border: none ;width:80%;"><input type="text" id="apellidosReferido" name="apellidosReferido" placeholder="Apellidos"></br></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: left;border: none ;width:20%;"><label for="fechaEstudio">Dia del Estudio</label></td>
-                                <td style="text-align: left;border: none ;width:80%;"><input type="date" id="fechaEstudio" name="fechaEstudio" placeholder="Dia del Estudio"></br></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: left;border: none ;width:20%;"><label for="visitRef">Visit ID </label></td>
-                                <td style="text-align: left;border: none ;width:80%;"><input type="number" id="visitRef" name="visitRef" placeholder="Visit ID"></br></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: left;border: none ;width:20%;"><label for="planReferido">Plan Medico </label></td>
-                                <td style="text-align: left;border: none ;width:80%;"><input type="text" id="planReferido" name="planReferido" placeholder="Plan Medico"></br></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: left;border: none ;width:20%;"><label for="otroPlanReferido">Otro Plan Medico </label></td>
-                                <td style="text-align: left;border: none ;width:80%;"><input type="text" id="otroPlanReferido" name="otroPlanReferido" placeholder="Otro Plan Medico"></br></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: left;border: none ;width:20%;"><label for="ddReferidoMD">Referido Completado por el Médico</label></td>
-                                <td style="text-align: left;border: none ;width:80%;">
-                                <select id="ddReferidoMD" name="ddReferidoMD">
-                                    <option value="si" selected>Si</option>
-                                    <option value="no">No</option>
-                                </select></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center;border:none;width:20%;">
-                                    <input type="submit" id="btnSubmit3" value="Someter">
-                                    <input type="button" id="btnCancel3" value="Cancel">
-                                </td><td style="text-align: left;border:none;"></td>
-                            </tr>
-                            </table>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Done">
-                    </div>
-                </div>
-            </div>
-            </div>';
-        break;
+
+
         case 'Sleep_Inspeccion_Rutina':
             echo '<div id="InspeccionVisual" class="noprint content">
             <div class="modal-dialog">
@@ -510,7 +404,7 @@ if($_GET){
                             <input type="hidden" value="1" name="update">
                             <tr>
                                 <td style="text-align: left;border: none ;width:20%;"><label for="fechaInspeccion">Fecha de Inspeccion</label></td>
-                                <td style="text-align: left;border: none ;width:20%;"><input type="datetime-local" id="fechaInspeccion" name="fechaInspeccion" value="'. $row[1]->format('Y-m-d\TH:s').'"></br></td>
+                                <td style="text-align: left;border: none ;width:20%;"><input type="datetime-local" id="fechaInspeccion" name="fechaInspeccion" value="'. (!$row[1] == '' ? $row[1]->format('Y-m-d\TH:s'):'').'"></br></td>
                                 <td style="text-align: left;border: none ;width:10%;"></br></td>
                                 <td style="text-align: left;border: none ;width:50%;"></br></td>
                             </tr>
@@ -696,7 +590,7 @@ if($_GET){
                             </tr>
                             <tr>
                                 <td style="text-align: left;border: none ;width:20%;"><label for="fechaMask" class="lrequired">Fecha</label></td>
-                                <td style="text-align: left;border: none ;width:80%;"><input type="date" id="fechaMask" name="fechaMask" value="'.$row[3]->format('Y-m-d').'" required></br></td>
+                                <td style="text-align: left;border: none ;width:80%;"><input type="date" id="fechaMask" name="fechaMask" value="'.(!$row[3] == '' ? $row[3]->format('Y-m-d'):'').'" required></br></td>
                             </tr>
                             <tr>
                                 <td style="text-align: left;border: none ;width:20%;"><label for="ddPlanMedico">Plan Medico </label></td>
@@ -765,7 +659,7 @@ if($_GET){
                         </tr>
                         <tr>
                             <td style="text-align: left;border: none ;width:30%;"><label for="valFecha">Fecha del evento</label></td>
-                            <td style="text-align: left;border: none ;width:30%;"><input type="datetime-local" name="valFecha" id="valFecha" value="'.$row[2]->format('Y-m-d\TH:i').'"></br></td>
+                            <td style="text-align: left;border: none ;width:30%;"><input type="datetime-local" name="valFecha" id="valFecha" value="'.(!$row[2] == '' ? $row[2]->format('Y-m-d\TH:i'):'').'"></br></td>
                             <td style="text-align: left;border: none ;width:30%;" colspan="2">
                             <label for="ddReferidoMD"></label></td>
                         </tr>
@@ -801,7 +695,7 @@ if($_GET){
                         </tr>
                         <tr>
                             <td style="text-align: left;border: none ;width:30%;"><label for="valReportado">Fecha reportado</label></td>
-                            <td style="text-align: left;border: none ;width:30%;"><input type="datetime-local" id="valReportado" name="valReportado" value="'.$row[2]->format('Y-m-d\TH:i').'"></br></td>
+                            <td style="text-align: left;border: none ;width:30%;"><input type="datetime-local" id="valReportado" name="valReportado" value="'.(!$row[8] == '' ? $row[8]->format('Y-m-d\TH:i'):'').'"></br></td>
                             <td style="text-align: left;border: none ;width:30%;" colspan="2">
                             <label for="ddReferidoMD"></label></td>
                         </tr>
@@ -844,7 +738,7 @@ if($_GET){
                     </tr>
                     <tr>
                         <td style="text-align: left;border: none ;width:30%;"><label for="fechaPrestado">Fecha y hora de prestado</label></td>
-                        <td style="text-align: left;border: none ;width:30%;"><input type="datetime-local" name="fechaPrestado" id="fechaPrestado" value="'.$row[3]->format('Y-m-d\TH:i').'"></br></td>
+                        <td style="text-align: left;border: none ;width:30%;"><input type="datetime-local" name="fechaPrestado" id="fechaPrestado" value="'.(!$row[4] == '' ? $row[3]->format('Y-m-d\TH:i'):'').'"></br></td>
                     </tr>
                     <tr>
                         <td style="text-align: left;border: none ;width:30%;"><label for="tecEntrega">Techico que entrega</label></td>
@@ -856,7 +750,7 @@ if($_GET){
                     </tr>
                     <tr>
                         <td style="text-align: left;border: none ;width:30%;"><label for="fecha_Entrega">Fecha y hora de entrega en que el equipo debe ser entregado al laboratorio del sueño</label></td>
-                        <td style="text-align: left;border: none ;width:30%;"><input type="datetime-local" name="fecha_Entrega" id="fecha_Entrega" value="'.$row[4]->format('Y-m-d\TH:i').'"></br></td>
+                        <td style="text-align: left;border: none ;width:30%;"><input type="datetime-local" name="fecha_Entrega" id="fecha_Entrega" value="'.(!$row[4] == '' ? $row[4]->format('Y-m-d\TH:i'):'').'"></br></td>
                     </tr>
                     <tr>
                         <td style="text-align: left;border: none ;width:30%;"><label for="techRecibe">Tecnico que recibe</label></td>
@@ -864,7 +758,7 @@ if($_GET){
                     </tr>
                     <tr>
                         <td style="text-align: left;border: none ;width:30%;"><label for="fRecibe">Fecha y hora que recibe</label></td>
-                        <td style="text-align: left;border: none ;width:30%;"><input type="datetime-local" name="fRecibe" id="fRecibe" value="'.$row[8]->format('Y-m-d\TH:i').'"></br></td>
+                        <td style="text-align: left;border: none ;width:30%;"><input type="datetime-local" name="fRecibe" id="fRecibe" value="'.(!$row[8] == '' ? $row[8]->format('Y-m-d\TH:i'):'').'"></br></td>
                     </tr>
                     <tr>
                         <td style="text-align: left;border: none ;width:30%;"><label for="desinfecto">Desinfectó equipo</label></td>
@@ -872,7 +766,7 @@ if($_GET){
                     </tr>            
                     <tr>
                         <td style="text-align: left;border: none ;width:30%;"><label for="cpapFecha">Fecha y hora de desinfectado</label></td>
-                        <td style="text-align: left;border: none ;width:30%;"><input type="datetime-local" id="cpapFecha" name="cpapFecha" value="'.$row[10]->format('Y-m-d\TH:i').'"></br></td>
+                        <td style="text-align: left;border: none ;width:30%;"><input type="datetime-local" id="cpapFecha" name="cpapFecha" value="'.(!$row[10] == '' ? $row[10]->format('Y-m-d\TH:i'):'').'"></br></td>
                     </tr>
                     <tr>
                         <td style="text-align: left;border: none ;width:30%;"><label for="ePrestado">Equipo prestado</label></td>
@@ -916,7 +810,7 @@ if($_GET){
                     </tr>
                     <tr>
                         <td style="text-align: left;border: none ;width:20%;"><label for="comFecha">Fecha y Hora:</label></td>
-                        <td style="text-align: left;border: none ;width:30%;"><input type="datetime-local" id="comFecha" name="comFecha" value="'.$row[3]->format('Y-m-d\TH:i').'"></br></td>
+                        <td style="text-align: left;border: none ;width:30%;"><input type="datetime-local" id="comFecha" name="comFecha" value="'.(!$row[3] == '' ? $row[3]->format('Y-m-d\TH:i'):'').'"></br></td>
                         <td style="text-align: left;border: none ;width:40%;" colspan="2">
                     </tr>
                     <tr>
@@ -962,30 +856,34 @@ if($_GET){
                             <td style="text-align: left;border: none ;width:80%;"><input type="number" id="visitRechazo" name="visitRechazo" value="'.$row[1].'" required></br></td>
                         </tr>
                         <tr>
+                            <td style="text-align: left;border: none ;width:20%;"><label for="paciente">Nombre del paciente</label></td>
+                            <td style="text-align: left;border: none ;width:80%;"><input type="text" id="paciente" name="paciente" value="'.$row[2].'"></br></td>
+                        </tr>
+                        <tr>
                             <td style="text-align: left;border: none ;width:20%;"><label for="fechaRechazo">Fecha del estudio</label></td>
-                            <td style="text-align: left;border: none ;width:80%;"><input type="date" id="fechaRechazo" name="fechaRechazo" value="'.$row[2]->format('Y-m-d').'"></br></td>
+                            <td style="text-align: left;border: none ;width:80%;"><input type="datetime-local" id="fechaRechazo" name="fechaRechazo" value="'.(!$row[3] == '' ? $row[3]->format('Y-m-d\TH:i'):'').'"></br></td>
                         </tr>
                         <tr>
                             <td style="text-align: left;border: none ;width:20%;"><label for="radPasos">Se tomaron pasos de adaptación?</label></td>
                             <td style="text-align: left;border: none ;width:80%;">
-                                <input type="radio" id="radPasos1" name="radPasos" value="Si" '.(trim($row[4]) ==='Si' ? 'checked' : '').'><label for="radio1">Si</label></br>
-                                <input type="radio" id="radPasos2" name="radPasos" value="No" '.(trim($row[4]) ==='No' ? 'checked' : '').'><label for="radio2">No</option>
+                                <input type="radio" id="radPasos1" name="radPasos" value="Si" '.(trim($row[5]) ==='Si' ? 'checked' : '').'><label for="radio1">Si</label></br>
+                                <input type="radio" id="radPasos2" name="radPasos" value="No" '.(trim($row[5]) ==='No' ? 'checked' : '').'><label for="radio2">No</option>
                             </td>
                         </tr>
                         <tr>
                             <td style="text-align: left;border: none ;width:20%;"><label>Firmó documento de rechazo?</label></td>
                             <td style="text-align: left;border: none ;width:80%;">
-                                <input type="radio" id="radFirma1" name="radFirma" value="Si" '.(trim($row[5]) ==='Si' ? 'checked' : '').'><label for="radFirma1">Si</label></br>
-                                <input type="radio" id="radFirma2" name="radFirma" value="No" '.(trim($row[5]) ==='No' ? 'checked' : '').'><label for="radFirma2">No</option>
+                                <input type="radio" id="radFirma1" name="radFirma" value="Si" '.(trim($row[6]) ==='Si' ? 'checked' : '').'><label for="radFirma1">Si</label></br>
+                                <input type="radio" id="radFirma2" name="radFirma" value="No" '.(trim($row[6]) ==='No' ? 'checked' : '').'><label for="radFirma2">No</option>
                             </td>
                         </tr>
                         <tr>
                             <td style="text-align: left;border: none ;width:20%;"><label for="razonRechazo" class="lrequired">Razón por la que rechazo tratamiento*</label></td>
-                            <td style="text-align: left;border: none ;width:80%;"><textarea id="razonRechazo" name="razonRechazo" cols="50" rows="4" required>'.$row[3].'</textarea></br></td>
+                            <td style="text-align: left;border: none ;width:80%;"><textarea id="razonRechazo" name="razonRechazo" cols="50" rows="4" required>'.$row[4].'</textarea></br></td>
                         </tr>
                         <tr>
                             <td style="text-align: left;border: none ;width:20%;"><label for="techRechazo">Nombre del técnico</label></td>
-                            <td style="text-align: left;border: none ;width:80%;"><input type="text" id="techRechazo" name="techRechazo" value="'.$row[6].'"></br></td>
+                            <td style="text-align: left;border: none ;width:80%;"><input type="text" id="techRechazo" name="techRechazo" value="'.$row[7].'"></br></td>
                         </tr>
                         <tr>
                             <td style="text-align: center;border:none;width:80%;" colspan="3">
@@ -1016,11 +914,11 @@ if($_GET){
                         <table>
                             <tr>
                                 <td style="text-align: left;border: none ;width:20%;"><label for="fechaPreparacion" class="lrequired">Fecha y Hora de Preparación</label></td>
-                                <td style="text-align: left;border: none ;width:80%;"><input type="datetime-local" id="fechaPreparacion" name="fechaPreparacion" value="'.$row[1]->format('Y-m-d\TH:i').'"></br></td>
+                                <td style="text-align: left;border: none ;width:80%;"><input type="datetime-local" id="fechaPreparacion" name="fechaPreparacion" value="'.(!$row[1]=='' ? $row[1]->format('Y-m-d\TH:i'):'').'"></br></td>
                             </tr>
                             <tr>
                                 <td style="text-align: left;border: none ;width:20%;"><label for="expiracionEndozime">Fecha de Expiración</label></td>
-                                <td style="text-align: left;border: none ;width:80%;"><input type="date" name="expiracionEndozime" value="'.$row[2]->format('Y-m-d').'"></br></td>
+                                <td style="text-align: left;border: none ;width:80%;"><input type="date" name="expiracionEndozime" value="'.(!$row[2] == '' ? $row[2]->format('Y-m-d'):'').'"></br></td>
                             </tr>
                             <tr>
                                 <td style="text-align: left;border: none ;width:20%;"><label for="tempEndozime">Temperatura del cuarto de almacenaje 15 a 80 grados C</label></td>
@@ -1096,7 +994,7 @@ if($_GET){
                             <table>
                                 <tr>
                                     <td style="text-align: left;border: none ;width:20%;"><label for="etcoDesinfeccion">Fecha de desinfección</label></td>
-                                    <td style="text-align: left;border: none ;width:80%;"><input type="date" name="etcoDesinfeccion"value="'.$row[1]->format('Y-m-d').'"></br></td>
+                                    <td style="text-align: left;border: none ;width:80%;"><input type="date" name="etcoDesinfeccion"value="'.(!$row[1] == '' ? $row[1]->format('Y-m-d'):'').'"></br></td>
                                 </tr>
                                 <tr>
                                     <td style="text-align: left;border: none ;width:20%;"><label for="etcoTecnico" class="lrequired">Nombre del Técnico</label></td>
@@ -1139,22 +1037,22 @@ if($_GET){
                             <table>
                                 <tr>
                                     <td style="text-align: left;border: none ;width:20%;"><label for="fechaDesinfeccion" class="lrequired">Fecha de desinfección</label></td>
-                                    <td style="text-align: left;border: none ;width:80%;"><input type="date" name="fechaDesinfeccion" value="'.$row[1]->format('Y-m-d').'" ></br></td>
+                                    <td style="text-align: left;border: none ;width:80%;"><input type="date" name="fechaDesinfeccion" value="'.(!$row[1] == '' ? $row[1]->format('Y-m-d') : '').'" ></br></td>
                                 </tr>
                                 <tr>
                                     <td style="text-align: left;border: none ;width:20%;"><label for="DesinfeccionFiltro">Fecha de desinfección de filtro</label></td>
-                                    <td style="text-align: left;border: none ;width:80%;"><input type="date" name="DesinfeccionFiltro" value="'.$row[2]->format('Y-m-d').'"></br></td>
+                                    <td style="text-align: left;border: none ;width:80%;"><input type="date" name="DesinfeccionFiltro" value="'.(!$row[2] == '' ? $row[2]->format('Y-m-d'):'').'"></br></td>
                                 </tr>
                                 <tr>
                                     <td style="text-align: left;border: none ;width:20%;"><label for="CambioFiltro">Fecha de cambio de filtro</label></td>
-                                    <td style="text-align: left;border: none ;width:80%;"><input type="date" name="CambioFiltro" value="'.$row[3]->format('Y-m-d').'"></br></td>
+                                    <td style="text-align: left;border: none ;width:80%;"><input type="date" name="CambioFiltro" value="'.(!$row[3] == '' ?$row[3]->format('Y-m-d'):'').'"></br></td>
                                 </tr>
                                 <tr>
                                     <td style="text-align: left;border: none ;width:20%;"><label for="ddCama" class="lrequired">Cama</label></td>
                                     <td style="text-align: left;border: none ;width:80%;">
                                     <input type="checkbox" name="ckCamas[]"  value="1" '.(in_array('1',$ar) ? 'checked' : '').'>1
                                     <input type="checkbox" name="ckCamas[]"  value="2" '.(in_array('2',$ar) ? 'checked' : '').'>2
-                                    <input type="checkbox" name="ckCamas[]"  value="4" '.(in_array('3',$ar) ? 'checked' : '').'>4
+                                    <input type="checkbox" name="ckCamas[]"  value="4" '.(in_array('3',$ar) ? 'checked' : '').'>3
                                     <input type="checkbox" name="ckCamas[]"  value="4" '.(in_array('4',$ar) ? 'checked' : '').'>4
                                     <input type="checkbox" name="ckCamas[]"  value="5" '.(in_array('5',$ar) ? 'checked' : '').'>5
                                     <input type="checkbox" name="ckCamas[]"  value="6" '.(in_array('6',$ar) ? 'checked' : '').'>6
@@ -1211,11 +1109,11 @@ if($_GET){
                                 </tr>
                                 <tr>
                                     <td style="text-align: left;border: none ;width:20%;"><label for="frascoAbierto">Fecha Abierto Frasco de la solución</label></td>
-                                    <td style="text-align: left;border: none ;width:80%;"><input type="date" id="frascoAbierto" name="frascoAbierto" value="'.$row[4]->format('Y-m-d').'"></br></td>
+                                    <td style="text-align: left;border: none ;width:80%;"><input type="date" id="frascoAbierto" name="frascoAbierto" value="'.(!$row[4] = '' ? $row[4]->format('Y-m-d'):'').'"></br></td>
                                 </tr>        
                                 <tr>
                                     <td style="text-align: left;border: none ;width:20%;"><label for="expiraSolucion">Fecha de Expiración de la solución (75 días)</label></td>
-                                    <td style="text-align: left;border: none ;width:80%;"><input type="date" id="expiraSolucion" name="expiraSolucion" value="'.$row[5]->format('Y-m-d').'"></br></td>
+                                    <td style="text-align: left;border: none ;width:80%;"><input type="date" id="expiraSolucion" name="expiraSolucion" value="'.(!$row[5] = '' ? $row[5]->format('Y-m-d'):'').'"></br></td>
                                 </tr>            
                                 <tr>
                                     <td style="text-align: left;border: none ;width:20%;"><label for="loteTirillas">Núm. Lote del Frasco de Tirillas</label></td>
@@ -1223,11 +1121,11 @@ if($_GET){
                                 </tr>
                                 <tr>
                                     <td style="text-align: left;border: none ;width:20%;"><label for="abiertoTirillas">Fecha Abierto Frasco de Tirillas</label></td>
-                                    <td style="text-align: left;border: none ;width:80%;"><input type="date" id="abiertoTirillas" name="abiertoTirillas" value="'.$row[7]->format('Y-m-d').'"></br></td>
+                                    <td style="text-align: left;border: none ;width:80%;"><input type="date" id="abiertoTirillas" name="abiertoTirillas" value="'.(!$row[7] = '' ? $row[7]->format('Y-m-d'):'').'"></br></td>
                                 </tr>            
                                 <tr>
                                     <td style="text-align: left;border: none ;width:20%;"><label for="expiraTirilla">Fecha de Expiración (Frasco de Tirillas)</label></td>
-                                    <td style="text-align: left;border: none ;width:80%;"><input type="date" id="expiraTirilla" name="expiraTirilla" value="'.$row[8]->format('Y-m-d').'"> (luego de abrir el frasco 90 dias)</br></td>
+                                    <td style="text-align: left;border: none ;width:80%;"><input type="date" id="expiraTirilla" name="expiraTirilla" value="'.(!$row[8] = '' ? $row[8]->format('Y-m-d'):'').'"> (luego de abrir el frasco 90 dias)</br></td>
                                 </tr>
                                 <tr>
                                     <td style="text-align: left;border: none ;width:20%;"><label for="ddResultadoTirilla1">1. Resultado Prueba de las Tirillas con Cidex OPA (PURO)</label></td>
@@ -1287,11 +1185,11 @@ if($_GET){
                                 </tr>
                                 <tr>
                                     <td style="text-align: left;border: none ;width:20%;"><label for="expiracionSolucion" class="lrequired">Fecha de expiración del frasco de la solución</label></td>
-                                    <td style="text-align: left;border: none ;width:80%;"><input type="date" id="expiracionSolucion" name="expiracionSolucion" value="'.$row[17]->format('Y-m-d').'"> (Frasco cerrado)</br></td>
+                                    <td style="text-align: left;border: none ;width:80%;"><input type="date" id="expiracionSolucion" name="expiracionSolucion" value="'.(!$row[17] = '' ? $row[17]->format('Y-m-d'):'').'"> (Frasco cerrado)</br></td>
                                 </tr>   
                                 <tr>
                                     <td style="text-align: left;border: none ;width:20%;"><label for="expiracionTirillas">Fecha de expiración del frasco de tirillas</label></td>
-                                    <td style="text-align: left;border: none ;width:80%;"><input type="date" id="expiracionTirillas" name="expiracionTirillas" value="'.$row[18]->format('Y-m-d').'"> (Frasco cerrado)</br></td>
+                                    <td style="text-align: left;border: none ;width:80%;"><input type="date" id="expiracionTirillas" name="expiracionTirillas" value="'.(!$row[18] = '' ? $row[18]->format('Y-m-d'):'').'"> (Frasco cerrado)</br></td>
                                 </tr>   
                                 <tr>
                                     <td style="text-align: center;border:none;width:20%;" colspan="5">
@@ -1324,7 +1222,7 @@ if($_GET){
                         <table>
                             <tr>
                                 <td style="text-align: left;border: none ;width:20%;"><label for="fechaSolucion" class="lrequired">Fecha *</label></td>
-                                <td style="text-align: left;border: none ;width:80%;"><input type="date" name="fechaSolucion" value="'.$row[1]->format('Y-m-d\TH:i').'"></br></td>
+                                <td style="text-align: left;border: none ;width:80%;"><input type="date" name="fechaSolucion" value="'.(!$row[1] == '' ? $row[1]->format('Y-m-d\TH:i'): '').'"></br></td>
                             </tr>
                             <tr>
                                 <td style="text-align: left;border: none ;width:20%;"><label for="txtDept">Departamento</label></td>
@@ -1332,11 +1230,11 @@ if($_GET){
                             </tr>
                             <tr>
                                 <td style="text-align: left;border: none ;width:20%;"><label for="fechaFrasco">Fecha Abierto Frasco de Tirillas</label></td>
-                                <td style="text-align: left;border: none ;width:80%;"><input type="date" name="fechaFrasco" value="'.$row[3]->format('Y-m-d').'"></br></td>
+                                <td style="text-align: left;border: none ;width:80%;"><input type="date" name="fechaFrasco" value="'. (!$row[3] == '' ? $row[3]->format('Y-m-d') : '').'"></br></td>
                             </tr>            
                             <tr>
                                 <td style="text-align: left;border: none ;width:20%;"><label for="fechaExpiracion">No Use Después de (FECHA)</label></td>
-                                <td style="text-align: left;border: none ;width:80%;"><input type="date" name="fechaExpiracion" value="'.$row[4]->format('Y-m-d').'"></br></td>
+                                <td style="text-align: left;border: none ;width:80%;"><input type="date" name="fechaExpiracion" value="'.(!$row[4] == '' ? $row[4]->format('Y-m-d') : '').'"></br></td>
                             </tr>
                             <tr>
                                 <td style="text-align: left;border: none ;width:20%;"><label for="numeroLote">Núm. Lote del Frasco de Tirillas</label></td>
@@ -1352,7 +1250,7 @@ if($_GET){
                             </tr>
                             <tr>
                                 <td style="text-align: left;border: none ;width:20%;"><label for="fechaCalidad">Fecha Pruebas de Calidad</label></td>
-                                <td style="text-align: left;border: none ;width:80%;"><input type="date" name="fechaCalidad" value="'.$row[7]->format('Y-m-d').'"></br></td>
+                                <td style="text-align: left;border: none ;width:80%;"><input type="date" name="fechaCalidad" value="'.(!$row[7] == '' ? $row[7]->format('Y-m-d'):'').'"></br></td>
                             </tr>
                             <tr>
                                 <td style="text-align: left;border: none ;width:20%;"><label for="txtProbada" class="lrequired">Probada por *</label></td>
@@ -1364,7 +1262,7 @@ if($_GET){
                             </tr>
                             <tr>
                                 <td style="text-align: left;border: none ;width:20%;"><label for="fechaComienzo">Fecha de Comienzo de la Solución</label></td>
-                                <td style="text-align: left;border: none ;width:80%;"><input type="date" name="fechaComienzo" value="'.$row[10]->format('Y-m-d').'"></br></td>
+                                <td style="text-align: left;border: none ;width:80%;"><input type="date" name="fechaComienzo" value="'.(!$row[10] == '' ? $row[10]->format('Y-m-d'):'').'"></br></td>
                             </tr>
                             <tr>
                                 <td style="text-align: left;border: none ;width:20%;"><label for="fechaExpiraSolucion">Fecha de Expiración de la Solución</label></td>
@@ -1417,7 +1315,7 @@ if($_GET){
                             </tr>
                             <tr>
                                 <td style="text-align: left;border: none ;width:20%;"><label for="fechaInmersion">Fecha y Hora de Comienzo de Inmersión</label></td>
-                                <td style="text-align: left;border: none ;width:80%;"><input type="datetime-local" name="fechaInmersion" value="'.$row[19]->format('Y-m-d\TH:i').'"></br></td>
+                                <td style="text-align: left;border: none ;width:80%;"><input type="datetime-local" name="fechaInmersion" value="'.(!$row[19] == '' ? $row[19]->format('Y-m-d\TH:i'):'').'"></br></td>
                             </tr>
                             <tr>
                                 <td style="text-align: left;border: none ;width:20%;"><label for="tiempoInmersion">Tiempo de Inmersión (minutos)</label></td>

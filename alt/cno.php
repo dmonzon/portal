@@ -6,8 +6,8 @@ class ServidorBD {
     }
 
     public function Conectar($s){
-        $serverName = "VHAMSQL10SVR";
-        // $serverName = "DCDL78D9773";
+        // $serverName = "VHAMSQL10SVR";
+        $serverName = "DCDL78D9773";
         switch ($s) {
             case 'i':
                 $db = "SSIS_DB";
@@ -249,13 +249,14 @@ function CreateTable($tabla){
 }
 
 function SleepQrys($data){
-    //$ur = $_SESSION['username'];
-    $ur = 'user_name';
+    $ur = $_SESSION['username'];
+    // $ur = 'user_name';
     //$myarray = array_map('trim', $_POST);
     extract($_POST);
     // echo "<pre>";
     // var_dump($_POST);
     switch ($tb) {
+        /*
         case 'Sleep_Studies_Results':
             if($update){
                 $tsql = "UPDATE Sleep_Studies_Results
@@ -267,11 +268,13 @@ function SleepQrys($data){
                 $par= array_map('trim', $par);
             }else{
                 $tsql ="INSERT INTO [Sleep_Studies_Results]
-                ([Expediente],[Nombre],[Apelidos],[Fecha_Estudio],[Fecha_Entrega],[Medico],[Visit_ID]
-                ,[DED],[Plan_Medico],[Plan_Medico2],[Created],[Modified],[CreatedBy],[ModifiedBy])
-                VALUES (?,?,?,?,?,?,?,?,?,?,GETDATE(),GETDATE(),?,?)";//;SELECT SCOPE_IDENTITY() as 'id';";
+                    ([Expediente],[Nombre],[Apelidos],[Fecha_Estudio],[Fecha_Entrega],[Medico],[Visit_ID]
+                    ,[DED],[Plan_Medico],[Plan_Medico2],[Created],[Modified],[CreatedBy],[ModifiedBy])
+                VALUES (?,?,?,".($txtfechaEstudio == '' ?  'NULL' : "'".$txtfechaEstudio."'")."
+                    ,".($fechaEntrega == '' ?  'NULL' : "'".$fechaEntrega."'").
+                    ",?,?,?,?,?,GETDATE(),GETDATE(),?,?)";//;SELECT SCOPE_IDENTITY() as 'id';";
                 $par = array($expedienteResults,ucwords(strtolower($nombreResultados)),ucwords(strtolower($txtApellidos))
-                    ,$txtfechaEstudio,$fechaEntrega,ucwords(strtolower($txtMedico)),$txtVisitID,$txtDED,$txtPlan,$txtOtroPlan,$ur,$ur);
+                    ,ucwords(strtolower($txtMedico)),$txtVisitID,$txtDED,$txtPlan,$txtOtroPlan,$ur,$ur);
                 $par= array_map('trim', $par);
             }
             doSleepDB($tsql,$par,$tb);
@@ -307,131 +310,137 @@ function SleepQrys($data){
             $par= array_map('trim', $par);
             doSleepDB($tsql,$par,$tb);
         break;
+        */
         case 'Sleep_Inspeccion_Rutina':
-            if($update){
-                $tsql ='UPDATE [dbo].[Sleep_Inspeccion_Rutina]
-                SET [Fecha_Inspeccion] = ?,[Habitacion] =?,[Amplificador] = ?,[Headbox] = ?,[Oximetro] =?,[CPAP] = ?,[Cama] = ?,[Bandas] = ?,[Sensores] =?,[Electrodos] = ?,
+            if($update =='1'){
+                $tsql ="UPDATE Sleep_Inspeccion_Rutina
+                SET [Fecha_Inspeccion] = ".($fechaInspeccion == '' ?  'NULL' : "'".str_replace('T', ' ', $fechaInspeccion)."'").",[Habitacion] =?,[Amplificador] = ?,[Headbox] = ?,[Oximetro] =?,[CPAP] = ?,[Cama] = ?,[Bandas] = ?,[Sensores] =?,[Electrodos] = ?,
                     [Oxigeno] =?,[Intercome] = ?,[PC] =?,[Accion_Tomada] = ?,[Iniciales_Tecnico] =?,[ETCO] = ?,[Transcutaneo] =?,[Modified] = getdate(),[ModifiedBy] = ?
-                where id = ?';
-                $dt = str_replace('T', ' ', $fechaInspeccion);
-                $par = array($dt,$ddHabitacion,$ddAmplificador,$ddHeadbox,$ddOximetro,$ddCPAP,$ddCama1,$ddBandas,$ddSensores,
-                    $ddElectrodos,$ddOxigeno,$ddIntrcome,$ddPC,$accionTomada,strtoupper(trim($techRutina)),$ddTrans,$ddETCO,$ur,$id);   
+                    where id = ?";
+                    // $dt = str_replace('T', ' ', $fechaInspeccion);
+                    // echo $tsql;
+                $par = array($ddHabitacion,$ddAmplificador,$ddHeadbox,$ddOximetro,$ddCPAP,$ddCama1,$ddBandas,$ddSensores,
+                    $ddElectrodos,$ddOxigeno,$ddIntrcome,$ddPC,$accionTomada,FormatearNombre($techRutina),$ddTrans,$ddETCO,$ur,$id);   
             }else{
 
                 $tsql ="INSERT INTO Sleep_Inspeccion_Rutina
                         ([Fecha_Inspeccion],[Habitacion],[Amplificador],[Headbox],[Oximetro],[CPAP],[Cama],[Bandas],[Sensores]
                         ,[Electrodos],[Oxigeno],[Intercome],[PC],[Accion_Tomada],[Iniciales_Tecnico],[Transcutaneo],[ETCO],[Created],[CreatedBy],[Modified],[ModifiedBy])
-                    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,getdate(),?,getdate(),?)";
-                $dt = str_replace('T', ' ', $fechaInspeccion);
-                $par = array($dt,$ddHabitacion,$ddAmplificador,$ddHeadbox,$ddOximetro,$ddCPAP,$ddCama1,$ddBandas,$ddSensores,
-                $ddElectrodos,$ddOxigeno,$ddIntrcome,$ddPC,$accionTomada,strtoupper(trim($techRutina)),$ddTrans,$ddETCO,$ur,$ur);
+                    VALUES (".($fechaInspeccion == '' ?  'NULL' : "'".str_replace('T', ' ', $fechaInspeccion)."'").",?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,getdate(),?,getdate(),?)";
+                // $dt = str_replace('T', ' ', $fechaInspeccion);
+                $par = array($ddHabitacion,$ddAmplificador,$ddHeadbox,$ddOximetro,$ddCPAP,$ddCama1,$ddBandas,$ddSensores,
+                $ddElectrodos,$ddOxigeno,$ddIntrcome,$ddPC,$accionTomada,FormatearNombre($techRutina),$ddTrans,$ddETCO,$ur,$ur);
             }
             $par= array_map('trim', $par);
             doSleepDB($tsql,$par,$tb);
         break;
         case 'Sleep_Registro_Paciente':
             if($update){
-                $tsql ='UPDATE [dbo].[Sleep_Registro_Paciente]
-                SET [Nombre] = ?,[Apellidos] = ?,[Fecha] = ?,[Plan_Medico] = ?,[Procedimiento] = ?,[Otro_Procedimiento] = ?,[Referido] = ?,[Tecnico] = ?,[Modified] = getdate(),[ModifiedBy] = ?
-                   where id =?';
-                $par = array(ucwords(strtolower($nombreMask)),ucwords(strtolower($apellidosMask)),$fechaMask,$ddPlanMedico,$ddProcedimiento1,$ddProcedimiento2,ucwords(strtolower($mdRefiere)),$tecnicoMask,$ur,$id);
+                $tsql ="UPDATE Sleep_Registro_Paciente
+                SET [Nombre] = ?,[Apellidos] = ?,[Fecha] = ".($fechaMask == '' ?  'NULL' : "'".$fechaMask."'").",[Plan_Medico] = ?,[Procedimiento] = ?,[Otro_Procedimiento] = ?,[Referido] = ?,[Tecnico] = ?,[Modified] = getdate(),[ModifiedBy] = ?
+                   where id =?";
+                $par = array(FormatearNombre($nombreMask),FormatearNombre($apellidosMask),$ddPlanMedico,$ddProcedimiento1,$ddProcedimiento2,FormatearNombre($mdRefiere),FormatearNombre($tecnicoMask),$ur,$id);
             }else{
                 $tsql ="INSERT INTO Sleep_Registro_Paciente
                 ([Nombre],[Apellidos],[Fecha],[Plan_Medico],[Procedimiento],[Otro_Procedimiento],[Referido],[Tecnico],[Created],[CreatedBy],[Modified],[ModifiedBy])
-                VALUES (?,?,?,?,?,?,?,?,getdate(),?,getdate(),?)";
-                $par = array(ucwords(strtolower($nombreMask)),ucwords(strtolower($apellidosMask)),$fechaMask,$ddPlanMedico,$ddProcedimiento1,$ddProcedimiento2,ucwords(strtolower($mdRefiere)),$tecnicoMask,$ur,$ur);
+                VALUES (?,?,".($fechaMask == '' ?  'NULL' : "'".$fechaMask."'").",?,?,?,?,?,getdate(),?,getdate(),?)";
+                $par = array(FormatearNombre($nombreMask),FormatearNombre($apellidosMask),$ddPlanMedico,$ddProcedimiento1,$ddProcedimiento2,FormatearNombre($mdRefiere),FormatearNombre($tecnicoMask),$ur,$ur);
             }
             $par= array_map('trim', $par);
             doSleepDB($tsql,$par,$tb);
         break;
         case 'Sleep_Valores_Criticos':
-            if($update){
-                $tsql ='UPDATE Sleep_Valores_Criticos
-                    SET [Tecnico] = ?,[Fecha] = ?,[Num_Paciente] = ?,[Valor_Critico] = ?,[ReportadoA] = ?,[Accion] =?
-                        ,[Accion_MD] = ?,[Fecha_Reportado] = ?,[Modified] = getdate(),[ModifiedBy] = ?
-                    where id =?';
-                $dt = str_replace('T', ' ', $valFecha); $dt2 = str_replace('T', ' ', $valReportado);
-                $par = array(ucwords(strtolower($valExpediente)),$dt,$valPaciente,$valorCritico,ucwords(strtolower($repotadoa)),$valAccion,$mdAccion,$dt2,$ur,$id);
+            if($update=='1'){
+                $tsql ="UPDATE Sleep_Valores_Criticos
+                    SET [Tecnico] = ?,[Fecha] = ".($valFecha == '' ?  'NULL' : "'".str_replace('T', ' ', $valFecha)."'").",[Num_Paciente] = ?,[Valor_Critico] = ?,[ReportadoA] = ?,[Accion] =?
+                        ,[Accion_MD] = ?,[Fecha_Reportado] = ".($valReportado == '' ?  'NULL' : "'".str_replace('T', ' ', $valReportado)."'").",[Modified] = getdate(),[ModifiedBy] = ?
+                    where id =?";
+                // $dt = str_replace('T', ' ', $valFecha); $dt2 = str_replace('T', ' ', $valReportado);
+                $par = array(ucwords(strtolower($valExpediente)),$valPaciente,$valorCritico,ucwords(strtolower($repotadoa)),$valAccion,$mdAccion,$ur,$id);
             }else{
                 $tsql ="INSERT INTO Sleep_Valores_Criticos
                 ([Tecnico],[Fecha],[Num_Paciente],[Valor_Critico],[ReportadoA],[Accion],[Accion_MD],[Fecha_Reportado],[Created],[CreatedBy],[Modified],[ModifiedBy])
-                VALUES (?,?,?,?,?,?,?,?,getdate(),?,getdate(),?)";
+                VALUES (?,".($valFecha == '' ?  'NULL' : "'".str_replace('T', ' ', $valFecha)."'").",?,?,?,?,?,".($valReportado == '' ?  'NULL' : "'".str_replace('T', ' ', $valReportado)."'").",getdate(),?,getdate(),?)";
                 $dt = str_replace('T', ' ', $valFecha); $dt2 = str_replace('T', ' ', $valReportado);
-                $par = array(ucwords(strtolower($valExpediente)),$dt,$valPaciente,$valorCritico,ucwords(strtolower($repotadoa)),$valAccion,$mdAccion,$dt2,$ur,$ur);
+                $par = array(ucwords(strtolower($valExpediente)),$valPaciente,$valorCritico,ucwords(strtolower($repotadoa)),$valAccion,$mdAccion,$ur,$ur);
             }
             $par= array_map('trim', $par);
             doSleepDB($tsql,$par,$tb);
         break;
         case 'Sleep_CPAP_Prestados':
             if($update){
-                $tsql ='UPDATE Sleep_CPAP_Prestados
-                SET [Num_Expediente] = ?,[Telefono] = ?,[Fecha_Prestado] = ?,[Fecha_Entrega] = ?,[Tecnico_Entrega] = ?,[Pago] = ?,[Tecnico_Recibe] = ?,[Fecha_Recibo] = ?
-                   ,[Desinfectado_Por] = ?,[Fecha_Desinfectado] =?,[Equipo] = ?,[Modified] = getdate(),[ModifiedBy] = ? WHERE id =?';
-                $dt = str_replace('T', ' ', $fechaPrestado);    $dt2 = str_replace('T', ' ', $fecha_Entrega);
-                $dt3 = str_replace('T', ' ', $cpapFecha);       $dt4 = str_replace('T', ' ', $fRecibe);
-                $par = array(ucwords(strtolower($cpacpName)),$pTelefono,$dt,$dt2,ucwords(strtolower($tecEntrega)),$pago50,ucwords(strtolower($techRecibe)),$dt4,ucwords(strtolower($desinfecto)),$dt3,$ePrestado,$ur,$id);
+                $tsql ="UPDATE Sleep_CPAP_Prestados
+                SET [Num_Expediente] = ?,[Telefono] = ?,[Fecha_Prestado] = ".($fechaPrestado == '' ?  'NULL' : "'".str_replace('T', ' ', $fechaPrestado)."'").
+                    ",[Fecha_Entrega] = ".($fecha_Entrega == '' ?  'NULL' : "'".str_replace('T', ' ', $fecha_Entrega)."'").",[Tecnico_Entrega] = ?,[Pago] = ?,[Tecnico_Recibe] = ?,
+                    [Fecha_Recibo] = ".($cpapFecha == '' ?  'NULL' : "'".str_replace('T', ' ', $cpapFecha)."'")."
+                    ,[Desinfectado_Por] = ?,[Fecha_Desinfectado] =".($fRecibe == '' ?  'NULL' : "'".str_replace('T', ' ', $fRecibe)."'").",[Equipo] = ?,[Modified] = getdate(),[ModifiedBy] = ? WHERE id =?";
+                // $dt = str_replace('T', ' ', $fechaPrestado);    $dt2 = str_replace('T', ' ', $fecha_Entrega);
+                // $dt3 = str_replace('T', ' ', $cpapFecha);       $dt4 = str_replace('T', ' ', $fRecibe);
+                $par = array(FormatearNombre($cpacpName),$pTelefono,FormatearNombre($tecEntrega),$pago50,FormatearNombre($techRecibe),FormatearNombre($desinfecto),$ePrestado,$ur,$id);
             }else{
                 $tsql ="INSERT INTO Sleep_CPAP_Prestados
                 ([Num_Expediente],[Telefono],[Fecha_Prestado],[Fecha_Entrega],[Tecnico_Entrega],[Pago],[Tecnico_Recibe],[Fecha_Recibo]
                 ,[Desinfectado_Por],[Fecha_Desinfectado],[Equipo],[Created],[CreatedBy],[Modified],[ModifiedBy])
-                VALUES (?,?,?,?,?,?,?,?,?,?,?,getdate(),?,getdate(),?)";
-                $dt = str_replace('T', ' ', $fechaPrestado);    $dt2 = str_replace('T', ' ', $fecha_Entrega);
-                $dt3 = str_replace('T', ' ', $cpapFecha);       $dt4 = str_replace('T', ' ', $fRecibe);
-                $par = array(ucwords(strtolower($cpacpName)),$pTelefono,$dt,$dt2,ucwords(strtolower($tecEntrega)),$pago50,ucwords(strtolower($techRecibe)),$dt4,ucwords(strtolower($desinfecto)),$dt3,$ePrestado,$ur,$ur);
+                VALUES (?,?,".($fechaPrestado == '' ?  'NULL' : "'".str_replace('T', ' ', $fechaPrestado)."'").",".($fecha_Entrega == '' ?  'NULL' : "'".str_replace('T', ' ', $fecha_Entrega)."'").
+                ",?,".($fRecibe == '' ?  'NULL' : "'".str_replace('T', ' ', $fRecibe)."'").",?,".($cpapFecha == '' ?  'NULL' : "'".str_replace('T', ' ', $cpapFecha)."'").",?,?,?,getdate(),?,getdate(),?)";
+                // $dt = str_replace('T', ' ', $fechaPrestado);    $dt2 = str_replace('T', ' ', $fecha_Entrega);
+                // $dt3 = str_replace('T', ' ', $cpapFecha);       $dt4 = str_replace('T', ' ', $fRecibe);
+                $par = array(FormatearNombre($cpacpName),$pTelefono,FormatearNombre($tecEntrega),$pago50,FormatearNombre($techRecibe),FormatearNombre($desinfecto),$ePrestado,$ur,$ur);
             }
             $par= array_map('trim', $par);
             doSleepDB($tsql,$par,$tb);
         break;
         case 'Sleep_Comunicacion':
-            if($update){
-                $tsql = 'UPDATE Sleep_Comunicacion
-                SET [Tecnico] = ?,[Contacto] = ?,[Fecha_Entrega] = ?,[Situacion] = ?,[Modified] = getdate(),[Modifiedby] = ?
-                WHERE id =?';
-                $dt = str_replace('T', ' ', $comFecha); 
-                $par = array(ucwords(strtolower($tecComunicacion)),ucwords(strtolower($txtLlama)),$dt,$comSituacion,$ur,$id);                
+            if($update =='1'){
+                $tsql = "UPDATE Sleep_Comunicacion
+                SET [Tecnico] = ?,[Contacto] = ?,[Fecha_Entrega] = ".($comFecha == '' ?  'NULL' : "'".str_replace('T', ' ', $comFecha)."'").",[Situacion] = ?,[Modified] = getdate(),[Modifiedby] = ?
+                WHERE id =?";
+                // $dt = str_replace('T', ' ', $comFecha); 
+                $par = array(FormatearNombre($tecComunicacion),FormatearNombre($txtLlama),$comSituacion,$ur,$id);                
             }else{
                 $tsql ="INSERT INTO Sleep_Comunicacion
                     ([Tecnico],[Fecha_Entrega],[Contacto],[Situacion],[Created],[CreatedBy],[Modified],[Modifiedby])
-                VALUES (?,?,?,?,getdate(),?,getdate(),?)";
+                VALUES (?,".($comFecha == '' ?  'NULL' : "'".str_replace('T', ' ', $comFecha)."'").",?,?,getdate(),?,getdate(),?)";
                 $dt = str_replace('T', ' ', $comFecha); 
-                $par = array(ucwords(strtolower($tecComunicacion)),$dt,ucwords(strtolower($txtLlama)),$comSituacion,$ur,$ur);
+                $par = array(FormatearNombre($tecComunicacion),FormatearNombre($txtLlama),$comSituacion,$ur,$ur);
             }
             $par= array_map('trim', $par);
             doSleepDB($tsql,$par,$tb);
         break;
         case 'Sleep_Comunicacion_HSAT':
             if($update){
-                $tsql ='UPDATE Sleep_Comunicacion_HSAT
-                    SET [Fecha] = ?,[Nombre_Paciente] = ?,[Llama_al_centro] = ?,[Num_Identificacion] = ?,[Asunto] = ?,[Solucion] = ?
+                $tsql ="UPDATE Sleep_Comunicacion_HSAT
+                    SET [Fecha] = ".($chFecha == '' ?  'NULL' : "'".str_replace('T', ' ', $chFecha)."'").",[Nombre_Paciente] = ?,[Llama_al_centro] = ?,[Num_Identificacion] = ?,[Asunto] = ?,[Solucion] = ?
                         ,[Tecnico] = ?,[Modified] = getdate(),[ModifiedBy] = ?
-                    WHERE id=?';
-                $dt = str_replace('T', ' ', $chFecha); 
-                $par = array($dt,ucwords(strtolower($chName)),ucwords(strtolower($chCaller)),$chDispositivo,$chAsunto,$chSolucion,ucwords(strtolower($chTecnico)),$ur,$id);
+                    WHERE id=?";
+                // $dt = str_replace('T', ' ', $chFecha); 
+                $par = array(FormatearNombre($chName),FormatearNombre($chCaller),$chDispositivo,$chAsunto,$chSolucion,FormatearNombre($chTecnico),$ur,$id);
             }else{
                 $tsql ="INSERT INTO Sleep_Comunicacion_HSAT
                     ([Fecha],[Nombre_Paciente],[Llama_al_centro],[Num_Identificacion],[Asunto],[Solucion],[Tecnico],[Created],[CreatedBy],[Modified],[ModifiedBy])
-                VALUES (?,?,?,?,?,?,?,getdate(),?,getdate(),?)";
-                $dt = str_replace('T', ' ', $chFecha); 
-                $par = array($dt,ucwords(strtolower($chName)),ucwords(strtolower($chCaller)),$chDispositivo,$chAsunto,$chSolucion,ucwords(strtolower($chTecnico)),$ur,$ur);
+                VALUES (".($chFecha == '' ?  'NULL' : "'".str_replace('T', ' ', $chFecha)."'").",?,?,?,?,?,?,getdate(),?,getdate(),?)";
+                // $dt = str_replace('T', ' ', $chFecha); 
+                $par = array(FormatearNombre($chName),FormatearNombre($chCaller),$chDispositivo,$chAsunto,$chSolucion,FormatearNombre($chTecnico),$ur,$ur);
             }
             doSleepDB($tsql,$par,$tb);
         break;
         case 'Sleep_Registro_HSAT':
             if($update){
-                $tsql = 'UPDATE Sleep_Registro_HSAT
-                    SET [Visit_id]=?,[Fecha] =?,[Nombre_Paciente] = ?,[Equipo] =?,[Fecha_Devolucion] = ?,[Inspeccion] = ?,[Comentarios] = ?
-                    ,[Tecnico] = ?,[Modified] = getdate(),[ModifiedBy] = ?
-                WHERE id=?';
-                $dt = str_replace('T', ' ', $rhFecha); 
-                $dt2 = str_replace('T', ' ', $rhDevolucion); 
-                $par = array($vstId,$dt,ucwords(strtolower($rhName)),$rhEquipo,$dt2,$rhInspeccion,$rhComentarios,ucwords(strtolower($rhTecnico)),$ur,$id);
+                $tsql = "UPDATE Sleep_Registro_HSAT
+                    SET [Visit_id]=?,[Fecha] =".($rhFecha == '' ?  'NULL' : "'".str_replace('T', ' ', $rhFecha)."'").",[Nombre_Paciente] = ?,[Equipo] =?
+                        ,[Fecha_Devolucion] = ".($rhDevolucion == '' ?  'NULL' : "'".str_replace('T', ' ', $rhDevolucion)."'").",[Inspeccion] = ?,[Comentarios] = ?
+                        ,[Tecnico] = ?,[Modified] = getdate(),[ModifiedBy] = ?
+                WHERE id=?";
+                // $dt = str_replace('T', ' ', $rhFecha); 
+                // $dt2 = str_replace('T', ' ', $rhDevolucion); 
+                $par = array($vstId,FormatearNombre($rhName),$rhEquipo,$rhInspeccion,$rhComentarios,FormatearNombre($rhTecnico),$ur,$id);
             }else{
                 $tsql ="INSERT INTO Sleep_Registro_HSAT
                     ([Visit_id],[Fecha],[Nombre_Paciente],[Equipo],[Fecha_Devolucion],[Inspeccion],[Comentarios],[Tecnico],[Created],[CreatedBy],[Modified],[ModifiedBy])
-                VALUES (?,?,?,?,?,?,?,?,getdate(),?,getdate(),?)";
-                $dt = str_replace('T', ' ', $rhFecha); 
-                $dt2 = str_replace('T', ' ', $rhDevolucion); 
-                $par = array($vstId,$dt,ucwords(strtolower($rhName)),$rhEquipo,$dt2,$rhInspeccion,$rhComentarios,ucwords(strtolower($rhTecnico)),$ur,$ur);
+                VALUES (?,".($rhFecha == '' ?  'NULL' : "'".str_replace('T', ' ', $rhFecha)."'").",?,?,".($rhDevolucion == '' ?  'NULL' : "'".str_replace('T', ' ', $rhDevolucion)."'").",?,?,?,getdate(),?,getdate(),?)";
+                // $dt = str_replace('T', ' ', $rhFecha); 
+                // $dt2 = str_replace('T', ' ', $rhDevolucion); 
+                $par = array($vstId,FormatearNombre($rhName),$rhEquipo,$rhInspeccion,$rhComentarios,FormatearNombre($rhTecnico),$ur,$ur);
             }
             //ucwords(strtolower($tecComunicacion)),$dt,ucwords(strtolower($txtLlama)),$comSituacion,$ur,$ur);
             $par= array_map('trim', $par);
@@ -439,31 +448,34 @@ function SleepQrys($data){
         break;
         case 'Sleep_Rechazo':
             if($update){
-                $tsql ='UPDATE Sleep_Rechazo
-                    SET [Visit_ID] = ?,[Paciente]=?,[Fecha] = ?,[Razon] = ?,[Pasos_Adaptacion] = ?,[Firmado] = ?,[Tecnico] = ?,[Modified] = getdate(),[ModifiedBy] = ?
-                    WHERE id=?';
-                $par = array($visitRechazo,$paciente,$fechaRechazo,$razonRechazo,$radPasos,$radFirma,ucwords(strtolower($techRechazo)),$ur,$id);
+                $tsql ="UPDATE Sleep_Rechazo
+                    SET [Visit_ID] = ?,[Paciente]=?,[Fecha] = ".($fechaRechazo == '' ?  'NULL' : "'".str_replace('T', ' ', $fechaRechazo)."'").",[Razon] = ?,[Pasos_Adaptacion] = ?,[Firmado] = ?,[Tecnico] = ?,[Modified] = getdate(),[ModifiedBy] = ?
+                    WHERE id=?";
+                // echo $tsql ;
+                    $par = array($visitRechazo,FormatearNombre($paciente),$razonRechazo,$radPasos,$radFirma,FormatearNombre($techRechazo),$ur,$id);
             }else{
                 $tsql ="INSERT INTO Sleep_Rechazo ([Visit_ID],[Paciente],[Fecha],[Razon],[Pasos_Adaptacion],[Firmado],[Tecnico],[Created],[CreatedBy],[Modified],[ModifiedBy])
-                    VALUES (?,?,?,?,?,?,?,getdate(),?,getdate(),?)";
-                $par = array($visitRechazo,$paciente,$fechaRechazo,$razonRechazo,$radPasos,$radFirma,ucwords(strtolower($techRechazo)),$ur,$ur);
+                    VALUES (?,?,".($fechaRechazo == '' ?  'NULL' : "'".$fechaRechazo."'").",?,?,?,?,getdate(),?,getdate(),?)";
+                $par = array($visitRechazo,FormatearNombre($paciente),$razonRechazo,$radPasos,$radFirma,FormatearNombre($techRechazo),$ur,$ur);
             }
             $par= array_map('trim', $par);
             doSleepDB($tsql,$par,$tb);
         break;
         case 'Sleep_Endozime':
             if($update){
-                $tsql='UPDATE Sleep_Endozime
-                SET [Fecha_Preparacion] = ?,[Fecha_Expira] = ?,[Temperatura] = ?,[Tecnico] = ?,[Modified] = getdate(),[ModifiedBy] = ?
-                WHERE id=?';
-                $dt = str_replace('T', ' ', $fechaPreparacion);
-                $par = array($dt,$expiracionEndozime,$tempEndozime,ucwords(strtolower($etcoTecnico)),$ur,$id);    
+                $tsql="UPDATE Sleep_Endozime
+                SET [Fecha_Preparacion] = ".($fechaPreparacion == '' ?  'NULL' : "'".str_replace('T', ' ', $fechaPreparacion)."'").
+                    ",[Fecha_Expira] = ".($expiracionEndozime == '' ?  'NULL' : "'".$expiracionEndozime."'").",[Temperatura] = ?,[Tecnico] = ?,[Modified] = getdate(),[ModifiedBy] = ?
+                WHERE id=?";
+                //$dt = str_replace('T', ' ', $fechaPreparacion);
+                $par = array($tempEndozime,FormatearNombre($etcoTecnico),$ur,$id);    
             }else{
                 $tsql ="INSERT INTO Sleep_Endozime
                 ([Fecha_Preparacion],[Fecha_Expira],[Temperatura],[Tecnico],[Created],[CreatedBy],[Modified],[ModifiedBy])
-                    VALUES (?,?,?,?,getdate(),?,getdate(),?)";
-                $dt = str_replace('T', ' ', $fechaPreparacion);
-                $par = array($dt,$expiracionEndozime,$tempEndozime,ucwords(strtolower($etcoTecnico)),$ur,$ur);
+                    VALUES (".($fechaPreparacion == '' ?  'NULL' : "'".str_replace('T', ' ', $fechaPreparacion)."'").",".
+                              ($expiracionEndozime == '' ?  'NULL' : "'".$expiracionEndozime."'").",?,?,getdate(),?,getdate(),?)";
+                //$dt = str_replace('T', ' ', $fechaPreparacion);
+                $par = array($tempEndozime,FormatearNombre($etcoTecnico),$ur,$ur);
             }
             $par= array_map('trim', $par);
             doSleepDB($tsql,$par,$tb);
@@ -485,113 +497,167 @@ function SleepQrys($data){
             doSleepDB($tsql,$par,$tb);
         break;
         case 'Sleep_ETCO':
-            if($update){
+            if($update == '1'){
                 $tsql = 'UPDATE Sleep_ETCO
-                    SET [Fecha] = ?,[Tecnico] = ?,[Modelo] = ?,[Modified] = ?,[ModifiedBy] = ? WHERE id=?';
-                $par = array($etcoDesinfeccion,ucwords(strtolower($etcoTecnico)),$etcoModelo,$ur,$id);
+                    SET [Fecha] = '.($etcoDesinfeccion == '' ?  'NULL' : "'".$etcoDesinfeccion."'").',[Tecnico] = ?,[Modelo] = ?,[Modified] = GETDATE(),[ModifiedBy] = ? WHERE id=?';
+                $par = array(FormatearNombre($etcoTecnico),$etcoModelo,$ur,$id);
             }else {
                 $tsql ="INSERT INTO Sleep_ETCO
                 ([Fecha],[Tecnico],[Modelo],[Created],[CreatedBy],[Modified],[ModifiedBy])
-                    VALUES (?,?,?,getdate(),?,getdate(),?)";
-                $par = array($etcoDesinfeccion,ucwords(strtolower($etcoTecnico)),$etcoModelo,$ur,$ur);
+                    VALUES (".($etcoDesinfeccion == '' ?  'NULL' : "'".$etcoDesinfeccion."'").",?,?,getdate(),?,getdate(),?)";
+                $par = array(FormatearNombre($etcoTecnico),$etcoModelo,$ur,$ur);
             }
             $par= array_map('trim', $par);
             doSleepDB($tsql,$par,$tb);
         break;
         case 'Sleep_Desinfeccion_CPAP':
-            if($update){
-                $tsql = 'UPDATE Sleep_Desinfeccion_CPAP
-                    SET [Fecha] = ?,[Fecha_Filtro] = ?,[Fecha_Cambio] = ?,[Camas] = ?,[Tecnico] = ?,[Modified] = getdate(),[ModifiedBy] = ?
-                    WHERE id = ?';       
+            //si tiene menos de 5 caracteres se cambia a todas mayuscaulas entendiendo que son iniciales, de lo contrario solo la primera leta de cada palabra a mayuscula
+            if($update == "1"){
+                $tsql = "UPDATE Sleep_Desinfeccion_CPAP
+                    SET [Fecha] = ".($fechaDesinfeccion == '' ?  'NULL' : "'".$fechaDesinfeccion."'").
+                        ",[Fecha_Filtro] = ".($DesinfeccionFiltro == '' ?  'NULL' : "'".$DesinfeccionFiltro."'").
+                        ",[Fecha_Cambio] = ".($CambioFiltro == '' ?  'NULL' : "'".$CambioFiltro."'").",[Camas] = ?,[Tecnico] = ?,[Modified] = getdate(),[ModifiedBy] = ?
+                        WHERE id = ?";       
                 $camas = implode(',',$ckCamas);
-                $par = array($fechaDesinfeccion,$DesinfeccionFiltro,$CambioFiltro,$camas,ucwords(strtolower($txtTecnico)),$ur,$id);
+                $par = array($camas,FormatearNombre($txtTecnico),$ur,$id);
             }else {
                 $tsql ="INSERT INTO Sleep_Desinfeccion_CPAP
                     ([Fecha],[Fecha_Filtro],[Fecha_Cambio],[Camas],[Tecnico],[Created],[CreatedBy],[Modified],[ModifiedBy])
-                    VALUES (?,?,?,?,?,getdate(),?,getdate(),?)";
+                        VALUES (".($fechaDesinfeccion == '' ?  'NULL' : "'".$fechaDesinfeccion."'")."
+                                ,".($DesinfeccionFiltro == '' ?  'NULL' : "'".$DesinfeccionFiltro."'")."
+                                ,".($CambioFiltro == '' ?  'NULL' : "'".$CambioFiltro."'").",?,?, getdate(),?,getdate(),?)";
                 $camas = implode(',',$ckCamas);
-                $par = array($fechaDesinfeccion,$DesinfeccionFiltro,$CambioFiltro,$camas,ucwords(strtolower($txtTecnico)),$ur,$id);
-            }
+                $par = array($camas,FormatearNombre($txtTecnico),$ur,$ur);
+            } 
             $par= array_map('trim', $par);
             doSleepDB($tsql,$par,$tb);
         break;
         case 'Sleep_Frasco_Cidex':
-            if($update){
-                $tsql = 'UPDATE [dbo].[Sleep_Frasco_Cidex]
-                    SET [Fecha] = ?,[Temperatura] = ?,[Lote_Solucion] = ?,[Fecha_Abierto_Solucion] = ?,[Fecha_Expira_Solucion] = ?,[Lote_Tirillas] = ?,[Fecha_Abierto_Tirillas] = ?
-                    ,[Fecha_Expira_Tirillas] = ?,[Resultado_Puro1] = ?,[Resultado_Puro2] = ?,[Resultado_Puro3] = ?,[Resultado_Diluido1] = ?,[Resultado_Diluido2] = ?,[Resultado_Diluido3] = ?
-                    ,[Acciones] = ?,[Tecnico] = ?,[Fecha_Expira_Frasco_Sol] = ?,[Fecha_Expira_Frasco_Tir] =?,[Modified] = getdate(),[ModifiedBy] = ?
-                WHERE id = ?';
-                $par = array($fechaDePrueba,$txtTemperatura,$loteFrasco,$frascoAbierto,$expiraSolucion,$loteTirillas,$abiertoTirillas,
-                    $expiraTirilla,$ddResultadoTirilla1,$ddResultadoTirilla2,$ddResultadoTirilla3,$ddResultadoDiluido1,$ddResultadoDiluido2,
-                    $ddResultadoDiluido3,$txtAccionesCorrectivas,ucwords(strtolower($techTest)),$expiracionSolucion,$expiracionTirillas,$ur,$id);//20
+            if($update =='1'){
+                $tsql = "UPDATE [dbo].[Sleep_Frasco_Cidex]
+                    SET [Fecha] = ".($fechaDePrueba == '' ?  'NULL' : "'".$fechaDePrueba."'").",[Temperatura] = ?,[Lote_Solucion] = ?
+                    ,[Fecha_Abierto_Solucion] = ".($frascoAbierto == '' ?  'NULL' : "'".$frascoAbierto."'")."
+                    ,[Fecha_Expira_Solucion] = ".($expiraSolucion == '' ?  'NULL' : "'".$expiraSolucion."'")."
+                    ,[Lote_Tirillas] = ?
+                    ,[Fecha_Abierto_Tirillas] = ".($abiertoTirillas == '' ?  'NULL' : "'".$abiertoTirillas."'")."
+                    ,[Fecha_Expira_Tirillas]  = ".($expiraTirilla == '' ?  'NULL' : "'".$expiraTirilla."'")."
+                    ,[Resultado_Puro1] = ?,[Resultado_Puro2] = ?,[Resultado_Puro3] = ?,[Resultado_Diluido1] = ?,[Resultado_Diluido2] = ?,[Resultado_Diluido3] = ?
+                    ,[Acciones] = ?,[Tecnico] = ?
+                    ,[Fecha_Expira_Frasco_Sol] = ".($expiracionSolucion == '' ?  'NULL' : "'".$expiracionSolucion."'")."
+                    ,[Fecha_Expira_Frasco_Tir] = ".($expiracionTirillas == '' ?  'NULL' : "'".$expiracionTirillas."'")."
+                    ,[Modified] = getdate(),[ModifiedBy] = ?
+                WHERE id = ?";
+                $par = array($txtTemperatura,$loteFrasco,$loteTirillas,
+                    $ddResultadoTirilla1,$ddResultadoTirilla2,$ddResultadoTirilla3,$ddResultadoDiluido1,$ddResultadoDiluido2,
+                    $ddResultadoDiluido3,$txtAccionesCorrectivas,FormatearNombre($techTest),$ur,$id);//13
+            }else{
+                $tsql ="INSERT INTO Sleep_Frasco_Cidex
+                    ([Fecha],[Temperatura],[Lote_Solucion],[Fecha_Abierto_Solucion],[Fecha_Expira_Solucion],[Lote_Tirillas],[Fecha_Abierto_Tirillas]
+                    ,[Fecha_Expira_Tirillas],[Resultado_Puro1],[Resultado_Puro2],[Resultado_Puro3],[Resultado_Diluido1],[Resultado_Diluido2]
+                    ,[Resultado_Diluido3],[Acciones],[Tecnico],[Fecha_Expira_Frasco_Sol],[Fecha_Expira_Frasco_Tir],[Created],[CreatedBy],[Modified],[ModifiedBy])
+                VALUES (".($fechaDePrueba == '' ?  'NULL' : "'".$fechaDePrueba."'").",?,?
+                    ,".($frascoAbierto == '' ?  'NULL' : "'".$frascoAbierto."'")."
+                    ,".($expiraSolucion == '' ?  'NULL' : "'".$expiraSolucion."'")."
+                    ,?
+                    ,".($abiertoTirillas == '' ?  'NULL' : "'".$abiertoTirillas."'")."
+                    ,".($expiraTirilla == '' ?  'NULL' : "'".$expiraTirilla."'")."
+                    ,?,?,?,?,?,?,?,?,".($expiracionSolucion == '' ?  'NULL' : "'".$expiracionSolucion."'")."
+                    ,".($expiracionTirillas == '' ?  'NULL' : "'".$expiracionTirillas."'").",getdate(),?,getdate(),?)";//22
+                    $par = array($txtTemperatura,$loteFrasco,$loteTirillas,$ddResultadoTirilla1,$ddResultadoTirilla2,$ddResultadoTirilla3,
+                    $ddResultadoDiluido1,$ddResultadoDiluido2,$ddResultadoDiluido3,$txtAccionesCorrectivas,FormatearNombre($techTest),$ur,$ur);//13
+                    // $par = array($fechaDePrueba,$txtTemperatura,$loteFrasco,$frascoAbierto,$expiraSolucion,$loteTirillas,$abiertoTirillas,
+                    //     $expiraTirilla,$ddResultadoTirilla1,$ddResultadoTirilla2,$ddResultadoTirilla3,$ddResultadoDiluido1,$ddResultadoDiluido2,
+                    //     $ddResultadoDiluido3,$txtAccionesCorrectivas,FormatearNombre($techTest),$expiracionSolucion,$expiracionTirillas,$ur,$ur);//20
             }
-            $tsql ="INSERT INTO Sleep_Frasco_Cidex
-                ([Fecha],[Temperatura],[Lote_Solucion],[Fecha_Abierto_Solucion],[Fecha_Expira_Solucion],[Lote_Tirillas],[Fecha_Abierto_Tirillas]
-                ,[Fecha_Expira_Tirillas],[Resultado_Puro1],[Resultado_Puro2],[Resultado_Puro3],[Resultado_Diluido1],[Resultado_Diluido2]
-                ,[Resultado_Diluido3],[Acciones],[Tecnico],[Fecha_Expira_Frasco_Sol],[Fecha_Expira_Frasco_Tir],[Created],[CreatedBy],[Modified],[ModifiedBy])
-            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,getdate(),?,getdate(),?)";//22
-            $par = array($fechaDePrueba,$txtTemperatura,$loteFrasco,$frascoAbierto,$expiraSolucion,$loteTirillas,$abiertoTirillas,
-                $expiraTirilla,$ddResultadoTirilla1,$ddResultadoTirilla2,$ddResultadoTirilla3,$ddResultadoDiluido1,$ddResultadoDiluido2,
-                $ddResultadoDiluido3,$txtAccionesCorrectivas,ucwords(strtolower($techTest)),$expiracionSolucion,$expiracionTirillas,$ur,$ur);//20
             $par= array_map('trim', $par);
             doSleepDB($tsql,$par,$tb);
         break;
         case 'Sleep_Solucion_Cidex':
             if($update){
-                $tsql = 'UPDATE Sleep_Solucion_Cidex
-                    SET [Fecha] = ?,[Departamento] = ?,[Fecha_abierto] = ?,[No_usar_despues] = ?,[Lote_Tirillas] =?,[Resultado_Calidad] = ?,[Fecha_Prueba_Calidad] = ?,[Probada_por] = ?
-                    ,[Visit_ID] = ?,[Fecha_Comienzo] = ?,[Fecha_Expiracion] = ?,[Fecha_Prueba_Solucion] =?,[Resultado_Solucion] = ?,[Temperatura] = ?,[Ausencia_Turbidez] = ?,[Ausencia_Materia] = ?
-                    ,[Accion] = ?,[Equipo] = ?,[Fecha_Inmersion] = ?,[Tiempo_inmersion] = ?,[Liqueo] = ?,[Realizada_por] =?,[Hora_Inmersion] = ?,[Modified] = getdate(),[ModifiedBy] = ?
-                    WHERE id=?';
-                $dt = str_replace('T', ' ', $fechaFrasco); 
-                $dt2 = str_replace('T', ' ', $fechaInmersion); 
+                $tsql = "UPDATE Sleep_Solucion_Cidex
+                    SET [Fecha] = ".($fechaSolucion == '' ?  'NULL' : "'".$fechaSolucion."'").
+                        ",[Departamento] = ?
+                        ,[Fecha_abierto] = ".($fechaFrasco == '' ?  'NULL' : "'".str_replace('T', ' ', $fechaFrasco)."'")."
+                        ,[No_usar_despues] = ".($fechaExpiracion == '' ?  'NULL' : "'".$fechaExpiracion."'")."
+                        ,[Lote_Tirillas] =?
+                        ,[Resultado_Calidad] = ?
+                        ,[Fecha_Prueba_Calidad] = ".($fechaCalidad == '' ?  'NULL' : "'".$fechaCalidad."'")."
+                        ,[Probada_por] = ?
+                        ,[Visit_ID] = ?
+                        ,[Fecha_Comienzo] = ".($fechaComienzo == '' ?  'NULL' : "'".$fechaComienzo."'")."
+                        ,[Fecha_Expiracion] = ".($fechaExpiraSolucion == '' ?  'NULL' : "'".$fechaExpiraSolucion."'")."
+                        ,[Fecha_Prueba_Solucion] =".($fechaPrueba == '' ?  'NULL' : "'".str_replace('T', ' ', $fechaPrueba)."'")."
+                        ,[Resultado_Solucion] = ?
+                        ,[Temperatura] = ?
+                        ,[Ausencia_Turbidez] = ?
+                        ,[Ausencia_Materia] = ?
+                        ,[Accion] = ?
+                        ,[Equipo] = ?
+                        ,[Fecha_Inmersion] = ".($fechaInmersion == '' ?  'NULL' : "'".str_replace('T', ' ', $fechaInmersion)."'")."
+                        ,[Tiempo_inmersion] = ?,[Liqueo] = ?,[Realizada_por] =?
+                        ,[Hora_Inmersion] = ".($terminacion == '' ?  'NULL' : "'".$terminacion."'")."
+                        ,[Modified] = getdate(),[ModifiedBy] = ?
+                    WHERE id=?";
+                // $dt = str_replace('T', ' ', $fechaFrasco);
+                // $dt2 = str_replace('T', ' ', $fechaInmersion);
                 $equipo = implode(',',$ckEquipo);
-                $par = array($fechaSolucion,$txtDept,$fechaFrasco,$fechaExpiracion,$numeroLote,$ddPruebaRes,$fechaCalidad,ucwords(strtolower($txtProbada)),$visitIdSolucion,$fechaComienzo,
-                    $fechaExpiraSolucion,$dt,$cpapEquipo,$solTemp,$ddTurbidez,$ddMateria,$txtCorrectivas,$equipo,$dt2,
-                    $tiempoInmersion,$txtLiqueo,ucwords(strtolower($techPrueba)),$terminacion,$ur,$id);//
+                $par = array($txtDept,$numeroLote,$ddPruebaRes,FormatearNombre($txtProbada),$visitIdSolucion,$cpapEquipo,$solTemp,$ddTurbidez,$ddMateria,$txtCorrectivas,$equipo,
+                    $tiempoInmersion,$txtLiqueo,FormatearNombre($techPrueba),$ur,$id);//
             }else{
                 $tsql ="INSERT INTO Sleep_Solucion_Cidex
                     ([Fecha],[Departamento],[Fecha_abierto],[No_usar_despues],[Lote_Tirillas],[Resultado_Calidad],[Fecha_Prueba_Calidad],[Probada_por],[Visit_ID]
                     ,[Fecha_Comienzo],[Fecha_Expiracion],[Fecha_Prueba_Solucion],[Resultado_Solucion],[Temperatura],[Ausencia_Turbidez]
                     ,[Ausencia_Materia],[Accion],[Equipo],[Fecha_Inmersion],[Tiempo_inmersion],[Liqueo],[Realizada_por],[Hora_Inmersion],[Created],[CreatedBy],[Modified],[ModifiedBy])
-                VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,getdate(),?,getdate(),?)";//29
+                VALUES (".($fechaSolucion == '' ?  'NULL' : "'".$fechaSolucion."'").
+                        ",?
+                        ,".($fechaFrasco == '' ?  'NULL' : "'".str_replace('T', ' ', $fechaFrasco)."'")."
+                        ,".($fechaExpiracion == '' ?  'NULL' : "'".$fechaExpiracion."'")."
+                        ,?,?,".($fechaCalidad == '' ?  'NULL' : "'".$fechaCalidad."'")."
+                        ,?,?,".($fechaComienzo == '' ?  'NULL' : "'".$fechaComienzo."'")."
+                        ,".($fechaExpiraSolucion == '' ?  'NULL' : "'".$fechaExpiraSolucion."'")."
+                        ,".($fechaPrueba == '' ?  'NULL' : "'".str_replace('T', ' ', $fechaPrueba)."'")."
+                        ,?,?,?,?,?,?
+                        ,".($fechaInmersion == '' ?  'NULL' : "'".str_replace('T', ' ', $fechaInmersion)."'")."
+                        ,?,?,?
+                        ,".($terminacion == '' ?  'NULL' : "'".$terminacion."'").",getdate(),?,getdate(),?)";
                 $dt = str_replace('T', ' ', $fechaFrasco); 
                 $dt2 = str_replace('T', ' ', $fechaInmersion); 
                 $equipo = implode(',',$ckEquipo);
-                $par = array($fechaSolucion,$txtDept,$fechaFrasco,$fechaExpiracion,$numeroLote,$ddPruebaRes,$fechaCalidad,ucwords(strtolower($txtProbada)),$visitIdSolucion,$fechaComienzo,
-                    $fechaExpiraSolucion,$dt,$cpapEquipo,$solTemp,$ddTurbidez,$ddMateria,$txtCorrectivas,$equipo,$dt2,
-                    $tiempoInmersion,$txtLiqueo,ucwords(strtolower($techPrueba)),$terminacion,$ur,$ur);//
+                $par = array($txtDept,$numeroLote,$ddPruebaRes,FormatearNombre($txtProbada),$visitIdSolucion,$cpapEquipo,$solTemp,$ddTurbidez,$ddMateria,$txtCorrectivas,$equipo,
+                    $tiempoInmersion,$txtLiqueo,FormatearNombre($techPrueba),$ur,$ur);//
+                // $par = array($txtDept,$fechaFrasco,$fechaExpiracion,$numeroLote,$ddPruebaRes,$fechaCalidad,ucwords(strtolower($txtProbada)),$visitIdSolucion,$fechaComienzo,
+                //     $fechaExpiraSolucion,$dt,$cpapEquipo,$solTemp,$ddTurbidez,$ddMateria,$txtCorrectivas,$equipo,$dt2,
+                //     $tiempoInmersion,$txtLiqueo,ucwords(strtolower($techPrueba)),$terminacion,$ur,$ur);//
             }
             $par= array_map('trim', $par);
             doSleepDB($tsql,$par,$tb);
         break;
         case 'Sleep_HSAT':
             if($update){
-                $tsql = 'UPDATE Sleep_HSAT
-                SET [Fecha] = ?,[Modelo] = ?,[Tecnico] = ?,[Modified] = getdate(),[ModifiedBy] = ? WHERE id=?';
-                $par = array($hsatFecha,ucwords(strtolower($hsatTecnico)),$hsatModelo,$ur,$id);
+                $tsql = "UPDATE Sleep_HSAT
+                SET [Fecha] = ".($hsatFecha == '' ?  'NULL' : "'".$hsatFecha."'").",[Modelo] = ?,[Tecnico] = ?,[Modified] = GETDATE(),[ModifiedBy] = ? WHERE id=?";
+                $par = array($hsatModelo,FormatearNombre($hsatTecnico),$ur,$id);
             }else{
                 $tsql ="INSERT INTO Sleep_HSAT
                 ([Fecha],[Tecnico],[Modelo],[Created],[CreatedBy],[Modified],[ModifiedBy])
-                    VALUES (?,?,?,getdate(),?,getdate(),?)";
-                $par = array($hsatFecha,ucwords(strtolower($hsatTecnico)),$hsatModelo,$ur,$ur);
+                    VALUES (".($hsatFecha == '' ?  'NULL' : "'".$hsatFecha."'").",?,?,GETDATE(),?,GETDATE(),?)";
+                $par = array(FormatearNombre($hsatTecnico),$hsatModelo,$ur,$ur);
             }           
             $par= array_map('trim', $par);
             doSleepDB($tsql,$par,$tb);
         break;
         case 'Sleep_TCPCO':
-            echo $update;
-            if($update =='true'){
+            // echo $update;
+            if($update){
                 $tsql ="UPDATE Sleep_TCPCO
-                    SET [Fecha] = ?,[Modelo] = ?,[Tecnico] = ?,[Modified] = getdate(),[ModifiedBy] = ?
+                    SET [Fecha] = ".($tcpcFecha == '' ?  'NULL' : "'".$tcpcFecha."'").",[Modelo] = ?,[Tecnico] = ?,[Modified] = getdate(),[ModifiedBy] = ?
                     WHERE id=?";
-                $par = array($tcpcFecha,ucwords(strtolower($tcpcTecnico)),$tcpcModelo,$ur,$id);
+                $par = array($tcpcModelo,FormatearNombre($tcpcTecnico),$ur,$id);
             }else{
                 $tsql ="INSERT INTO Sleep_TCPCO
                 ([Fecha],[Tecnico],[Modelo],[Created],[CreatedBy],[Modified],[ModifiedBy])
-                    VALUES (?,?,?,getdate(),?,getdate(),?)";
-                $par = array($tcpcFecha,ucwords(strtolower($tcpcTecnico)),$tcpcModelo,$ur,$ur);
+                    VALUES (".($tcpcFecha == '' ?  'NULL' : "'".$tcpcFecha."'").",?,?,getdate(),?,getdate(),?)";
+                $par = array(ucwords(strtolower($tcpcTecnico)),$tcpcModelo,$ur,$ur);
             }
             $par= array_map('trim', $par);
             doSleepDB($tsql,$par,$tb);
@@ -791,8 +857,13 @@ function gSleepTable($data,$tabla,$tsql, $opt = "0" ){
                     $d = $row[$j]->format('m/d/Y H:i:s');
                     $d = str_replace("00:00:00","",$d);
                     echo "<td class='hd-table'>".$d.'<input type="hidden" name="'.$fld.'_'.$id.'" id="'.$fld.'_'.$id.'" value="'.$d.'"></td>';
+                // }elseif ($row[$j] instanceof Date) {
+                    
+                //     $d = $row[$j]->format('m/d/Y');
+                //     //$d = str_replace("00:00:00","",$d);
+                //     echo "<td class='hd-table'>".$d.'<input type="hidden" name="'.$fld.'_'.$id.'" id="'.$fld.'_'.$id.'" value="'.$d.'"></td>';
                 }else{
-                    $value = ($row[$j] == '' ? '0' : $row[$j]) ;
+                    $value = ($row[$j] == '' ? '-' : $row[$j]) ;
                     echo "<td class='hd-table'>".$value.'<input type="hidden" name="'.$fld.'_'.$id.'" id="'.$fld.'_'.$id.'" value="'.$value.'"></td>';
                 }
             }else{
@@ -825,4 +896,12 @@ function gRegistrosSEA($visit){
         $data[] = array($row['id'],$row['OptionName'],$row['Description']);                            
 
     return $data;
+}
+
+function FormatearNombre($string){
+    if(strlen($string) < 5){
+        return strtoupper($string);
+    }else{
+        return ucwords(strtolower($string));
+    }
 }

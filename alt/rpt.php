@@ -126,7 +126,7 @@ if($_POST){
     $tabla = @$_POST['tb'];
     extract($_POST);
     if($tb ==='s'){
-        echo 'zumba yandellll';
+        echo 'under construction';
     }else{
         SleepQrys($_POST);
         $tsql = "SELECT * FROM $tabla order by Modified desc" ;
