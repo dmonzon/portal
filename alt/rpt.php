@@ -135,6 +135,7 @@ if($_POST){
 ?>
     <div style="text-align:center;width=95%;">
         <img src="imgs/ham-logo.png"></br></br>
+        <!-- para el titulo se llama la funcion getRepTittle en cno.php -->
         <?php echo '<span style="color:red;font-style:oblique;font-size: 30px;font-stretch: expanded;font-weight: bold;">'.getRepTittle($tabla).'</span>';?></br></br>
         <!-- <button class="noprint" style="border:none;color:red;background:none;" alt="Back" onclick="javascript:history.back();"><i class="fa-solid fa-arrow-left-long fa-lg"></i></button> -->
         <button class="noprint" style="border:none;color:red;background:none;" alt="Back" onclick="window.location.href = 'sleeplogs.php';"><i class="fa-solid fa-house-crack fa-lg"></i></button>

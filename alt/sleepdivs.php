@@ -668,11 +668,11 @@ $divs =
                 <td style="text-align: left;border: none ;width:30%;"><input type="radio" id="rhEquipo" name="rhEquipo" value="HSAT-SN-BWM2022-7101" checked><label for="radio1">HSAT-SN-BWM2022-7101</label></br></td>
                 <td style="text-align: left;border: none ;width:40%;"></td>
             </tr>
-            <tr>
+            <!--<tr>
                 <td style="text-align: left;border: none ;width:20%;"><label for="rhDevolucion">Fecha y Hora de devolución del equipo:</label></td>
                 <td style="text-align: left;border: none ;width:30%;"><input type="datetime-local" id="rhDevolucion" name="rhDevolucion" required></br></td>
                 <td style="text-align: left;border: none ;width:40%;"></td>
-            </tr>
+            </tr>-->
             <tr>
                 <td style="text-align: left;border: none ;width:20%;"><label for="rhInspeccion">Inspeccion de rutina:</label></td>
                 <td style="text-align: left;border: none ;width:30%;">
@@ -686,10 +686,79 @@ $divs =
                 <td style="text-align: left;border: none ;width:40%;"></td>
             </tr>
             <tr>
-                <td style="text-align: left;border: none ;width:20%;"><label for="rhTecnico">Nombre del tecnico</label></td>
+                <td style="text-align: left;border: none ;width:20%;"><label for="rhTecnico">Nombre del tecnico que entrega</label></td>
                 <td style="text-align: left;border: none ;width:30%;"><input type="text" id="rhTecnico" name="rhTecnico" required></br></td>
                 <td style="text-align: left;border: none ;width:40%;"></td>
             </tr>
+            <!--<tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="reTecnico">Nombre del tecnico que recibe</label></td>
+                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="reTecnico" name="reTecnico" required></br></td>
+                <td style="text-align: left;border: none ;width:40%;"></td>
+            </tr>-->
+            <tr>
+                <td style="text-align: center;border:none;width:20%;" colspan="3">
+                    <input type="submit" id="btnSubmit31" value="Guardar">
+                    <input type="button" id="btnCancel31" value="Cancelar">
+                </td><td style="text-align: left;border:none;"></td>
+            </tr>
+        </table>
+    </form>
+    </div>
+</div>
+
+<div id="logDevolucionHSAT" class="noprint content">
+<div class="contentt">
+    <tr>Registro de Devolucion del HSAT - <a href="rpt.php?tb=Sleep_Devolucion_HSAT"><i class="fa-solid fa-file-lines fa-2x"></i></a></tr><hr></br>
+    <form id="frmlogComHSAT" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Devolucion_HSAT" name="tb"><input type="hidden" value="0" name="update">
+        <table>
+        </style>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="vstId">Visit ID</label></td>
+                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="vstId" name="vstId"></br></td>
+                <td style="text-align: left;border: none ;width:40%;" colspan="2">
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="rhFecha">Fecha y Hora de entrega:</label></td>
+                <td style="text-align: left;border: none ;width:30%;"><input type="datetime-local" id="rhFecha" name="rhFecha"></br></td>
+                <td style="text-align: left;border: none ;width:40%;" colspan="2">
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="rhName">Nombre del paciente</label></td>
+                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="rhName" name="rhName" required></br></td>
+                <td style="text-align: left;border: none ;width:40%;"></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="rhEquipo">Tipo de equipo prestado:</label></td>
+                <td style="text-align: left;border: none ;width:30%;"><input type="radio" id="rhEquipo" name="rhEquipo" value="HSAT-SN-BWM2022-7101" checked><label for="radio1">HSAT-SN-BWM2022-7101</label></br></td>
+                <td style="text-align: left;border: none ;width:40%;"></td>
+            </tr>
+            <!--<tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="rhDevolucion">Fecha y Hora de devolución del equipo:</label></td>
+                <td style="text-align: left;border: none ;width:30%;"><input type="datetime-local" id="rhDevolucion" name="rhDevolucion" required></br></td>
+                <td style="text-align: left;border: none ;width:40%;"></td>
+            </tr>-->
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="rhInspeccion">Inspeccion de rutina:</label></td>
+                <td style="text-align: left;border: none ;width:30%;">
+                    <input type="radio" id="chAsunto1" name="rhInspeccion" value="Funcional" checked><label for="radio1">Funcional</label></br>
+                    <input type="radio" id="chAsunto2" name="rhInspeccion" value="Defectuoso"><label for="radio2">Defectuoso</option>
+                <td style="text-align: left;border: none ;width:40%;"></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="rhComentarios">Comentarios:</label></td>
+                <td style="text-align: left;border: none ;width:30%;"><textarea id="rhComentarios" name="rhComentarios"></textarea></br></td>
+                <td style="text-align: left;border: none ;width:40%;"></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="rhTecnico">Nombre del tecnico que entrega</label></td>
+                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="rhTecnico" name="rhTecnico" required></br></td>
+                <td style="text-align: left;border: none ;width:40%;"></td>
+            </tr>
+            <!--<tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="reTecnico">Nombre del tecnico que recibe</label></td>
+                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="reTecnico" name="reTecnico" required></br></td>
+                <td style="text-align: left;border: none ;width:40%;"></td>
+            </tr>-->
             <tr>
                 <td style="text-align: center;border:none;width:20%;" colspan="3">
                     <input type="submit" id="btnSubmit31" value="Guardar">

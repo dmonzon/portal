@@ -6,8 +6,13 @@ class ServidorBD {
     }
 
     public function Conectar($s){
-        // $serverName = "VHAMSQL10SVR";
+        /////////////////////////////////////////////////////////////// PRODUCCION /////////////////////////////////////////////////////////////
+        // $serverName = "VHAMSQL10SVR"; 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
+        ////////////////////////////////////////////////////////////// DESARROLLO (LOCAL) //////////////////////////////////////////////////////
         $serverName = "DCDL78D9773";
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         switch ($s) {
             case 'i':
                 $db = "SSIS_DB";
@@ -356,13 +361,13 @@ function SleepQrys($data){
                         ,[Accion_MD] = ?,[Fecha_Reportado] = ".($valReportado == '' ?  'NULL' : "'".str_replace('T', ' ', $valReportado)."'").",[Modified] = getdate(),[ModifiedBy] = ?
                     where id =?";
                 // $dt = str_replace('T', ' ', $valFecha); $dt2 = str_replace('T', ' ', $valReportado);
-                $par = array(ucwords(strtolower($valExpediente)),$valPaciente,$valorCritico,ucwords(strtolower($repotadoa)),$valAccion,$mdAccion,$ur,$id);
+                $par = array(FormatearNombre($valExpediente),$valPaciente,$valorCritico,FormatearNombre($repotadoa),$valAccion,$mdAccion,$ur,$id);
             }else{
                 $tsql ="INSERT INTO Sleep_Valores_Criticos
                 ([Tecnico],[Fecha],[Num_Paciente],[Valor_Critico],[ReportadoA],[Accion],[Accion_MD],[Fecha_Reportado],[Created],[CreatedBy],[Modified],[ModifiedBy])
                 VALUES (?,".($valFecha == '' ?  'NULL' : "'".str_replace('T', ' ', $valFecha)."'").",?,?,?,?,?,".($valReportado == '' ?  'NULL' : "'".str_replace('T', ' ', $valReportado)."'").",getdate(),?,getdate(),?)";
                 $dt = str_replace('T', ' ', $valFecha); $dt2 = str_replace('T', ' ', $valReportado);
-                $par = array(ucwords(strtolower($valExpediente)),$valPaciente,$valorCritico,ucwords(strtolower($repotadoa)),$valAccion,$mdAccion,$ur,$ur);
+                $par = array(FormatearNombre($valExpediente),$valPaciente,$valorCritico,FormatearNombre($repotadoa),$valAccion,$mdAccion,$ur,$ur);
             }
             $par= array_map('trim', $par);
             doSleepDB($tsql,$par,$tb);
@@ -425,21 +430,35 @@ function SleepQrys($data){
             doSleepDB($tsql,$par,$tb);
         break;
         case 'Sleep_Registro_HSAT':
-            if($update){
+            if($update == '1'){
                 $tsql = "UPDATE Sleep_Registro_HSAT
                     SET [Visit_id]=?,[Fecha] =".($rhFecha == '' ?  'NULL' : "'".str_replace('T', ' ', $rhFecha)."'").",[Nombre_Paciente] = ?,[Equipo] =?
-                        ,[Fecha_Devolucion] = ".($rhDevolucion == '' ?  'NULL' : "'".str_replace('T', ' ', $rhDevolucion)."'").",[Inspeccion] = ?,[Comentarios] = ?
+                        ,[Inspeccion] = ?,[Comentarios] = ?
                         ,[Tecnico] = ?,[Modified] = getdate(),[ModifiedBy] = ?
                 WHERE id=?";
-                // $dt = str_replace('T', ' ', $rhFecha); 
-                // $dt2 = str_replace('T', ' ', $rhDevolucion); 
                 $par = array($vstId,FormatearNombre($rhName),$rhEquipo,$rhInspeccion,$rhComentarios,FormatearNombre($rhTecnico),$ur,$id);
             }else{
                 $tsql ="INSERT INTO Sleep_Registro_HSAT
-                    ([Visit_id],[Fecha],[Nombre_Paciente],[Equipo],[Fecha_Devolucion],[Inspeccion],[Comentarios],[Tecnico],[Created],[CreatedBy],[Modified],[ModifiedBy])
-                VALUES (?,".($rhFecha == '' ?  'NULL' : "'".str_replace('T', ' ', $rhFecha)."'").",?,?,".($rhDevolucion == '' ?  'NULL' : "'".str_replace('T', ' ', $rhDevolucion)."'").",?,?,?,getdate(),?,getdate(),?)";
-                // $dt = str_replace('T', ' ', $rhFecha); 
-                // $dt2 = str_replace('T', ' ', $rhDevolucion); 
+                    ([Visit_id],[Fecha],[Nombre_Paciente],[Equipo],[Inspeccion],[Comentarios],[Tecnico],[Created],[CreatedBy],[Modified],[ModifiedBy])
+                VALUES (?,".($rhFecha == '' ?  'NULL' : "'".str_replace('T', ' ', $rhFecha)."'").",?,?,?,?,?,getdate(),?,getdate(),?)";
+                $par = array($vstId,FormatearNombre($rhName),$rhEquipo,$rhInspeccion,$rhComentarios,FormatearNombre($rhTecnico),$ur,$ur);
+            }
+            //ucwords(strtolower($tecComunicacion)),$dt,ucwords(strtolower($txtLlama)),$comSituacion,$ur,$ur);
+            $par= array_map('trim', $par);
+            doSleepDB($tsql,$par,$tb);
+        break;
+        case 'Sleep_Devolucion_HSAT':
+            if($update == '1'){
+                $tsql = "UPDATE Sleep_Devolucion_HSAT
+                    SET [Visit_id]=?,[Fecha] =".($rhFecha == '' ?  'NULL' : "'".str_replace('T', ' ', $rhFecha)."'").",[Nombre_Paciente] = ?,[Equipo] =?
+                        ,[Inspeccion] = ?,[Comentarios] = ?
+                        ,[Tecnico] = ?,[Modified] = getdate(),[ModifiedBy] = ?
+                WHERE id=?";
+                $par = array($vstId,FormatearNombre($rhName),$rhEquipo,$rhInspeccion,$rhComentarios,FormatearNombre($rhTecnico),$ur,$id);
+            }else{
+                $tsql ="INSERT INTO Sleep_Devolucion_HSAT
+                    ([Visit_id],[Fecha],[Nombre_Paciente],[Equipo],[Inspeccion],[Comentarios],[Tecnico],[Created],[CreatedBy],[Modified],[ModifiedBy])
+                VALUES (?,".($rhFecha == '' ?  'NULL' : "'".str_replace('T', ' ', $rhFecha)."'").",?,?,?,?,?,getdate(),?,getdate(),?)";
                 $par = array($vstId,FormatearNombre($rhName),$rhEquipo,$rhInspeccion,$rhComentarios,FormatearNombre($rhTecnico),$ur,$ur);
             }
             //ucwords(strtolower($tecComunicacion)),$dt,ucwords(strtolower($txtLlama)),$comSituacion,$ur,$ur);
@@ -485,13 +504,13 @@ function SleepQrys($data){
                 $tsql='UPDATE [dbo].[Sleep_Ojos]
                 SET [Fecha] = ?,[Tecnico] = ?,[Modified] = getdate(),[ModifiedBy] = ? WHERE id=?';
                 //$dt = str_replace('T', ' ', $fechaDucha); 
-                $par = array($fechaDucha,ucwords(strtolower($tecDucha)),$ur,$id);
+                $par = array($fechaDucha,FormatearNombre($tecDucha),$ur,$id);
             }else{
                 $tsql ="INSERT INTO Sleep_Ojos
                 ([Fecha],[Tecnico],[Created],[CreatedBy],[Modified],[ModifiedBy])
                     VALUES (?,?,getdate(),?,getdate(),?)";
                 // $dt = str_replace('T', ' ', $fechaDucha); 
-                $par = array($fechaDucha,ucwords(strtolower($tecDucha)),$ur,$ur);
+                $par = array($fechaDucha,FormatearNombre($tecDucha),$ur,$ur);
             }
             $par= array_map('trim', $par);
             doSleepDB($tsql,$par,$tb);
@@ -657,7 +676,7 @@ function SleepQrys($data){
                 $tsql ="INSERT INTO Sleep_TCPCO
                 ([Fecha],[Tecnico],[Modelo],[Created],[CreatedBy],[Modified],[ModifiedBy])
                     VALUES (".($tcpcFecha == '' ?  'NULL' : "'".$tcpcFecha."'").",?,?,getdate(),?,getdate(),?)";
-                $par = array(ucwords(strtolower($tcpcTecnico)),$tcpcModelo,$ur,$ur);
+                $par = array(FormatearNombre($tcpcTecnico),$tcpcModelo,$ur,$ur);
             }
             $par= array_map('trim', $par);
             doSleepDB($tsql,$par,$tb);
@@ -701,12 +720,13 @@ function doSleepDB($tsql,$params,$tb){
 }
 
 function getRepTittle($tb){
+    //Titulos para el listados de datos en rpt.php
     switch ($tb) {
         case 'Sleep_Comunicacion_HSAT':
             return 'Log de Desinfección del HSAT';
         break;
-        case 'Sleep_Comunicacion_HSAT':
-            return 'Log de comunicación HSAT';
+        case 'Sleep_Devolucion_HSAT':
+            return 'Registro de Devolucion del HSAT';
         break;
         case 'Sleep_Registro_HSAT':
             return 'Log de Registro y Mantenimiento del HSAT';
@@ -774,6 +794,9 @@ function getEditLnk($tb){
         break;
         case 'Sleep_Registro_HSAT':
             return 'logResgistroHSAT';
+        break;
+        case 'Sleep_Devolucion_HSAT':
+            return 'logDevolucionHSAT';
         break;
         case 'Sleep_HSAT':
             return 'HSAT';

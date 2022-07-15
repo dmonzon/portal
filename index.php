@@ -38,7 +38,7 @@ if($_POST){
   require_once("alt/cno.php");
   $db = new ServidorBD();
   $conn = $db->Conectar('a');
-  $tsql = "SELECT [id],[GroupName],[GroupOU] FROM [dbo].[WebGroups]";  
+  $tsql = "SELECT [id],[GroupName],[GroupOU],Display FROM [dbo].[WebGroups]";  
   $getResults = sqlsrv_query($conn, $tsql);
   if( $getResults === false ) {
       die( print_r( sqlsrv_errors(), true));

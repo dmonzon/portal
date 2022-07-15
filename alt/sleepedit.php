@@ -161,6 +161,72 @@ if($_GET){
                 </div>
             </div>';
         break;
+        case 'Sleep_Devolucion_HSAT':
+            echo '<div id="logDevolucionHSAT" >
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">					
+                                Log de Registro de Devolucion del HSAT
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            </div>
+                        <div class="modal-body">
+                        <form id="frmlogComHSAT" action="rpt.php" target="_self" method="post"><input type="hidden" value="Sleep_Devolucion_HSAT" name="tb"><input type="hidden" value="1" name="update">
+                        <table>
+                            <tr>
+                                <td style="text-align: left;border: none ;width:20%;"><label for="vstId">Visit ID</label></td>
+                                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="vstId" name="vstId" value="'.$row[1].'"></br></td>
+                                <td style="text-align: left;border: none ;width:40%;" colspan="2">
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;border: none ;width:20%;"><label for="rhFecha">Fecha y Hora de devolucion:</label></td>
+                                <td style="text-align: left;border: none ;width:30%;"><input type="datetime-local" id="rhFecha" name="rhFecha" value="'.(!$row[2] == '' ? $row[2]->format('Y-m-d\TH:i'):'').'"></br></td>
+                                <td style="text-align: left;border: none ;width:40%;" colspan="2">
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;border: none ;width:20%;"><label for="rhName">Nombre del paciente</label></td>
+                                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="rhName" name="rhName" value="'.$row[3].'"  required></br></td>
+                                <td style="text-align: left;border: none ;width:40%;"></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;border: none ;width:20%;"><label for="rhEquipo">Tipo de equipo prestado:</label></td>
+                                <td style="text-align: left;border: none ;width:30%;">
+                                <input type="radio" id="rhEquipo" name="rhEquipo" value="HSAT-SN-BWM2022-7101" checked><label for="radio1">HSAT-SN-BWM2022-7101</label></br></td>
+                                <td style="text-align: left;border: none ;width:40%;"></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;border: none ;width:20%;"><label for="rhInspeccion">Inspeccion de rutina:</label></td>
+                                <td style="text-align: left;border: none ;width:30%;">
+                                    <input type="radio" id="chAsunto1" name="rhInspeccion" value="Funcional" '.(trim($row[5]) =='Funcional' ? 'checked' : '').'><label for="radio1">Funcional</label></br>
+                                    <input type="radio" id="chAsunto2" name="rhInspeccion" value="Defectuoso"'.(trim($row[5]) =='Defectuoso' ? 'checked' : '').'><label for="radio2">Defectuoso</option>
+                                <td style="text-align: left;border: none ;width:40%;"></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;border: none ;width:20%;"><label for="rhComentarios">Comentarios:</label></td>
+                                <td style="text-align: left;border: none ;width:30%;"><textarea id="rhComentarios" name="rhComentarios">'.$row[6].'</textarea></br></td>
+                                <td style="text-align: left;border: none ;width:40%;"></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;border: none ;width:20%;"><label for="rhTecnico">Nombre del tecnico</label></td>
+                                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="rhTecnico" name="rhTecnico" value="'.$row[7].'" required></br></td>
+                                <td style="text-align: left;border: none ;width:40%;"></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;border:none;width:20%;" colspan="5">
+                                    <input type="hidden" name="id" value="'.$row[0].'">
+                                    <input type="submit" id="btnSubmit31" value="Guardar">
+                                    <input type="button" id="btnCancel31" value="Cancelar">
+                                </td>
+                            </tr>
+                            </table>
+                            </form>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Done">
+                    </div>
+                </div>
+                </div>
+            </div>';
+        break;
         case 'Sleep_Registro_HSAT':
             echo '<div id="logResgistroHSAT" >
                     <div class="modal-dialog">
@@ -194,25 +260,20 @@ if($_GET){
                                 <td style="text-align: left;border: none ;width:40%;"></td>
                             </tr>
                             <tr>
-                                <td style="text-align: left;border: none ;width:20%;"><label for="rhDevolucion">Fecha y Hora de devolución del equipo:</label></td>
-                                <td style="text-align: left;border: none ;width:30%;"><input type="datetime-local" id="rhDevolucion" name="rhDevolucion" value="'.(!$row[5] == '' ? $row[5]->format('Y-m-d\TH:i'):'').'" required></br></td>
-                                <td style="text-align: left;border: none ;width:40%;"></td>
-                            </tr>
-                            <tr>
                                 <td style="text-align: left;border: none ;width:20%;"><label for="rhInspeccion">Inspeccion de rutina:</label></td>
                                 <td style="text-align: left;border: none ;width:30%;">
-                                    <input type="radio" id="chAsunto1" name="rhInspeccion" value="Funcional" '.(trim($row[6]) =='Funcional' ? 'checked' : '').'><label for="radio1">Funcional</label></br>
-                                    <input type="radio" id="chAsunto2" name="rhInspeccion" value="Defectuoso"'.(trim($row[6]) =='Defectuoso' ? 'checked' : '').'><label for="radio2">Defectuoso</option>
+                                    <input type="radio" id="chAsunto1" name="rhInspeccion" value="Funcional" '.(trim($row[5]) =='Funcional' ? 'checked' : '').'><label for="radio1">Funcional</label></br>
+                                    <input type="radio" id="chAsunto2" name="rhInspeccion" value="Defectuoso"'.(trim($row[5]) =='Defectuoso' ? 'checked' : '').'><label for="radio2">Defectuoso</option>
                                 <td style="text-align: left;border: none ;width:40%;"></td>
                             </tr>
                             <tr>
                                 <td style="text-align: left;border: none ;width:20%;"><label for="rhComentarios">Comentarios:</label></td>
-                                <td style="text-align: left;border: none ;width:30%;"><textarea id="rhComentarios" name="rhComentarios">'.$row[7].'</textarea></br></td>
+                                <td style="text-align: left;border: none ;width:30%;"><textarea id="rhComentarios" name="rhComentarios">'.$row[6].'</textarea></br></td>
                                 <td style="text-align: left;border: none ;width:40%;"></td>
                             </tr>
                             <tr>
                                 <td style="text-align: left;border: none ;width:20%;"><label for="rhTecnico">Nombre del tecnico</label></td>
-                                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="rhTecnico" name="rhTecnico" value="'.$row[8].'" required></br></td>
+                                <td style="text-align: left;border: none ;width:30%;"><input type="text" id="rhTecnico" name="rhTecnico" value="'.$row[7].'" required></br></td>
                                 <td style="text-align: left;border: none ;width:40%;"></td>
                             </tr>
                             <tr>
@@ -387,8 +448,6 @@ if($_GET){
                 </div>
                 </div>';
         break;
-
-
         case 'Sleep_Inspeccion_Rutina':
             echo '<div id="InspeccionVisual" class="noprint content">
             <div class="modal-dialog">

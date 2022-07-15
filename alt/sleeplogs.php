@@ -251,7 +251,9 @@ if (!isset($_SESSION['username'])) {
         <li><a href="rpt.php?tb=Sleep_Comunicacion_HSAT"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="logComunicacionHSAT">Comunicación HSAT</a></li></br>
         <li><a href="rpt.php?tb=Sleep_Rechazo"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="logRechazo">Rechazo de Tratamiento</a></li></br>
         <li><a href="rpt.php?tb=Sleep_Registro_HSAT"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="logResgistroHSAT">Registro y Mantenimiento del HSAT</a></li></br>
-        <hr><h3><span style="color:red;">Logs de Desinfección</span></h3><hr>
+        <li><a href="rpt.php?tb=Sleep_Registro_HSAT"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="logDevolucionHSAT">Registro de Devolucion del HSAT</a></li></br>
+        <hr><h3><span sty
+        000le="color:red;">Logs de Desinfección</span></h3><hr>
         <li><a href="rpt.php?tb=Sleep_Desinfeccion_CPAP"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="CPAP">Desinfección CPAP</a></li></br>
         <li><a href="rpt.php?tb=Sleep_TCPCO"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="tcPCO2">Desinfección de tcPCO2</a></li></br>
         <li><a href="rpt.php?tb=Sleep_HSAT"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="HSAT">Desinfección del HSAT</a></li></br>
