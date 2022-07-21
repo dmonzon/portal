@@ -681,21 +681,85 @@ function SleepQrys($data){
             $par= array_map('trim', $par);
             doSleepDB($tsql,$par,$tb);
         break;
-        // case 'Sleep_ETCO':
-        //     if($update) {
-        //         $tsql ="UPDATE Sleep_ETCO
-        //             SET [Fecha] = ?,[Tecnico] = ?,[Modelo] = ?,[Modified] = getdate(),[ModifiedBy] = ? WHERE id=?";
-        //         $par = array($etcoDesinfeccion,ucwords(strtolower($etcoTecnico)),$etcoModelo,$ur,$id);
+        case 'Sleep_Mant_Cap':
+            if($update == '1') {
+                $tsql ="UPDATE Sleep_Mant_Cap
+                    SET [Fecha] = ".($fechaMant == '' ?  'NULL' : "'".str_replace('T', ' ', $fechaMant)."'").",[Equipo] = ?,[Notas] = ?,[Tecnico] = ?,[Modified] = getdate(),[ModifiedBy] = ? WHERE id=?";
+                $par = array($equipo,$notas,FormatearNombre($tecnico),$ur,$id);
 
-        //     } else {
-        //         $tsql ="INSERT INTO Sleep_ETCO
-        //         ([Fecha],[Tecnico],[Modelo],[Created],[CreatedBy],[Modified],[ModifiedBy])
-        //             VALUES (?,?,?,getdate(),?,getdate(),?)";
-        //         $par = array($etcoDesinfeccion,ucwords(strtolower($etcoTecnico)),$etcoModelo,$ur,$ur);
-        //     }
-        //     $par= array_map('trim', $par);
-        //     doSleepDB($tsql,$par,$tb);
-        // break;
+            } else {
+                $tsql ="INSERT INTO Sleep_Mant_Cap
+                    ([Fecha],[Equipo],[Notas],[Tecnico],[Created],[CreatedBy],[Modified],[ModifiedBy])
+                    VALUES (".($fechaMant == '' ?  'NULL' : "'".str_replace('T', ' ', $fechaMant)."'").",?,?,?,getdate(),?,getdate(),?)";
+                $par = array($equipo,$notas,FormatearNombre($tecnico),$ur,$ur);
+            }
+            $par= array_map('trim', $par);
+            doSleepDB($tsql,$par,$tb);
+        break;
+        case 'Sleep_Mant_PAP':
+            if($update == '1') {
+                $tsql ="UPDATE Sleep_Mant_PAP
+                    SET [Fecha] = ".($fechaMant == '' ?  'NULL' : "'".str_replace('T', ' ', $fechaMant)."'").",[Equipo] = ?,[Cama] = ?,
+                        [Notas] = ?,[Tecnico] = ?,[Modified] = getdate(),[Modifiedby] = ? WHERE id=?";
+                $par = array($equipo,$cama,$notas1,FormatearNombre($txtTecnico),$ur,$id);
+            } else {
+                $tsql ="INSERT INTO Sleep_Mant_PAP
+                        ([Fecha],[Equipo],[Cama],[Notas],[Tecnico],[Created],[Createdby],[Modified],[Modifiedby])
+                    VALUES (".($fechaMant == '' ?  'NULL' : "'".str_replace('T', ' ', $fechaMant)."'").",?,?,?,?,getdate(),?,getdate(),?)";
+                $par = array($equipo,$cama,$notas1,FormatearNombre($txtTecnico),$ur,$ur);
+            }
+            $par= array_map('trim', $par);
+            doSleepDB($tsql,$par,$tb);
+        break;
+        case 'Sleep_Mant_HA':
+            if($update == '1') {
+                $tsql ="UPDATE Sleep_Mant_HA
+                    SET [Fecha] = ".($fechaMant == '' ?  'NULL' : "'".str_replace('T', ' ', $fechaMant)."'")." ,[Headbox] = ?,[Cama1] = ?,[Amplificadores] = ?
+                        ,[Cama2] = ?,[Notas] = ?,[Tecnico] = ?,[Modified] = getdate(),[Modifiedby] = ? WHERE id=?";
+                $par = array($Headbox,$cama1,$amplificadores,$cama2,$notas1,FormatearNombre($txtTecnico),$ur,$id);
+
+            } else {
+                $tsql ="INSERT INTO Sleep_Mant_HA
+                        ([Fecha],[Headbox],[Cama1],[Amplificadores],[Cama2],[Notas],[Tecnico],[Created],[Createdby],[Modified],[Modifiedby])
+                    VALUES (".($fechaMant == '' ?  'NULL' : "'".str_replace('T', ' ', $fechaMant)."'").",?,?,?,?,?,?,getdate(),?,getdate(),?)";
+                $par = array($Headbox,$cama1,$amplificadores,$cama2,$notas1,FormatearNombre($txtTecnico),$ur,$ur);
+            }
+            $par= array_map('trim', $par);
+            doSleepDB($tsql,$par,$tb);
+        break;
+        case 'Sleep_Mant_Equipos':
+            $equipos = implode(',',$ckEquipo);
+            if($update == '1') {
+                $tsql ="UPDATE Sleep_Mant_Equipos
+                    SET [Fecha] = ".($fechaMant == '' ?  'NULL' : "'".str_replace('T', ' ', $fechaMant)."'").",[Equipos] = ?,
+                        [Notas] = ?,[Tecnico] = ?,[Modified] = getdate(),[Modifiedby] = ? WHERE id=?";
+                    $par = array($equipos,$notas1,FormatearNombre($txtTecnico),$ur,$id);
+                    } else {
+                $tsql ="INSERT INTO Sleep_Mant_Equipos
+                        ([Fecha],[Equipos],[Notas],[Tecnico],[Created],[Createdby],[Modified],[Modifiedby])
+                    VALUES (".($fechaMant == '' ?  'NULL' : "'".str_replace('T', ' ', $fechaMant)."'").",?,?,?,getdate(),?,getdate(),?)";
+                $par = array($equipos,$notas1,FormatearNombre($txtTecnico),$ur,$ur);
+            }
+            $par= array_map('trim', $par);
+            doSleepDB($tsql,$par,$tb);
+        break;
+        case 'Sleep_Biomedica_Equipos':
+            if($update == '1') {
+                $tsql ="UPDATE Sleep_Biomedica_Equipos
+                    SET [Equipo] = ?,[Problema] = ?,[Reportado] = ".($reportado == '' ?  'NULL' : "'".str_replace('T', ' ', $reportado)."'").",[Reporto] =?,
+                        [Envio] = ".($fechaEnvio == '' ?  'NULL' : "'".str_replace('T', ' ', $fechaEnvio)."'").",[Tracking] = ?,
+                        [Recibido] = ".($recibido == '' ?  'NULL' : "'".str_replace('T', ' ', $recibido)."'").",[Notas] = ?,[Tecnico] = ?,[Modified] = getdate(),[Modifiedby] = ? WHERE id=?";
+                $par = array($equipo,$problema,$reporto,$tracking,$notas1,FormatearNombre($biomedico),$ur,$id);
+            } else {
+                $tsql ="INSERT INTO Sleep_Biomedica_Equipos
+                        ([Equipo],[Problema],[Reportado],[Reporto],[Envio],[Tracking],[Recibido],[Notas],[Tecnico],[Created],[Createdby],[Modified],[Modifiedby])
+                    VALUES (?,?,".($reportado == '' ?  'NULL' : "'".str_replace('T', ' ', $reportado)."'").",?,".($fechaEnvio == '' ?  'NULL' : "'".str_replace('T', ' ', $fechaEnvio)."'").",
+                        ?,".($recibido == '' ?  'NULL' : "'".str_replace('T', ' ', $recibido)."'").",?,?,getdate(),?,getdate(),?)";
+                $par = array($equipo,$problema,$reporto,$tracking,$notas1,FormatearNombre($biomedico),$ur,$ur);
+            }
+            $par= array_map('trim', $par);
+            doSleepDB($tsql,$par,$tb);
+        break;
         default:
         break;
     }
@@ -782,6 +846,21 @@ function getRepTittle($tb){
         case 'Sleep_Solucion_Cidex':
             return 'Registro de la Verificación de la Solución Cidex OPA e Inmersión del Equipo Durante el Proceso de Desinfección de Alto Nivel';
         break;
+        case 'Sleep_Biomedica_Equipos':
+            return 'Equipos enviados para reparación';
+        break;
+        case 'Sleep_Mant_Equipos':
+            return 'Mantenimiento Equipos';
+        break;
+        case 'Sleep_Mant_HA':
+            return 'Mantenimiento Preventivo Headbox y Amplificadores';
+        break;
+        case 'Sleep_Mant_PAP':
+            return 'Mantenimiento Preventivo PAP';
+        break;
+        case 'Sleep_Mant_Cap':
+            return 'Mantenimiento Preventivo Capnografo';
+        break;
         default:
         break;
     }   
@@ -848,6 +927,21 @@ function getEditLnk($tb){
         break;
         case 'Sleep_Solucion_Cidex':
             return 'solucionCidex';
+        break;
+        case 'Sleep_Mant_Cap':
+            return 'MantCAP';
+        break;
+        case 'Sleep_Mant_PAP':
+            return 'MantPAP';
+        break;
+        case 'Sleep_Mant_HA':
+            return 'MantHA';
+        break;
+        case 'Sleep_Mant_Equipos':
+            return 'MantEq';
+        break;
+        case 'Sleep_Biomedica_Equipos':
+            return 'BioEq';
         break;
         default:
         break;

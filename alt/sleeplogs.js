@@ -241,28 +241,28 @@ $(document).on('change','#tb',function(){
         break;        
         case 'Sleep_Solucion_Cidex':
             $('.selField').append('<option value="Fecha">Fecha</option>');//1
-            $('.selField').append('<option value="Tecnico">Tecnico</option>');//2
-            $('.selField').append('<option value="Fecha_abierto">Fecha_abierto</option>');//3
-            $('.selField').append('<option value="Lote_Tirillas">Lote_Tirillas</option>');//4
-            $('.selField').append('<option value="Fecha_Expira_Solucion">Fecha_Expira_Solucion</option>');//5
-            $('.selField').append('<option value="Lote_Tirillas">Lote_Tirillas</option>');//6
-            $('.selField').append('<option value="Resultado_Calidad">Resultado_Calidad</option>');//7
-            $('.selField').append('<option value="Fecha_Prueba_Calidad">Fecha_Prueba_Calidad</option>');//8
-            $('.selField').append('<option value="Probada_por">Probada_por</option>');//9
-            $('.selField').append('<option value="Visit_ID">Visit_ID</option>');//10
-            $('.selField').append('<option value="Fecha_Comienzo">Fecha_Comienzo</option>');//12
-            $('.selField').append('<option value="Fecha_Expiracion">Fecha_Expiracion</option>');
-            $('.selField').append('<option value="Fecha_Prueba_Solucion">Fecha_Prueba_Solucion</option>');//14
-            $('.selField').append('<option value="Resultado_Solucion">Resultado_Solucion</option>');//15
+            $('.selField').append('<option value="Departamento">Departamento</option>');//2
+            $('.selField').append('<option value="Fecha_abierto">Fecha abierto</option>');//3
+            $('.selField').append('<option value="No_usar_despues">Fecha de no usar despues de...</option>');//4
+            $('.selField').append('<option value="Lote_Tirillas">Lote de Tirillas</option>');//6
+            $('.selField').append('<option value="Resultado_Calidad">Resultado de Calidad</option>');//7
+            $('.selField').append('<option value="Fecha_Prueba_Calidad">Fecha de Prueba de Calidad</option>');//8
+            $('.selField').append('<option value="Probada_por">Probada por</option>');//9
+            $('.selField').append('<option value="Visit_ID">Visit ID</option>');//10
+            $('.selField').append('<option value="Fecha_Comienzo">Fecha de Comienzo</option>');//12
+            $('.selField').append('<option value="Fecha_Expiracion">Fecha de Expiracion</option>');
+            $('.selField').append('<option value="Fecha_Prueba_Solucion">Fecha de la prueba de la solucion</option>');//14
+            $('.selField').append('<option value="Resultado_Solucion">Resultado Solucion</option>');//15
             $('.selField').append('<option value="Temperatura">Temperatura</option>');
-            $('.selField').append('<option value="Ausencia_Turbidez">Ausencia_Turbidez</option>');//17
-            $('.selField').append('<option value="Ausencia_Materia">Ausencia_Materia</option>');
+            $('.selField').append('<option value="Ausencia_Turbidez">Ausencia Turbidez</option>');//17
+            $('.selField').append('<option value="Ausencia_Materia">Ausencia Materia</option>');
             $('.selField').append('<option value="Accion">Accion</option>');//19
-            $('.selField').append('<option value="Equipo"Equipo</option>');
+            $('.selField').append('<option value="Equipo">Equipo</option>');
+            $('.selField').append('<option value="Fecha_Inmersion">Fecha de Inmersion</option>');//21
             $('.selField').append('<option value="Tiempo_inmersion">Tiempo_inmersion</option>');//21
             $('.selField').append('<option value="Liqueo">Liqueo</option>');
-            $('.selField').append('<option value="Realizada_por">Realizada_por</option>');//23
-            $('.selField').append('<option value="Hora_Inmersion">Hora_Inmersion</option>');//24
+            $('.selField').append('<option value="Realizada_por">Realizada por</option>');//23
+            $('.selField').append('<option value="Hora_Inmersion">Hora de Inmersion</option>');//24
             $('.selField').append('<option value="Created">Creado en</option>');
             $('.selField').append('<option value="CreatedBy">Creado por</option>');//26
             $('.selField').append('<option value="Modified">Modificado en</option>');
@@ -272,7 +272,7 @@ $(document).on('change','#tb',function(){
             $('.selField').append('<option value="Fecha">Fecha y Hora de llamada</option>');
             $('.selField').append('<option value="Nombre_Paciente">Nombre del Paciente</option>');
             $('.selField').append('<option value="Llama_al_centro">Persona que llama al centro</option>');
-            $('.selField').append('<option value="Numero de identificación del dispositivo">Numero de identificación del dispositivo</option>');
+            $('.selField').append('<option value="Num_Identificacion">Numero de identificación del dispositivo</option>');
             $('.selField').append('<option value="Asunto">Asunto identificado o problema con el equipo</option>');
             $('.selField').append('<option value="Solucion">Recomendación brindada al paciente</option>');
             $('.selField').append('<option value="Tecnico">Tecnico</option>');
@@ -303,7 +303,67 @@ $(document).on('change','#tb',function(){
             $('.selField').append('<option value="CreatedBy">Creado por</option>');
             $('.selField').append('<option value="Modified">Modificado en</option>');
             $('.selField').append('<option value="ModifiedBy">Modificado por</option>');
-        break;  
+        break;
+        case 'Sleep_Biomedica_Equipos':
+            $('.selField').append('<option value="Equipo">Equipo</option>');
+            $('.selField').append('<option value="Problema">Problema</option>');
+            $('.selField').append('<option value="Reportado">Fecha reportado</option>');
+            $('.selField').append('<option value="Reporto">Quién reportó</option>');
+            $('.selField').append('<option value="Envio">Fecha del envío</option>');
+            $('.selField').append('<option value="Tracking">Número de rastreo</option>');
+            $('.selField').append('<option value="Recibido">Quién recibie el equipo</option>');
+            $('.selField').append('<option value="Notas">Notas</option>');
+            $('.selField').append('<option value="Tecnico">Nombre del biomédico</option>');
+            $('.selField').append('<option value="Created">Creado en</option>');
+            $('.selField').append('<option value="CreatedBy">Creado por</option>');
+            $('.selField').append('<option value="Modified">Modificado en</option>');
+            $('.selField').append('<option value="ModifiedBy">Modificado por</option>');
+        break; 
+        case 'Sleep_Mant_Cap':
+            $('.selField').append('<option value="Fecha">Fecha del mantenimiento</option>');
+            $('.selField').append('<option value="Equipo">Equipo</option>');
+            $('.selField').append('<option value="Notas">Notas</option>');
+            $('.selField').append('<option value="Tecnico">Nombre del tecnico</option>');
+            $('.selField').append('<option value="Created">Creado en</option>');
+            $('.selField').append('<option value="CreatedBy">Creado por</option>');
+            $('.selField').append('<option value="Modified">Modificado en</option>');
+            $('.selField').append('<option value="ModifiedBy">Modificado por</option>');
+        break; 
+        case 'Sleep_Mant_Equipos':
+            $('.selField').append('<option value="Fecha">Fecha del mantenimiento</option>');
+            $('.selField').append('<option value="Equipos">Equipo</option>');
+            $('.selField').append('<option value="Notas">Notas</option>');
+            $('.selField').append('<option value="Tecnico">Nombre del tecnico</option>');
+            $('.selField').append('<option value="Created">Creado en</option>');
+            $('.selField').append('<option value="CreatedBy">Creado por</option>');
+            $('.selField').append('<option value="Modified">Modificado en</option>');
+            $('.selField').append('<option value="ModifiedBy">Modificado por</option>');
+        break; 
+        case 'Sleep_Mant_HA':
+            $('.selField').append('<option value="Fecha">Fecha del mantenimiento</option>');
+            $('.selField').append('<option value="Headbox">Headbox</option>');
+            $('.selField').append('<option value="Cama1">Cama</option>');
+            $('.selField').append('<option value="Amplificadores">Amplificadores</option>');
+            $('.selField').append('<option value="Cama2">Cama</option>');
+            $('.selField').append('<option value="Notas">Notas</option>');
+            $('.selField').append('<option value="Tecnico">Nombre del tecnico</option>');
+            $('.selField').append('<option value="Created">Creado en</option>');
+            $('.selField').append('<option value="CreatedBy">Creado por</option>');
+            $('.selField').append('<option value="Modified">Modificado en</option>');
+            $('.selField').append('<option value="ModifiedBy">Modificado por</option>');
+        break; 
+        case 'Sleep_Mant_PAP':
+            $('.selField').append('<option value="Fecha">Fecha del mantenimiento</option>');
+            $('.selField').append('<option value="Equipo">Equipo</option>');
+            $('.selField').append('<option value="Cama">Cama</option>');
+            $('.selField').append('<option value="Notas">Notas</option>');
+            $('.selField').append('<option value="Tecnico">Nombre del tecnico</option>');
+            $('.selField').append('<option value="Created">Creado en</option>');
+            $('.selField').append('<option value="CreatedBy">Creado por</option>');
+            $('.selField').append('<option value="Modified">Modificado en</option>');
+            $('.selField').append('<option value="ModifiedBy">Modificado por</option>');
+        break; 
+
     default:
         break;
     }

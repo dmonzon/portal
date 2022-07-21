@@ -1268,6 +1268,301 @@ $divs =
     </div>
 </div>
 
+<div id="MantCAP" class="noprint content">
+<div class="contentt">
+    <tr> Mantenimiento Preventivo Capnografo - <a href="rpt.php?tb=Sleep_Mant_Cap"><i class="fa-solid fa-file-lines fa-2x"></i></a></tr><hr></br>
+    <form id="frmMantCAP" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Mant_Cap" name="tb"><input type="hidden" value="0" name="update">
+    <table>
+        </style>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="fechaMant" class="lrequired">Fecha de mantenimiento (Calibracion e Inspeccion visual cada 6 meses)</label></td>
+                <td style="text-align: left;border: none ;width:80%;"><input type="date" name="fechaMant"></br></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="equipo">Equipo</label></td>
+                <td style="text-align: left;border: none ;width:80%;">
+                <input type="radio" id="rdEquipo1" name="equipo" value="501967844"><label for="rdEquipo1">501967844 NONIN MEDICAL INC. RESPSENSE LS1R-9R</label><br/>
+                <input type="radio" id="rdEquipo2" name="equipo" value="590000107"><label for="rdEquipo2">590000107 NONIN MEDICAL INC. RESPSENSE LS1R-9R</label>
+                </br></td>
+            </tr>
+
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="notas">Notas:</label></td>
+                <td style="text-align: left;border: none ;width:80%;"><textarea name="notas" id="notas" rows="4" cols="50"></textarea></br></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="tecnico">Mantenimiento por:</label></td>
+                <td style="text-align: left;border: none ;width:80%;"><input type="text" id="tecnico" name="tecnico" ></br></td>
+            </tr>
+            <tr>
+                <td style="text-align: center;border:none;width:20%;">
+                    <input type="submit" id="btnSubmit3" value="Guardar">
+                    <input type="button" id="btnCancel3" value="Cancelar">
+                </td><td style="text-align: left;border:none;"></td>
+            </tr>
+        </table>
+    </form>
+    </div>
+</div>
+
+<div id="MantPAP" class="noprint content">
+<div class="contentt">
+    <tr> Mantenimiento Preventivo PAP - <a href="rpt.php?tb=Sleep_Mant_PAP"><i class="fa-solid fa-file-lines fa-2x"></i></a></tr><hr></br>
+    <form id="frmMantPAP" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Mant_PAP" name="tb"><input type="hidden" value="0" name="update">
+    <table>
+        </style>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="fechaMant" class="lrequired">Fecha de mantenimiento (Inspeccion visual cada 6 meses)</label></td>
+                <td style="text-align: left;border: none ;width:80%;"><input type="date" name="fechaMant"></br></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="equipo">PAP</label></td>
+                <td style="text-align: left;border: none ;width:80%;">
+                <select id="equipo" name="equipo" required>
+                    <option value="" selected>Seleccione</option>
+                    <option value="L120923865976">L120923865976 PHILIPS</option>
+                    <option value="L12092399B859">L12092399B859 PHILIPS</option>
+                    <option value="L120924016F0C">L120924016F0C PHILIPS</option>
+                    <option value="L146449847EC7">L146449847EC7 PHILIPS</option>
+                    <option value="L150102570615">L150102570615 PHILIPS</option>
+                    <option value="22151762119">22151762119 RESMED</option>
+                    <option value="22152090784">22152090784 RESMED</option>
+                    <option value="22152090785">22152090785 RESMED</option>
+                    <option value="22152090801">22152090801 RESMED</option>
+                    <option value="22152090841">22152090841 RESMED</option>
+                    <option value="22152090842">22152090842 RESMED</option>
+                </select>
+                <label for="cama" class="lrequired">Cama</label>
+                <select id="cama" name="cama" required>
+                    <option value="" selected>Seleccione</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                </select>
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="notas1">Notas:</label></td>
+                <td style="text-align: left;border: none ;width:80%;"><textarea name="notas1" id="notas1" rows="4" cols="50"></textarea></br></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="txtTecnico" class="lrequired">Nombre del Técnico</label></td>
+                <td style="text-align: left;border: none ;width:80%;"><input type="text" name="txtTecnico" required></br></td>
+            </tr>
+            <tr>
+                <td style="text-align: center;border:none;width:20%;">
+                    <input type="submit" id="btnSubmit3" value="Guardar">
+                    <input type="button" id="btnCancel3" value="Cancelar">
+                </td><td style="text-align: left;border:none;"></td>
+            </tr>
+        </table>
+    </form>
+    </div>
+</div>
+
+<div id="MantHA" class="noprint content">
+<div class="contentt">
+    <tr> Mantenimiento Preventivo Headbox y Amplificadores - <a href="rpt.php?tb=Sleep_Mant_HA"><i class="fa-solid fa-file-lines fa-2x"></i></a></tr><hr></br>
+    <form id="frmMantPAP" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Mant_HA" name="tb"><input type="hidden" value="0" name="update">
+    <table>
+        </style>
+        <tr>
+            <td style="text-align: left;border: none ;width:20%;"><label for="fechaMant" class="lrequired">Fecha de mantenimiento (Inspeccion visual cada 6 meses)</label></td>
+            <td style="text-align: left;border: none ;width:80%;"><input type="date" name="fechaMant"></br></td>
+        </tr>
+        <tr>
+            <td style="text-align: left;border: none ;width:20%;"><label for="equipo">Headbox</label></td>
+            <td style="text-align: left;border: none ;width:80%;">
+            <select id="Headbox" name="Headbox" required>
+                <option value="" selected>Seleccione</option>
+                <option value="BWIII2015-1204">BWIII2015-1204</option>
+                <option value="BWIII2015-1211">BWIII2015-1211</option>
+                <option value="BWIII2016-1249">BWIII2016-1249</option>
+                <option value="BWIII2016-1251">BWIII2016-1251</option>
+                <option value="BWIII2016-1270">BWIII2016-1270</option>
+                <option value="BWIII2016-1250">BWIII2016-1250</option>
+                <option value="BWIII2016-1269">BWIII2016-1269</option>
+                <option value="BWIII2015-1216">BWIII2015-1216</option>
+                <option value="BWIII2015-1215">BWIII2015-1215</option>
+                <option value="BWIII2015-1213">BWIII2015-1213</option>
+                <option value="BWIII2015-1212">BWIII2015-1212</option>
+                <option value="BWIII2015-1210">BWIII2015-1210</option>
+            </select>
+            <label for="ddCama" class="lrequired">Cama</label>
+            <select id="cama1" name="cama1" required>
+                <option value="" selected>Seleccione</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>
+        </tr>
+        <tr>
+            <td style="text-align: left;border: none ;width:20%;"><label for="amplificadores">Equipo</label></td>
+            <td style="text-align: left;border: none ;width:80%;">
+            <select id="amplificadores" name="amplificadores" required>
+                <option value="" selected>Seleccione</option>
+                <option value="BWIII2015-1204">BWIII2015-1204</option>
+                <option value="BWIII2015-1211">BWIII2015-1211</option>
+                <option value="BWIII2016-1249">BWIII2016-1249</option>
+                <option value="BWIII2016-1251">BWIII2016-1251</option>
+                <option value="BWIII2016-1270">BWIII2016-1270</option>
+                <option value="BWIII2016-1250">BWIII2016-1250</option>
+                <option value="BWIII2016-1269">BWIII2016-1269</option>
+                <option value="BWIII2015-1216">BWIII2015-1216</option>
+                <option value="BWIII2015-1215">BWIII2015-1215</option>
+                <option value="BWIII2015-1213">BWIII2015-1213</option>
+                <option value="BWIII2015-1212">BWIII2015-1212</option>
+                <option value="BWIII2015-1210">BWIII2015-1210</option>
+            </select>
+            <label for="ddCama" class="lrequired">Cama</label>
+            <select id="cama2" name="cama2" required>
+                <option value="" selected>Seleccione</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>
+        </tr>
+        <tr>
+            <td style="text-align: left;border: none ;width:20%;"><label for="notas1">Notas:</label></td>
+            <td style="text-align: left;border: none ;width:80%;"><textarea name="notas1" id="notas1" rows="4" cols="50"></textarea></br></td>
+        </tr>
+        <tr>
+            <td style="text-align: left;border: none ;width:20%;"><label for="txtTecnico">Inpeccionado por</label></td>
+            <td style="text-align: left;border: none ;width:80%;"><input type="text" name="txtTecnico"></br></td>
+        </tr>
+        <tr>
+            <td style="text-align: center;border:none;width:20%;">
+                <input type="submit" id="btnSubmit3" value="Guardar">
+                <input type="button" id="btnCancel3" value="Cancelar">
+            </td><td style="text-align: left;border:none;"></td>
+        </tr>
+    </table>
+    </form>
+    </div>
+</div>
+
+<div id="MantEq" class="noprint content">
+<div class="contentt">
+    <tr> Mantenimiento Equipos - <a href="rpt.php?tb=Sleep_Mant_Equipos"><i class="fa-solid fa-file-lines fa-2x"></i></a></tr><hr></br>
+    <form id="frmMantEqu" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Mant_Equipos" name="tb"><input type="hidden" value="0" name="update">
+    <table>
+        </style>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="fechaMant" class="lrequired">Fecha de mantenimiento</label></td>
+                <td style="text-align: left;border: none ;width:80%;"><input type="date" name="fechaMant"></br></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="ckEquipo" class="lrequired">Equipos:</label></td>
+                <td style="text-align: left;border: none ;width:80%;">
+                <input type="checkbox" name="ckEquipo[]" value="SH614534977SA">SH614534977SA GENERAL ELECTRIC V100 VITAL SIGNS MONITOR<br/>
+                <input type="checkbox" name="ckEquipo[]" value="SH618310150SA">SH618310150SA GENERAL ELECTRIC V100 VITAL SIGNS MONITOR<br/>
+                <input type="checkbox" name="ckEquipo[]" value="G02854573">G02854573 NELLCOR N595 PULSE OXIMETER<br/>
+                <input type="checkbox" name="ckEquipo[]" value="G05862166">G05862166 NELLCOR N595 PULSE OXIMETER<br/>
+                <input type="checkbox" name="ckEquipo[]" value="066957">066957 PRECISION MEDICAL EASY GO SUCTION PUMP<br/>
+                <input type="checkbox" name="ckEquipo[]" value="US00119956">US00119956 PHILIPS M4735 DEFIBRILLATOR/MONITOR<br/>
+                <input type="checkbox" name="ckEquipo[]" value="A142460">A142460 EXERGEN TAT 5000S TERMOMETRO<br/>
+                <input type="checkbox" name="ckEquipo[]" value="A165685">A165685 EXERGEN TAT 5000 TERMOMETRO<br/>
+                <input type="checkbox" name="ckEquipo[]" value="BALANZA">BALANZA 33 DETECTO DETECTO BALANZA<br/>
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="notas1">Notas:</label></td>
+                <td style="text-align: left;border: none ;width:80%;"><textarea name="notas1" id="notas1" rows="4" cols="50"></textarea></br></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="txtTecnico" class="lrequired">Mantenimiento por</label></td>
+                <td style="text-align: left;border: none ;width:80%;"><input type="text" name="txtTecnico" required></br></td>
+            </tr>
+            <tr>
+                <td style="text-align: center;border:none;width:20%;">
+                    <input type="submit" id="btnSubmit3" value="Guardar">
+                    <input type="button" id="btnCancel3" value="Cancelar">
+                </td><td style="text-align: left;border:none;"></td>
+            </tr>
+        </table>
+    </form>
+    </div>
+</div>
+
+<div id="BioEq" class="noprint content">
+<div class="contentt">
+    <tr> Equipos enviados para reparación - <a href="rpt.php?tb=Sleep_Biomedica_Equipos"><i class="fa-solid fa-file-lines fa-2x"></i></a></tr><hr></br>
+    <form id="frmBioEq" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Biomedica_Equipos" name="tb"><input type="hidden" value="0" name="update">
+    <table>
+        </style>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="equipo">Equipo</label></td>
+                <td style="text-align: left;border: none ;width:80%;"><input type="text" name="equipo"></br></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="problema">Problema reportado:</label></td>
+                <td style="text-align: left;border: none ;width:80%;"><input type="text" name="problema"></br></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="reportado" class="lrequired">Fecha reportado por personal técnico:</label></td>
+                <td style="text-align: left;border: none ;width:80%;"><input type="date" name="reportado"></br></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="reporto">Quién reportó:</label></td>
+                <td style="text-align: left;border: none ;width:80%;"><input type="text" name="reporto"></br></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="fechaEnvio" class="lrequired">Fecha de reparación/envío</label></td>
+                <td style="text-align: left;border: none ;width:80%;"><input type="date" name="fechaEnvio"></br></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="tracking">Tracking number:</label></td>
+                <td style="text-align: left;border: none ;width:80%;"><input type="text" name="tracking" required></br></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="recibido">Fecha recibido:</label></td>
+                <td style="text-align: left;border: none ;width:80%;"><input type="date" name="recibido"></br></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="notas1">Notas:</label></td>
+                <td style="text-align: left;border: none ;width:80%;"><textarea name="notas1" id="notas1" rows="4" cols="50"></textarea></br></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;border: none ;width:20%;"><label for="biomedico" class="lrequired">Nombre del biomédico</label></td>
+                <td style="text-align: left;border: none ;width:80%;"><input type="text" name="biomedico" required></br></td>
+            </tr>
+            <tr>
+                <td style="text-align: center;border:none;width:20%;">
+                    <input type="submit" id="btnSubmit3" value="Guardar">
+                    <input type="button" id="btnCancel3" value="Cancelar">
+                </td><td style="text-align: left;border:none;"></td>
+            </tr>
+        </table>
+    </form>
+    </div>
+</div>
+
+
 <div id="Buscador" class="content">
 <div class="contentt">
 <div id="head" class="noprint">
@@ -1293,6 +1588,11 @@ $divs =
                     <option value="Sleep_Registro_HSAT">Log de Registro y Mantenimiento del HSAT</option>
                     <option value="Sleep_Frasco_Cidex">Registro de Verificación de Frasco de Cidex OPA y Frasco de las Tirillas para las Pruebas Durante el Proceso de Desinfección de Alto Nivel</option>
                     <option value="Sleep_Solucion_Cidex">Registro de la Verificación de la Solución Cidex OPA e Inmersión del Equipo Durante el Proceso de Desinfección de Alto Nivel"</option>
+                    <option value="Sleep_Mant_Cap">Mantenimiento Preventivo Capnografo</option>
+                    <option value="Sleep_Mant_PAP">Mantenimiento Preventivo PAP</option>
+                    <option value="Sleep_Mant_HA">Mantenimiento Preventivo Headbox y Amplificadores</option>
+                    <option value="Sleep_Mant_Equipos">Mantenimiento Equipos</option>
+                    <option value="Sleep_Biomedica_Equipos">Equipos enviados para reparación</option>
                 </select>
             </td>
         </tr>

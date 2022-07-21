@@ -1409,9 +1409,334 @@ if($_GET){
             </div>
             </div>';
         break;
+        case 'Sleep_Mant_Cap':
+            echo'<div id="MantCAP" >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">					
+                    Mantenimiento Preventivo Capnografo
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">   
+                <form id="frmMantCAP" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Mant_Cap" name="tb"><input type="hidden" value="1" name="update">
+                <table>
+                        <tr>
+                            <td style="text-align: left;border: none ;width:20%;"><label for="fechaMant" class="lrequired">Fecha de mantenimiento (Calibracion e Inspeccion visual cada 6 meses)</label></td>
+                            <td style="text-align: left;border: none ;width:80%;"><input type="date" name="fechaMant" value="'.(!$row[1] == '' ? $row[1]->format('Y-m-d'): '').'"></br></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;border: none ;width:20%;"><label for="equipo">Equipo</label></td>
+                            <td style="text-align: left;border: none ;width:80%;">
+                            <input type="radio" id="rdEquipo1" name="equipo" value="501967844" '.($row[2] =='501967844' ? ' checked' : '').'><label for="rdEquipo1">501967844 NONIN MEDICAL INC. RESPSENSE LS1R-9R</label><br/>
+                            <input type="radio" id="rdEquipo2" name="equipo" value="590000107"'.($row[2] =='590000107' ? ' checked' : '').'><label for="rdEquipo2">590000107 NONIN MEDICAL INC. RESPSENSE LS1R-9R</label>
+                            </br></td>
+                        </tr>
+
+                        <tr>
+                            <td style="text-align: left;border: none ;width:20%;"><label for="notas">Notas:</label></td>
+                            <td style="text-align: left;border: none ;width:80%;"><textarea name="notas" id="notas" rows="4" cols="50">'.trim($row[3]).'</textarea></br></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;border: none ;width:20%;"><label for="tecnico">Mantenimiento por:</label></td>
+                            <td style="text-align: left;border: none ;width:80%;"><input type="text" id="tecnico" name="tecnico" value="'.trim($row[4]).'"></br></td>
+                        </tr>
+                        <tr>
+                        <td style="text-align: center;border:none;width:20%;" colspan="5">
+                        <input type="hidden" name="id" value="'.$row[0].'">
+                        <input type="submit" id="btnSubmit3" value="Guardar">
+                    </td><td style="text-align: left;border:none;"></td>
+                        </tr>
+                    </table>
+                </form>
+                </div>
+                <div class="modal-footer">
+                <input type="button" class="btn btn-default" data-dismiss="modal" value="Cerrar">
+            </div></div>
+            </div>';
+        break;
+        case 'Sleep_Mant_PAP':
+            echo'<div id="MantPAP" class="noprint content">
+                <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">					
+                            Mantenimiento Preventivo PAP
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            </div>
+                        <div class="modal-body">
+                <form id="frmMantPAP" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Mant_PAP" name="tb"><input type="hidden" value="1" name="update">
+                <table>
+                        <tr>
+                            <td style="text-align: left;border: none ;width:20%;"><label for="fechaMant" class="lrequired">Fecha de mantenimiento (Inspeccion visual cada 6 meses)</label></td>
+                            <td style="text-align: left;border: none ;width:80%;"><input type="date" name="fechaMant" value="'.(!$row[1] == '' ? $row[1]->format('Y-m-d'): '').'"></br></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;border: none ;width:20%;"><label for="equipo">PAP</label></td>
+                            <td style="text-align: left;border: none ;width:80%;">
+                            <select id="equipo" name="equipo" required>
+                                <option value="" selected>Seleccione</option>
+                                <option value="L120923865976"'.($row[2] =='L120923865976' ? ' selected' : '').'>L120923865976 PHILIPS</option>
+                                <option value="L12092399B859"'.($row[2] =='L12092399B859' ? ' selected' : '').'>L12092399B859 PHILIPS</option>
+                                <option value="L120924016F0C"'.($row[2] =='L120924016F0C' ? ' selected' : '').'>L120924016F0C PHILIPS</option>
+                                <option value="L146449847EC7"'.($row[2] =='L146449847EC7' ? ' selected' : '').'>L146449847EC7 PHILIPS</option>
+                                <option value="L150102570615"'.($row[2] =='L150102570615' ? ' selected' : '').'>L150102570615 PHILIPS</option>
+                                <option value="22151762119"'.($row[2] =='22151762119' ? ' selected' : '').'>22151762119 RESMED</option>
+                                <option value="22152090784"'.($row[2] =='22152090784' ? ' selected' : '').'>22152090784 RESMED</option>
+                                <option value="22152090785"'.($row[2] =='22152090785' ? ' selected' : '').'>22152090785 RESMED</option>
+                                <option value="22152090801"'.($row[2] =='22152090801' ? ' selected' : '').'>22152090801 RESMED</option>
+                                <option value="22152090841"'.($row[2] =='22152090841' ? ' selected' : '').'>22152090841 RESMED</option>
+                                <option value="22152090842"'.($row[2] =='22152090842' ? ' selected' : '').'>22152090842 RESMED</option>
+                            </select>
+                            <label for="cama" class="lrequired">Cama</label>
+                            <select id="cama" name="cama" required>
+                                <option value="" selected>Seleccione</option>
+                                <option value="1"'.($row[3] =='1' ? ' selected' : '').'>1</option>
+                                <option value="2"'.($row[3] =='2' ? ' selected' : '').'>2</option>
+                                <option value="3"'.($row[3] =='3' ? ' selected' : '').'>3</option>
+                                <option value="4"'.($row[3] =='4' ? ' selected' : '').'>4</option>
+                                <option value="5"'.($row[3] =='5' ? ' selected' : '').'>5</option>
+                                <option value="6"'.($row[3] =='6' ? ' selected' : '').'>6</option>
+                                <option value="7"'.($row[3] =='7' ? ' selected' : '').'>7</option>
+                                <option value="8"'.($row[3] =='8' ? ' selected' : '').'>8</option>
+                                <option value="9"'.($row[3] =='9' ? ' selected' : '').'>9</option>
+                                <option value="10"'.($row[3] =='10' ? ' selected' : '').'>10</option>
+                                <option value="11"'.($row[3] =='11' ? ' selected' : '').'>11</option>
+                                <option value="12"'.($row[3] =='12' ? ' selected' : '').'>12</option>
+                            </select>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;border: none ;width:20%;"><label for="notas1">Notas:</label></td>
+                            <td style="text-align: left;border: none ;width:80%;"><textarea name="notas1" id="notas1" rows="4" cols="50">'.trim($row[4]).'</textarea></br></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;border: none ;width:20%;"><label for="txtTecnico" class="lrequired">Nombre del Técnico</label></td>
+                            <td style="text-align: left;border: none ;width:80%;"><input type="text" name="txtTecnico" value="'.$row[5].'" required></br></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;border:none;width:20%;"><input type="hidden" name="id" value="'.$row[0].'">
+                                <input type="submit" id="btnSubmit3" value="Guardar">
+                            </td><td style="text-align: left;border:none;"></td>
+                        </tr>
+                    </table>
+                </form>
+                </div><div class="modal-footer">
+                <input type="button" class="btn btn-default" data-dismiss="modal" value="Cerrar">
+            </div>
+            </div>';
+        break;
+        case 'Sleep_Mant_HA':
+            echo '<div id="MantHA" class="noprint content">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">					
+                Mantenimiento Preventivo Headbox y Amplificadores
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+            <div class="modal-body"><form id="frmMantPAP" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Mant_HA" name="tb"><input type="hidden" value="1" name="update">
+                <table>
+                    <tr>
+                        <td style="text-align: left;border: none ;width:20%;"><label for="fechaMant" class="lrequired">Fecha de mantenimiento (Inspeccion visual cada 6 meses)</label></td>
+                        <td style="text-align: left;border: none ;width:80%;"><input type="date" name="fechaMant" value="'.(!$row[1] == '' ? $row[1]->format('Y-m-d'): '').'"></br></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;border: none ;width:20%;"><label for="equipo">Headbox</label></td>
+                        <td style="text-align: left;border: none ;width:80%;">
+                        <select id="Headbox" name="Headbox" required>
+                            <option value="" selected>Seleccione</option>
+                            <option value="BWIII2015-1204"'.($row[2] =='BWIII2015-1204' ? ' selected' : '').'>BWIII2015-1204</option>
+                            <option value="BWIII2015-1211"'.($row[2] =='BWIII2015-1211' ? ' selected' : '').'>BWIII2015-1211</option>
+                            <option value="BWIII2016-1249"'.($row[2] =='BWIII2016-1249' ? ' selected' : '').'>BWIII2016-1249</option>
+                            <option value="BWIII2016-1251"'.($row[2] =='BWIII2016-1251' ? ' selected' : '').'>BWIII2016-1251</option>
+                            <option value="BWIII2016-1270"'.($row[2] =='BWIII2016-1270' ? ' selected' : '').'>BWIII2016-1270</option>
+                            <option value="BWIII2016-1250"'.($row[2] =='BWIII2016-1250' ? ' selected' : '').'>BWIII2016-1250</option>
+                            <option value="BWIII2016-1269"'.($row[2] =='BWIII2016-1269' ? ' selected' : '').'>BWIII2016-1269</option>
+                            <option value="BWIII2015-1216"'.($row[2] =='BWIII2015-1216' ? ' selected' : '').'>BWIII2015-1216</option>
+                            <option value="BWIII2015-1215"'.($row[2] =='BWIII2015-1215' ? ' selected' : '').'>BWIII2015-1215</option>
+                            <option value="BWIII2015-1213"'.($row[2] =='BWIII2015-1213' ? ' selected' : '').'>BWIII2015-1213</option>
+                            <option value="BWIII2015-1212"'.($row[2] =='BWIII2015-1212' ? ' selected' : '').'>BWIII2015-1212</option>
+                            <option value="BWIII2015-1210"'.($row[2] =='BWIII2015-1210' ? ' selected' : '').'>BWIII2015-1210</option>
+                        </select>
+                        <label for="ddCama" class="lrequired">Cama</label>
+                        <select id="cama1" name="cama1" required>
+                            <option value="" selected>Seleccione</option>
+                            <option value="1"'.($row[3] =='1' ? ' selected' : '').'>1</option>
+                            <option value="3"'.($row[3] =='2' ? ' selected' : '').'>3</option>
+                            <option value="3"'.($row[3] =='3' ? ' selected' : '').'>3</option>
+                            <option value="4"'.($row[3] =='4' ? ' selected' : '').'>4</option>
+                            <option value="5"'.($row[3] =='5' ? ' selected' : '').'>5</option>
+                            <option value="6"'.($row[3] =='6' ? ' selected' : '').'>6</option>
+                            <option value="7"'.($row[3] =='7' ? ' selected' : '').'>7</option>
+                            <option value="8"'.($row[3] =='8' ? ' selected' : '').'>8</option>
+                            <option value="9"'.($row[3] =='9' ? ' selected' : '').'>9</option>
+                            <option value="10"'.($row[3] =='10' ? ' selected' : '').'>10</option>
+                            <option value="11"'.($row[3] =='11' ? ' selected' : '').'>11</option>
+                            <option value="12"'.($row[3] =='12' ? ' selected' : '').'>12</option>
+                        </select>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;border: none ;width:20%;"><label for="amplificadores">Equipo</label></td>
+                        <td style="text-align: left;border: none ;width:80%;">
+                        <select id="amplificadores" name="amplificadores" required>
+                            <option value="" selected>Seleccione</option>
+                            <option value="BWIII2015-1204"'.($row[4] =='BWIII2015-1204' ? ' selected' : '').'>BWIII2015-1204</option>
+                            <option value="BWIII2015-1211"'.($row[4] =='BWIII2015-1211' ? ' selected' : '').'>BWIII2015-1211</option>
+                            <option value="BWIII2016-1249"'.($row[4] =='BWIII2016-1249' ? ' selected' : '').'>BWIII2016-1249</option>
+                            <option value="BWIII2016-1251"'.($row[4] =='BWIII2016-1251' ? ' selected' : '').'>BWIII2016-1251</option>
+                            <option value="BWIII2016-1270"'.($row[4] =='BWIII2016-1270' ? ' selected' : '').'>BWIII2016-1270</option>
+                            <option value="BWIII2016-1250"'.($row[4] =='BWIII2016-1250' ? ' selected' : '').'>BWIII2016-1250</option>
+                            <option value="BWIII2016-1269"'.($row[4] =='BWIII2016-1269' ? ' selected' : '').'>BWIII2016-1269</option>
+                            <option value="BWIII2015-1216"'.($row[4] =='BWIII2015-1216' ? ' selected' : '').'>BWIII2015-1216</option>
+                            <option value="BWIII2015-1215"'.($row[4] =='BWIII2015-1215' ? ' selected' : '').'>BWIII2015-1215</option>
+                            <option value="BWIII2015-1213"'.($row[4] =='BWIII2015-1213' ? ' selected' : '').'>BWIII2015-1213</option>
+                            <option value="BWIII2015-1212"'.($row[4] =='BWIII2015-1212' ? ' selected' : '').'>BWIII2015-1212</option>
+                            <option value="BWIII2015-1210"'.($row[4] =='BWIII2015-1210' ? ' selected' : '').'>BWIII2015-1210</option>
+                        </select>
+                        <label for="ddCama" class="lrequired">Cama</label>
+                        <select id="cama2" name="cama2" required>
+                            <option value="" selected>Seleccione</option>
+                            <option value="1" '.($row[5] =='1' ? ' selected' : '').'>1</option>
+                            <option value="2" '.($row[5] =='2' ? ' selected' : '').'>2</option>
+                            <option value="3" '.($row[5] =='3' ? ' selected' : '').'>5</option>
+                            <option value="4" '.($row[5] =='4' ? ' selected' : '').'>4</option>
+                            <option value="5" '.($row[5] =='5' ? ' selected' : '').'>5</option>
+                            <option value="6" '.($row[5] =='6' ? ' selected' : '').'>6</option>
+                            <option value="7" '.($row[5] =='7' ? ' selected' : '').'>7</option>
+                            <option value="8" '.($row[5] =='8' ? ' selected' : '').'>8</option>
+                            <option value="9" '.($row[5] =='9' ? ' selected' : '').'>9</option>
+                            <option value="10"'.($row[5] =='10' ? ' selected' : '').'>10</option>
+                            <option value="11"'.($row[5] =='11' ? ' selected' : '').'>11</option>
+                            <option value="12"'.($row[5] =='12' ? ' selected' : '').'>12</option>
+                        </select>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;border: none ;width:20%;"><label for="notas1">Notas:</label></td>
+                        <td style="text-align: left;border: none ;width:80%;"><textarea name="notas1" id="notas1" rows="4" cols="50">'.trim($row[6]).'</textarea></br></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;border: none ;width:20%;"><label for="txtTecnico">Inpeccionado por</label></td>
+                        <td style="text-align: left;border: none ;width:80%;"><input type="text" name="txtTecnico" value="'.$row[7].'" ></br></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;border:none;width:20%;"><input type="hidden" name="id" value="'.$row[0].'">
+                            <input type="submit" id="btnSubmit3" value="Guardar">
+                        </td><td style="text-align: left;border:none;"></td>
+                    </tr>
+                </table>
+                </form>
+                </div><div class="modal-footer">
+                <input type="button" class="btn btn-default" data-dismiss="modal" value="Cerrar">
+            </div>
+            </div>';
+        break;
+        case 'Sleep_Mant_Equipos':
+            $ar = explode(',',$row[2]);
+            echo '<div id="MantEq" class="noprint content">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">					
+                Mantenimiento Equipos
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+            <div class="modal-body">
+                <form id="frmMantEqu" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Mant_Equipos" name="tb"><input type="hidden" value="1" name="update">
+                <table>
+                    </style>
+                        <tr>
+                            <td style="text-align: left;border: none ;width:20%;"><label for="fechaMant" class="lrequired">Fecha de mantenimiento</label></td>
+                            <td style="text-align: left;border: none ;width:80%;"><input type="date" name="fechaMant" value="'.(!$row[1] == '' ? $row[1]->format('Y-m-d'): '').'"></br></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;border: none ;width:20%;"><label for="ckEquipo" class="lrequired">Equipos:</label></td>
+                            <td style="text-align: left;border: none ;width:80%;">
+                            <input type="checkbox" name="ckEquipo[]" value="SH614534977SA"'.(in_array('SH614534977SA',$ar) ? ' checked' : '').'>SH614534977SA GENERAL ELECTRIC V100 VITAL SIGNS MONITOR<br/>
+                            <input type="checkbox" name="ckEquipo[]" value="SH618310150SA"'.(in_array('SH618310150SA',$ar) ? ' checked' : '').'>SH618310150SA GENERAL ELECTRIC V100 VITAL SIGNS MONITOR<br/>
+                            <input type="checkbox" name="ckEquipo[]" value="G02854573"'.(in_array('G02854573',$ar) ? ' checked' : '').'>G02854573 NELLCOR N595 PULSE OXIMETER<br/>
+                            <input type="checkbox" name="ckEquipo[]" value="G05862166"'.(in_array('G05862166',$ar) ? ' checked' : '').'>G05862166 NELLCOR N595 PULSE OXIMETER<br/>
+                            <input type="checkbox" name="ckEquipo[]" value="066957"'.(in_array('066957',$ar) ? ' checked' : '').'>066957 PRECISION MEDICAL EASY GO SUCTION PUMP<br/>
+                            <input type="checkbox" name="ckEquipo[]" value="US00119956"'.(in_array('US00119956',$ar) ? ' checked' : '').'>US00119956 PHILIPS M4735 DEFIBRILLATOR/MONITOR<br/>
+                            <input type="checkbox" name="ckEquipo[]" value="A142460"'.(in_array('A142460',$ar) ? ' checked' : '').'>A142460 EXERGEN TAT 5000S TERMOMETRO<br/>
+                            <input type="checkbox" name="ckEquipo[]" value="A165685"'.(in_array('A165685',$ar) ? ' checked' : '').'>A165685 EXERGEN TAT 5000 TERMOMETRO<br/>
+                            <input type="checkbox" name="ckEquipo[]" value="BALANZA"'.(in_array('BALANZA',$ar) ? ' checked' : '').'>BALANZA 33 DETECTO DETECTO BALANZA<br/>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;border: none ;width:20%;"><label for="notas1">Notas:</label></td>
+                            <td style="text-align: left;border: none ;width:80%;"><textarea name="notas1" id="notas1" rows="4" cols="50">'.trim($row[3]).'</textarea></br></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;border: none ;width:20%;"><label for="txtTecnico" class="lrequired">Mantenimiento por</label></td>
+                            <td style="text-align: left;border: none ;width:80%;"><input type="text" name="txtTecnico" value="'.$row[4].'" required></br></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;border:none;width:20%;"><input type="hidden" name="id" value="'.$row[0].'">
+                                <input type="submit" id="btnSubmit3" value="Guardar">
+                            </td><td style="text-align: left;border:none;"></td>
+                        </tr>
+                    </table>
+                </form>
+                </div><div class="modal-footer">
+                <input type="button" class="btn btn-default" data-dismiss="modal" value="Cerrar">
+            </div>
+            </div>';
+        break;
+        case 'Sleep_Biomedica_Equipos':
+            echo '<div id="BioEq" class="noprint content">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">					
+                Equipos enviados para reparación
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+            <div class="modal-body">
+                <form id="frmBioEq" action="rpt.php" target="rpt" method="post"><input type="hidden" value="Sleep_Biomedica_Equipos" name="tb"><input type="hidden" value="1" name="update">
+                <table>
+                        <tr>
+                            <td style="text-align: left;border: none ;width:20%;"><label for="equipo">Equipo</label></td>
+                            <td style="text-align: left;border: none ;width:80%;"><input type="text" name="equipo" value="'.$row[1].'"></br></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;border: none ;width:20%;"><label for="problema">Problema reportado:</label></td>
+                            <td style="text-align: left;border: none ;width:80%;"><input type="text" name="problema" value="'.$row[2].'"></br></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;border: none ;width:20%;"><label for="reportado" class="lrequired">Fecha reportado por personal técnico:</label></td>
+                            <td style="text-align: left;border: none ;width:80%;"><input type="date" name="reportado" value="'.(!$row[3] == '' ? $row[3]->format('Y-m-d'): '').'"></br></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;border: none ;width:20%;"><label for="reporto">Quién reportó:</label></td>
+                            <td style="text-align: left;border: none ;width:80%;"><input type="text" name="reporto" value="'.$row[4].'"></br></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;border: none ;width:20%;"><label for="fechaEnvio" class="lrequired">Fecha de envío</label></td>
+                            <td style="text-align: left;border: none ;width:80%;"><input type="date" name="fechaEnvio" value="'.(!$row[5] == '' ? $row[5]->format('Y-m-d'): '').'"></br></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;border: none ;width:20%;"><label for="tracking">Tracking number:</label></td>
+                            <td style="text-align: left;border: none ;width:80%;"><input type="text" name="tracking" value="'.$row[6].'" required></br></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;border: none ;width:20%;"><label for="recibido">Fecha recibido:</label></td>
+                            <td style="text-align: left;border: none ;width:80%;"><input type="date" name="recibido" value="'.(!$row[7] == '' ? $row[7]->format('Y-m-d'): '').'"></br></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;border: none ;width:20%;"><label for="notas1">Notas:</label></td>
+                            <td style="text-align: left;border: none ;width:80%;"><textarea name="notas1" id="notas1" rows="4" cols="50">'.trim($row[8]).'</textarea></br></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;border: none ;width:20%;"><label for="biomedico" class="lrequired">Nombre del biomédico</label></td>
+                            <td style="text-align: left;border: none ;width:80%;"><input type="text" name="biomedico" value="'.$row[9].'" required></br></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;border:none;width:20%;"><input type="hidden" name="id" value="'.$row[0].'">
+                                <input type="submit" id="btnSubmit3" value="Guardar">
+                            </td><td style="text-align: left;border:none;"></td>
+                        </tr>
+                    </table>
+                </form>
+                </div><div class="modal-footer">
+                <input type="button" class="btn btn-default" data-dismiss="modal" value="Cerrar">
+            </div>
+            </div>';
+        break;
         default:
         break;
-    }   
-
-
+}   
 ?>

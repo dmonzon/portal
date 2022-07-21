@@ -242,9 +242,9 @@ if (!isset($_SESSION['username'])) {
         <li><a class="cambia" label="SleepStudies">Sleep Studies Results</li></a></br><hr> 
         ******************************************************************************************************************************************
         -->
-        <h3><span style="color:red;">Logs</span></h3><hr>
+        <h4><span style="color:red;">Logs</span></h4>
         <li><a href="rpt.php?tb=Sleep_Inspeccion_Rutina"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="InspeccionVisual">Inspección Visual de Rutina</a></li></br>
-        <li><a href="rpt.php?tb=Sleep_Registro_Paciente"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="MaskFitting">Registro de Paciente-Class/Mask Fitting</a></li></br>
+        <li><a href="rpt.php?tb=Sleep_Registro_Paciente"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="MaskFitting">Registro de Paciente/Mask Fitting</a></li></br>
         <li><a href="rpt.php?tb=Sleep_Valores_Criticos"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="ValCriticos">Valores Críticos</a></li></br>
         <li><a href="rpt.php?tb=Sleep_CPAP_Prestados"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="LogCPAP">Auto CPAP Prestados</a></li></br>
         <li><a href="rpt.php?tb=Sleep_Comunicacion"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="logComunicacion">Comunicación</a></li></br>
@@ -252,16 +252,22 @@ if (!isset($_SESSION['username'])) {
         <li><a href="rpt.php?tb=Sleep_Rechazo"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="logRechazo">Rechazo de Tratamiento</a></li></br>
         <li><a href="rpt.php?tb=Sleep_Registro_HSAT"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="logResgistroHSAT">Registro y Mantenimiento del HSAT</a></li></br>
         <li><a href="rpt.php?tb=Sleep_Registro_HSAT"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="logDevolucionHSAT">Registro de Devolucion del HSAT</a></li></br>
-        <hr><h3><span sty
-        000le="color:red;">Logs de Desinfección</span></h3><hr>
+        <hr><h4><span style="color:red;">Logs de Desinfección</span></h4>
         <li><a href="rpt.php?tb=Sleep_Desinfeccion_CPAP"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="CPAP">Desinfección CPAP</a></li></br>
         <li><a href="rpt.php?tb=Sleep_TCPCO"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="tcPCO2">Desinfección de tcPCO2</a></li></br>
         <li><a href="rpt.php?tb=Sleep_HSAT"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="HSAT">Desinfección del HSAT</a></li></br>
         <li><a href="rpt.php?tb=Sleep_ETCO"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="ETCO2">Desinfección ETCO2 Monitor</a></li></br>
         <li><a href="rpt.php?tb=Sleep_Ojos"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="DuchasOjos">Duchas de lavado de ojos</a></li></br>
-        <li><a href="rpt.php?tb=Sleep_Endozime"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="UsoManejo">Uso y Manejo de Endozime AW Plus</a></li></br>
+        <li><a href="rpt.php?tb=Sleep_Endozime"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="UsoManejo">Manejo de Endozime AW Plus</a></li></br>
         <li><a href="rpt.php?tb=Sleep_Solucion_Cidex"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="solucionCidex">Registro de la Verificación de la Solución Cidex OPA e Inmersión del Equipo Durante el Proceso de Desinfección de Alto Nivel</a></li></br>
         <li><a href="rpt.php?tb=Sleep_Frasco_Cidex"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="frascoCIdex">Registro de Verificación de Frasco de Cidex OPA y de las Tirillas Durante el Proceso de Desinfección de Alto Nivel</a></li></br>
+        <hr><h4><span style="color:red;">Biomedica</span></h4>
+        <li><a href="rpt.php?tb=Sleep_Mant_Cap"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="MantCAP">Mant. Preventivo Capnografo</a></li></br>
+        <li><a href="rpt.php?tb=Sleep_Mant_PAP"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="MantPAP">Mant. Preventivo PAP</a></li></br>
+        <li><a href="rpt.php?tb=Sleep_Mant_HA"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="MantHA">Mant. Headbox y Amplificadores</a></li></br>
+        <li><a href="rpt.php?tb=Sleep_Mant_Equipos"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="MantEq">Mant. Equipos</a></li></br>
+        <li><a href="rpt.php?tb=Sleep_Biomedica_Equipos"><i class="fa-solid fa-file-lines fa-lg"></i></a><a class="cambia" label="BioEq">Equipos enviados para reparación</a></li></br>
+        <li></li></br><li></li></br>
     </ul>
 </div>
 
