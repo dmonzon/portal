@@ -117,8 +117,11 @@ if($_GET){
 
     }else{
         $tsql = "SELECT * FROM $tabla 
+                
+                /************* añadido para filtrar solo los del año corriente **********/
                 WHERE DATEPART(YEAR, [Created]) = DATEPART(YEAR, CURRENT_TIMESTAMP)
                 or    DATEPART(YEAR, [Modified]) = DATEPART(YEAR, CURRENT_TIMESTAMP)
+                /************************************************************************/
                 ORDER by Modified desc" ;
         //$tsql = $sql . "order by Modified desc" ;
     }

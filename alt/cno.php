@@ -255,8 +255,6 @@ function CreateTable($tabla){
 
 function SleepQrys($data){
     $ur = $_SESSION['username'];
-    // $ur = 'user_name';
-    //$myarray = array_map('trim', $_POST);
     extract($_POST);
     // echo "<pre>";
     // var_dump($_POST);
@@ -974,11 +972,6 @@ function gSleepTable($data,$tabla,$tsql, $opt = "0" ){
                     $d = $row[$j]->format('m/d/Y H:i:s');
                     $d = str_replace("00:00:00","",$d);
                     echo "<td class='hd-table'>".$d.'<input type="hidden" name="'.$fld.'_'.$id.'" id="'.$fld.'_'.$id.'" value="'.$d.'"></td>';
-                // }elseif ($row[$j] instanceof Date) {
-                    
-                //     $d = $row[$j]->format('m/d/Y');
-                //     //$d = str_replace("00:00:00","",$d);
-                //     echo "<td class='hd-table'>".$d.'<input type="hidden" name="'.$fld.'_'.$id.'" id="'.$fld.'_'.$id.'" value="'.$d.'"></td>';
                 }else{
                     $value = ($row[$j] == '' ? '-' : $row[$j]) ;
                     echo "<td class='hd-table'>".$value.'<input type="hidden" name="'.$fld.'_'.$id.'" id="'.$fld.'_'.$id.'" value="'.$value.'"></td>';

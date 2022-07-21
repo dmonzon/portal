@@ -6,14 +6,11 @@ $(document).ready(function() {
         nombre = $(this).attr("label");
         //mostrar el panel segun el nombre del enlace oprimido
         $("#" + nombre).show();
-        //$("#Buscador").show();
-        // alert(nombre);
     });
 });
 
 
 function sortTabla(tabla,columnName){
-    // alert("Tabla");
     var sort = $("#sort").val();
 
     $.ajax({
@@ -36,59 +33,14 @@ function sortTabla(tabla,columnName){
 }
 
 $(document).on('change','#tb',function(){
-    // m = $("#txtValue").val();
-    // alert(m);
-    // $("#frmSearch")[0].reset();
     $('#txtValue').val('');
     $('#txtValue2').val('');
     $('#txtValue3').val('');
     
     v = this.value;
     $('.selField').empty();
-    //a~nadir opciones a los dropdowns
+    //añadir opciones a los dropdowns
     switch (v) {
-        /*
-        case 'Sleep_Studies_Results':
-            $('.selField').append('<option value="Expediente">Num. Expediente</option>');
-            $('.selField').append('<option value="Nombre">Nombre</option>');
-            $('.selField').append('<option value="Apellidos">Apellidos</option>');
-            $('.selField').append('<option value="Fecha_Estudio">Fecha de Estudio</option>');
-            $('.selField').append('<option value="Fecha_Entrega">Fecha de Entrega</option>');
-            $('.selField').append('<option value="Medico">Medico</option>');
-            $('.selField').append('<option value="Visit_ID">Visit ID</option>');
-            $('.selField').append('<option value="DED">DED</option>');
-            $('.selField').append('<option value="Plan_Medico">Plan Medico</option>');
-            $('.selField').append('<option value="Plan_Medico2">Plan Medico2</option>');
-            $('.selField').append('<option value="Created">Creado en</option>');
-            $('.selField').append('<option value="CreatedBy">Creado por</option>');
-            $('.selField').append('<option value="Modified">Modified</option>');
-            $('.selField').append('<option value="ModifiedBy">ModifiedBy</option>');
-        break;
-         case 'Sleep_Listado_Expedientes':
-            $('.selField').append('<option value="num_expediente">Num. Expediente</option>');
-            $('.selField').append('<option value="Nombre">Nombre</option>');
-            $('.selField').append('<option value="Apelidos">Apelidos</option>');
-            $('.selField').append('<option value="Telefono1">Telefono1</option>');
-            $('.selField').append('<option value="Telefono2">Telefono2</option>');
-            $('.selField').append('<option value="Created">Creado</option>');
-            $('.selField').append('<option value="CreatedBy">Creado Por</option>');
-            $('.selField').append('<option value="Modified">Modificado</option>');
-            $('.selField').append('<option value="ModifiedBy">Modificado por </option>');
-        break;
-        case 'Sleep_Listado_Referidos':
-            $('.selField').append('<option value="Num_expediente">Num. Expediente</option>');
-            $('.selField').append('<option value="Nombre">Nombre</option>');
-            $('.selField').append('<option value="Apellidos">Apelidos</option>');
-            $('.selField').append('<option value="Dia_Estudio">Dia de Estudio</option>');
-            $('.selField').append('<option value="Visit_ID">Visit ID</option>');
-            $('.selField').append('<option value="Plan_Medico">Plan Medico</option>');
-            $('.selField').append('<option value="Plan_Medico2">Otro Plan Medico</option>');
-            $('.selField').append('<option value="Referido_Por_MD">Referido por Medico</option>');
-            $('.selField').append('<option value="Created">Creado</option>');
-            $('.selField').append('<option value="CreatedBy">Creado Por</option>');
-            $('.selField').append('<option value="Modified">Modificado</option>');
-            $('.selField').append('<option value="ModifiedBy">Modificado por</option>');
-        break;*/
         case 'Sleep_Inspeccion_Rutina':
             $('.selField').append('<option value="Fecha_Inspeccion">Fecha Inspeccion</option>');
             $('.selField').append('<option value="Habitacion">Habitacion</option>');
@@ -408,14 +360,11 @@ function DoNav(){
     }
 }
 function openNav() {
-    // alert($("#mySidebar").width());
     document.getElementById("mySidebar").style.width = "350px";
     document.getElementById("main").style.marginLeft = "350px";
 }
 
 function closeNav() {
-    // alert($("#mySidebar").width());
-    // $("#lnk").show();
     document.getElementById("mySidebar").style.width = "0";
     document.getElementById("main").style.marginLeft= "0";
 }

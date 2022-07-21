@@ -142,7 +142,12 @@
                             <option value="Sleep_ETCO">Desinfección ETCO2 Monitor</option>
                             <option value="Sleep_Desinfeccion_CPAP">Desinfección CPAP</option>
                             <option value="Sleep_Frasco_Cidex">Registro de Verificación de Frasco de Cidex OPA y Frasco de las Tirillas para las Pruebas Durante el Proceso de Desinfección de Alto Nivel</option>
-                            <option value="Sleep_Solucion_Cidex">Registro de la Verificación de la Solución Cidex OPA e Inmersión del Equipo Durante el Proceso de Desinfección de Alto Nivel"</option>
+                            <option value="Sleep_Solucion_Cidex">Registro de la Verificación de la Solución Cidex OPA e Inmersión del Equipo Durante el Proceso de Desinfección de Alto Nivel</option>
+                            <option value="Sleep_Mant_Cap">Mantenimiento Preventivo Capnografo</option>
+                            <option value="Sleep_Mant_PAP">Mantenimiento Preventivo PAP</option>
+                            <option value="Sleep_Mant_HA">Mantenimiento Preventivo Headbox y Amplificadores</option>
+                            <option value="Sleep_Mant_Equipos">Mantenimiento Equipos</option>
+                            <option value="Sleep_Biomedica_Equipos">Equipos enviados para reparación</option>
                         </select>
                     </td>
                 </tr>
